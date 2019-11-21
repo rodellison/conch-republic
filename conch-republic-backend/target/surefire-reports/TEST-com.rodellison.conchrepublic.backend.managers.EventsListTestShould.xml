@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.rodellison.conchrepublic.backend.managers.EventsListTestShould" time="0.821" tests="2" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="gopherProxySet" value="false"/>
+    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
+    <property name="java.specification.version" value="11"/>
+    <property name="sun.cpu.isalist" value=""/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/rodellison/Bitbucket/conch-republic/conch-republic-backend/target/test-classes:/Users/rodellison/Bitbucket/conch-republic/conch-republic-backend/target/classes:/Users/rodellison/.m2/repository/com/amazonaws/aws-lambda-java-core/1.2.0/aws-lambda-java-core-1.2.0.jar:/Users/rodellison/.m2/repository/com/amazonaws/aws-lambda-java-log4j/1.0.0/aws-lambda-java-log4j-1.0.0.jar:/Users/rodellison/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar:/Users/rodellison/.m2/repository/io/vertx/vertx-core/3.8.1/vertx-core-3.8.1.jar:/Users/rodellison/.m2/repository/io/netty/netty-common/4.1.39.Final/netty-common-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-buffer/4.1.39.Final/netty-buffer-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-transport/4.1.39.Final/netty-transport-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-handler/4.1.39.Final/netty-handler-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-codec/4.1.39.Final/netty-codec-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-handler-proxy/4.1.39.Final/netty-handler-proxy-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-codec-socks/4.1.39.Final/netty-codec-socks-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-codec-http/4.1.39.Final/netty-codec-http-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-codec-http2/4.1.39.Final/netty-codec-http2-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-resolver/4.1.39.Final/netty-resolver-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-resolver-dns/4.1.39.Final/netty-resolver-dns-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-codec-dns/4.1.39.Final/netty-codec-dns-4.1.39.Final.jar:/Users/rodellison/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.9.9/jackson-core-2.9.9.jar:/Users/rodellison/.m2/repository/io/vertx/vertx-junit5/3.8.1/vertx-junit5-3.8.1.jar:/Users/rodellison/.m2/repository/io/vertx/vertx-rx-java/3.8.1/vertx-rx-java-3.8.1.jar:/Users/rodellison/.m2/repository/io/reactivex/rxjava/1.3.8/rxjava-1.3.8.jar:/Users/rodellison/.m2/repository/io/vertx/vertx-rx-gen/3.8.1/vertx-rx-gen-3.8.1.jar:/Users/rodellison/.m2/repository/io/vertx/vertx-codegen/3.8.1/vertx-codegen-3.8.1.jar:/Users/rodellison/.m2/repository/org/mvel/mvel2/2.3.1.Final/mvel2-2.3.1.Final.jar:/Users/rodellison/.m2/repository/io/vertx/vertx-rx-java2/3.8.1/vertx-rx-java2-3.8.1.jar:/Users/rodellison/.m2/repository/io/reactivex/rxjava2/rxjava/2.2.4/rxjava-2.2.4.jar:/Users/rodellison/.m2/repository/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2.jar:/Users/rodellison/.m2/repository/org/apache/logging/log4j/log4j-api/2.8.2/log4j-api-2.8.2.jar:/Users/rodellison/.m2/repository/org/apache/logging/log4j/log4j-core/2.8.2/log4j-core-2.8.2.jar:/Users/rodellison/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.10.1/jackson-annotations-2.10.1.jar:/Users/rodellison/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.10.1/jackson-databind-2.10.1.jar:/Users/rodellison/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.10.1/jackson-dataformat-cbor-2.10.1.jar:/Users/rodellison/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.4.0/junit-jupiter-api-5.4.0.jar:/Users/rodellison/.m2/repository/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar:/Users/rodellison/.m2/repository/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar:/Users/rodellison/.m2/repository/org/junit/platform/junit-platform-commons/1.4.0/junit-platform-commons-1.4.0.jar:/Users/rodellison/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.4.0/junit-jupiter-engine-5.4.0.jar:/Users/rodellison/.m2/repository/org/junit/platform/junit-platform-engine/1.4.0/junit-platform-engine-1.4.0.jar:"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="user.timezone" value="America/New_York"/>
+    <property name="java.vm.specification.version" value="11"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-11.0.4.jdk/Contents/Home/lib"/>
+    <property name="sun.java.command" value="/Users/rodellison/Bitbucket/conch-republic/conch-republic-backend/target/surefire/surefirebooter2297589707187374555.jar /Users/rodellison/Bitbucket/conch-republic/conch-republic-backend/target/surefire 2019-11-21T14-38-38_556-jvmRun1 surefire7110700151040712457tmp surefire_08003130726829980670tmp"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/Users/rodellison/Bitbucket/conch-republic/conch-republic-backend/target/test-classes:/Users/rodellison/Bitbucket/conch-republic/conch-republic-backend/target/classes:/Users/rodellison/.m2/repository/com/amazonaws/aws-lambda-java-core/1.2.0/aws-lambda-java-core-1.2.0.jar:/Users/rodellison/.m2/repository/com/amazonaws/aws-lambda-java-log4j/1.0.0/aws-lambda-java-log4j-1.0.0.jar:/Users/rodellison/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar:/Users/rodellison/.m2/repository/io/vertx/vertx-core/3.8.1/vertx-core-3.8.1.jar:/Users/rodellison/.m2/repository/io/netty/netty-common/4.1.39.Final/netty-common-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-buffer/4.1.39.Final/netty-buffer-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-transport/4.1.39.Final/netty-transport-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-handler/4.1.39.Final/netty-handler-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-codec/4.1.39.Final/netty-codec-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-handler-proxy/4.1.39.Final/netty-handler-proxy-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-codec-socks/4.1.39.Final/netty-codec-socks-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-codec-http/4.1.39.Final/netty-codec-http-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-codec-http2/4.1.39.Final/netty-codec-http2-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-resolver/4.1.39.Final/netty-resolver-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-resolver-dns/4.1.39.Final/netty-resolver-dns-4.1.39.Final.jar:/Users/rodellison/.m2/repository/io/netty/netty-codec-dns/4.1.39.Final/netty-codec-dns-4.1.39.Final.jar:/Users/rodellison/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.9.9/jackson-core-2.9.9.jar:/Users/rodellison/.m2/repository/io/vertx/vertx-junit5/3.8.1/vertx-junit5-3.8.1.jar:/Users/rodellison/.m2/repository/io/vertx/vertx-rx-java/3.8.1/vertx-rx-java-3.8.1.jar:/Users/rodellison/.m2/repository/io/reactivex/rxjava/1.3.8/rxjava-1.3.8.jar:/Users/rodellison/.m2/repository/io/vertx/vertx-rx-gen/3.8.1/vertx-rx-gen-3.8.1.jar:/Users/rodellison/.m2/repository/io/vertx/vertx-codegen/3.8.1/vertx-codegen-3.8.1.jar:/Users/rodellison/.m2/repository/org/mvel/mvel2/2.3.1.Final/mvel2-2.3.1.Final.jar:/Users/rodellison/.m2/repository/io/vertx/vertx-rx-java2/3.8.1/vertx-rx-java2-3.8.1.jar:/Users/rodellison/.m2/repository/io/reactivex/rxjava2/rxjava/2.2.4/rxjava-2.2.4.jar:/Users/rodellison/.m2/repository/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2.jar:/Users/rodellison/.m2/repository/org/apache/logging/log4j/log4j-api/2.8.2/log4j-api-2.8.2.jar:/Users/rodellison/.m2/repository/org/apache/logging/log4j/log4j-core/2.8.2/log4j-core-2.8.2.jar:/Users/rodellison/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.10.1/jackson-annotations-2.10.1.jar:/Users/rodellison/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.10.1/jackson-databind-2.10.1.jar:/Users/rodellison/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.10.1/jackson-dataformat-cbor-2.10.1.jar:/Users/rodellison/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.4.0/junit-jupiter-api-5.4.0.jar:/Users/rodellison/.m2/repository/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar:/Users/rodellison/.m2/repository/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar:/Users/rodellison/.m2/repository/org/junit/platform/junit-platform-commons/1.4.0/junit-platform-commons-1.4.0.jar:/Users/rodellison/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.4.0/junit-jupiter-engine-5.4.0.jar:/Users/rodellison/.m2/repository/org/junit/platform/junit-platform-engine/1.4.0/junit-platform-engine-1.4.0.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/rodellison"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2019-07-16"/>
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk-11.0.4.jdk/Contents/Home"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/Users/rodellison/Bitbucket/conch-republic/conch-republic-backend"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="/Users/rodellison/Bitbucket/conch-republic/conch-republic-backend/target/surefire/surefirebooter2297589707187374555.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.runtime.version" value="11.0.4+10-LTS"/>
+    <property name="user.name" value="rodellison"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="10.14.6"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="18.9"/>
+    <property name="localRepository" value="/Users/rodellison/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="/var/folders/l5/f1k1flv97vzcpwr2qj9qv8380000gn/T/"/>
+    <property name="java.version" value="11.0.4"/>
+    <property name="user.dir" value="/Users/rodellison/Bitbucket/conch-republic/conch-republic-backend"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.library.path" value="/Users/rodellison/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vm.version" value="11.0.4+10-LTS"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="java.class.version" value="55.0"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+  </properties>
+  <testcase name="getListOfEventsSortedByStartDate" classname="com.rodellison.conchrepublic.backend.managers.EventsListTestShould" time="0.035"/>
+  <testcase name="getEventsListIterator" classname="com.rodellison.conchrepublic.backend.managers.EventsListTestShould" time="0.004"/>
+</testsuite>
