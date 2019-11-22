@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.rodellison.conchrepublic.backend.managers.EventsListTestShould
--------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.821 s - in com.rodellison.conchrepublic.backend.managers.EventsListTestShould

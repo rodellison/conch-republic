@@ -4,6 +4,7 @@ import com.rodellison.conchrepublic.backend.model.EventItem;
 import com.rodellison.conchrepublic.backend.model.KeysLocations;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 // Import log4j classes.
 import org.apache.logging.log4j.Logger;
@@ -14,11 +15,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("The Events List should")
 class EventsListTestShould {
 
     private static final Logger logger = LogManager.getLogger(EventsListTestShould.class);
     EventsList testEventsList = new EventsList();
-
 
     @BeforeEach
     void setUp() {
@@ -75,7 +76,6 @@ class EventsListTestShould {
         event5.setEventDescription("Long test description for event");
         testEventsList.addEventItem(event5);
 
-
     }
 
     @AfterEach
@@ -84,25 +84,22 @@ class EventsListTestShould {
     }
 
     @Test
+    @DisplayName("get the list of Events sorted Oldest to Newest")
     void getListOfEventsSortedByStartDate() {
 
         List<EventItem> theSortedList = testEventsList.getListOfEventsSortedByStartDate();
-        assertEquals(theSortedList.get(0).getEventID(), "calendar-9876");
-        theSortedList.forEach((eventItem -> {
-            logger.info(eventItem);
-        }));
+        assertNotNull(theSortedList);
+        assertEquals("calendar-9876", theSortedList.get(0).getEventID(), "Test to validate that Events are sorted from oldest Start date to newest");
 
     }
 
     @Test
+    @DisplayName("get an iterator for the List of Events")
     void getEventsListIterator() {
         Iterator<EventItem> eventItemIterator = testEventsList.iterator();
-        assertTrue(eventItemIterator.hasNext());
-        while (eventItemIterator.hasNext())
-        {
-            EventItem thisItem = eventItemIterator.next();
-            logger.info(thisItem);
-        }
+        assertNotNull(eventItemIterator);
+        assertTrue(eventItemIterator.hasNext(), "Test to ensure the EventsList returns an Iterator");
+
 
     }
 }
