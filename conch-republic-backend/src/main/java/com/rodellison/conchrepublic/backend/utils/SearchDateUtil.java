@@ -36,7 +36,8 @@ public final class SearchDateUtil {
 
     public static final ArrayList<String> getSearchDates()
     {
-        setupSearchDates();
+        if (searchDates.size() == 0)
+            setupSearchDates();
         return searchDates;
     }
 

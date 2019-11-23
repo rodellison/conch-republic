@@ -40,7 +40,6 @@ public class APIDataUtil {
         log.warn("Performing APIDataUtil GetAPIRequest : " + requestURL);
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
-
         HttpGet httpget = new HttpGet(requestURL);
 
         // Create a response handler

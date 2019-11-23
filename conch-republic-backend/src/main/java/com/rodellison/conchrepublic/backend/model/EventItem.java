@@ -4,14 +4,14 @@ import java.util.Comparator;
 
 public class EventItem {
 
-    private  String eventID;
-    private  String eventStartDate;
-    private  String eventEndDate;
-    private  String eventName;
-    private  String eventContact;
-    private  KeysLocations eventLocation;
-    private  String eventImgURL;
-    private  String eventDescription;
+    private String eventID;
+    private String eventStartDate;
+    private String eventEndDate;
+    private String eventName;
+    private String eventContact;
+    private KeysLocations eventLocation;
+    private String eventImgURL;
+    private String eventDescription;
 
     public static final Comparator<EventItem> BY_START_DATE =
             Comparator.comparing(EventItem::getEventStartDate);
@@ -24,19 +24,22 @@ public class EventItem {
         this.eventID = eventID;
     }
 
-    public void setEventStartDate(String eventStartDate) {
-        this.eventStartDate = eventStartDate;
+    public void setEventStartAndEndDate(String strStartDate, String strEndDate) {
+        this.eventStartDate = strStartDate;
+        this.eventEndDate = strEndDate.isEmpty() ? strStartDate : strEndDate;
     }
 
     public String getEventStartDate() {
         return eventStartDate;
     }
 
-
-    public void setEventEndDate(String eventEndDate) {
-        this.eventEndDate = eventEndDate;
+    public String getEventEndDate() {
+        return eventEndDate;
     }
 
+    public KeysLocations getEventLocation() {
+        return eventLocation;
+    }
 
     public void setEventName(String eventName) {
         this.eventName = eventName;
@@ -59,33 +62,8 @@ public class EventItem {
     }
 
     //for testing
-    public EventItem ()
-    {
+    public EventItem() {
 
-    }
-
-    //May not have Contact or Image
-    public EventItem(String eventID, String eventStartDate, String eventEndDate, String eventName, KeysLocations eventLocation, String eventDescription) {
-        this.eventID = eventID;
-        this.eventStartDate = eventStartDate;
-        this.eventEndDate = eventEndDate;
-        this.eventName = eventName;
-        this.eventLocation = eventLocation;
-        this.eventDescription = eventDescription;
-
-        this.eventImgURL = "";
-        this.eventContact = "";
-    }
-
-    public EventItem(String eventID, String eventStartDate, String eventEndDate, String eventName, String eventContact, KeysLocations eventLocation, String eventImgURL, String eventDescription) {
-        this.eventID = eventID;
-        this.eventStartDate = eventStartDate;
-        this.eventEndDate = eventEndDate;
-        this.eventName = eventName;
-        this.eventContact = eventContact;
-        this.eventLocation = eventLocation;
-        this.eventImgURL = eventImgURL;
-        this.eventDescription = eventDescription;
     }
 
     @Override
@@ -101,7 +79,5 @@ public class EventItem {
                 ", eventDescription='" + eventDescription + '\'' +
                 '}';
     }
-
-
 
 }

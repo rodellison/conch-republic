@@ -11,11 +11,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("Search Date Util")
+@DisplayName("SearchDateUtil should")
 class SearchDateUtilTest {
 
     @Test
-    @DisplayName("can get a list of YYYYMM search parm dates")
+    @DisplayName("get a list of the next 12 valid YYYYMM search parm dates")
     void getSearchDates() {
 
         ArrayList<String> theSearchDateParms = SearchDateUtil.getSearchDates();
