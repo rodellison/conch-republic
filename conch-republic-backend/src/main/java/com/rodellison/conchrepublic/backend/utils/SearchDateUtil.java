@@ -8,7 +8,7 @@ public final class SearchDateUtil {
 
     public static final ArrayList<String> searchDates = new ArrayList<>();
 
-    private static final void setupSearchDates() {
+    private static final void setupSearchDates(int monthsToFetch) {
         Date today = new Date(); // Fri Jun 17 14:54:28 PDT 2016
         Calendar cal = Calendar.getInstance();  //calendar is 0 based for months so Jan = month 0, February = month 1, etc.
         cal.setTime(today); // don't forget this if date is arbitrary e.g. 01-01-2014
@@ -16,8 +16,7 @@ public final class SearchDateUtil {
         int month;
         int year;
 
-        //12 total months including today, if starting at month 0
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < monthsToFetch; i++) {
             month = cal.get(Calendar.MONTH) + 1;
             year = cal.get(Calendar.YEAR);
 
@@ -34,10 +33,10 @@ public final class SearchDateUtil {
          }
     }
 
-    public static final ArrayList<String> getSearchDates()
+    public static final ArrayList<String> getSearchDates(int monthsToFetch)
     {
         if (searchDates.size() == 0)
-            setupSearchDates();
+            setupSearchDates(monthsToFetch);
         return searchDates;
     }
 

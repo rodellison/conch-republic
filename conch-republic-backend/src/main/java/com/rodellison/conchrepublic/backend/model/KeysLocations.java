@@ -12,6 +12,10 @@ public enum KeysLocations {
     public static final String getLocation(KeysLocations item)
     {
         String returnVal;
+
+        if (item == null)
+            return "florida-keys";
+
         switch (item)
         {
             case ALL_FLORIDA_KEYS: {

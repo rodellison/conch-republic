@@ -15,29 +15,27 @@ import org.apache.logging.log4j.LogManager;
 
 import java.io.IOException;
 
-public class APIDataUtil {
+public class DataFetchUtil implements ExternalAPIFetchUtil {
 
-    private static final String CLASS_NAME = "APIDataUtil";
-    private static final Logger log = LogManager.getLogger(APIDataUtil.class);
+    private static final String CLASS_NAME = "DataFetchUtil";
+    private static final Logger log = LogManager.getLogger(DataFetchUtil.class);
 
     /**
      * GetAPIRequest is used to call the external (from AWS) API to get data
      *
-     * @param strExternalAPIURL
-     *         String object containing the url to be requested
      * @param strYYYYMM
      *         String object containing the year and month in order, e.g. 202006
-     * @param enumLocation
-     *         enumValue that will be converted to a URL resource
      *
      * @return String containing API response results (json text)
      */
-    public String fetchURLData(String strExternalAPIURL, String strYYYYMM, KeysLocations enumLocation) {
+    @Override
+    public String fetchURLData(String strYYYYMM) {
 
-        String strLocation = KeysLocations.getLocation(enumLocation);
+        String strExternalAPIURL = System.getenv("CONCH_REPUBLIC_BASE_URL");
+        String strLocation = KeysLocations.getLocation(KeysLocations.ALL_FLORIDA_KEYS);
         String requestURL = strExternalAPIURL + "/" + strLocation + "/" + strYYYYMM + "/";
 
-        log.warn("Performing APIDataUtil GetAPIRequest : " + requestURL);
+        log.warn("Performing " + CLASS_NAME + " API Request : " + requestURL);
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpget = new HttpGet(requestURL);
@@ -59,9 +57,9 @@ public class APIDataUtil {
         };
 
         try {
-            log.info("Executing httpclient request");
+            log.debug("Executing httpclient request");
             String responseBody = httpclient.execute(httpget, responseHandler);
-            log.info("httpclient request returned");
+            log.debug("httpclient request returned");
             httpclient.close();
             return responseBody;
 

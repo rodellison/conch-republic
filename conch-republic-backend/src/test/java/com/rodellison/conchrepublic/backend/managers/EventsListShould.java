@@ -2,21 +2,17 @@ package com.rodellison.conchrepublic.backend.managers;
 
 import com.rodellison.conchrepublic.backend.model.EventItem;
 import com.rodellison.conchrepublic.backend.model.KeysLocations;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("The Events List should")
-class EventsListTestShould {
+class EventsListShould {
 
     EventsList testEventsList = new EventsList();
 
