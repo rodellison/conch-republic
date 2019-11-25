@@ -1,6 +1,7 @@
-package com.rodellison.conchrepublic.backend.managers;
+package com.rodellison.conchrepublic.backend.model;
 
 import com.rodellison.conchrepublic.backend.model.EventItem;
+import com.rodellison.conchrepublic.backend.model.EventsList;
 import com.rodellison.conchrepublic.backend.model.KeysLocations;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

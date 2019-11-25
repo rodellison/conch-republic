@@ -38,6 +38,25 @@ public class EventItem {
         return eventEndDate;
     }
 
+    public String getEventName() {
+        return eventName;
+    }
+
+    public String getEventContact() {
+        return eventContact;
+    }
+
+    public String getEventDescription() {
+        return eventDescription;
+    }
+
+    public String getEventURL() {
+        return eventURL;
+    }
+    public String getEventImgURL() {
+        return eventImgURL;
+    }
+
     public KeysLocations getEventLocation() {
         return eventLocation;
     }

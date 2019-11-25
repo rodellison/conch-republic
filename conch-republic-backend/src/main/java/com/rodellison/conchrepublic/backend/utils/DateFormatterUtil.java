@@ -8,9 +8,9 @@ import java.util.Date;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-public class DateFormatter {
+public class DateFormatterUtil {
 
-    private static final Logger log = LogManager.getLogger(DateFormatter.class);
+    private static final Logger log = LogManager.getLogger(DateFormatterUtil.class);
 
     public static String[] formatEventDates(String inputDateString)
     {
@@ -32,7 +32,7 @@ public class DateFormatter {
 
             } catch (ParseException pe)
             {
-                log.error(DateFormatter.class.getName() + "Error attempting date formatting Request 1: " + inputDateValues[0]);
+                log.error(DateFormatterUtil.class.getName() + "Error attempting date formatting Request 1: " + inputDateValues[0]);
             }
         }
         else
@@ -45,7 +45,7 @@ public class DateFormatter {
 
             } catch (ParseException pe)
             {
-                log.error(DateFormatter.class.getName() + "Error attempting date formatting Request 1: " + inputDateValues[0]);
+                log.error(DateFormatterUtil.class.getName() + "Error attempting date formatting Request 1: " + inputDateValues[0]);
             }
         }
         returnDates[0] = startDate;

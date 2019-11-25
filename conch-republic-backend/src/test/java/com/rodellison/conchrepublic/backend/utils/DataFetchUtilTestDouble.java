@@ -1,30 +1,15 @@
 package com.rodellison.conchrepublic.backend.utils;
 
-import com.rodellison.conchrepublic.backend.managers.EventsList;
-import com.rodellison.conchrepublic.backend.model.EventItem;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+public class DataFetchUtilTestDouble implements ExternalAPIFetchUtil{
 
-import java.util.ArrayList;
-import java.util.List;
-// Import log4j classes.
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
-import static org.junit.jupiter.api.Assertions.*;
+    @Override
+    public String fetchURLData(String strYYYYMM) {
 
-@DisplayName("Extract Web Events Util should")
-public class ExtractWebEventsUtilShould {
+        return getTestHTMLString();
+    }
 
-    private static final Logger log = LogManager.getLogger(ExtractWebEventsUtilShould.class);
-    @Test
-    @DisplayName("convert the raw html to and EventList full of Events")
-    void convertRawHTMLToEventList() {
-
-        ExtractWebEventsUtil myExtractWebEventsUtil = new ExtractWebEventsUtil();
-
-        ArrayList<String> rawHTMLDataTest = new ArrayList<>();
-
-        //contains one div for listing block with no image, and another that does contain an image
+    public static String getTestHTMLString()
+    {
         String testHTML =
                 "<!doctype html>\n" +
                         "<html class=\"no-js\" lang=\"en-US\">\n" +
@@ -652,12 +637,7 @@ public class ExtractWebEventsUtilShould {
                         "<script data-cfasync=\"false\" src=\"/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js\"></script><script src=\"https://ajax.cloudflare.com/cdn-cgi/scripts/95c75768/cloudflare-static/rocket-loader.min.js\" data-cf-settings=\"9a55a0d385594b52fd861198-|49\" defer=\"\"></script></body>\n" +
                         "</html> ";
 
-        rawHTMLDataTest.add(testHTML);
-        List<EventItem> theEventListData = myExtractWebEventsUtil.convertRawHTMLToEventList(rawHTMLDataTest);
-        theEventListData.forEach(log::info);
+        return testHTML;
 
-        assertEquals(12, theEventListData.size());
-
-    }
-
+    };
 }

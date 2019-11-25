@@ -1,17 +1,17 @@
-package com.rodellison.conchrepublic.backend.utils;
+package com.rodellison.conchrepublic.backend.managers;
 
-import com.rodellison.conchrepublic.backend.managers.EventsList;
+import com.rodellison.conchrepublic.backend.model.EventsList;
 import com.rodellison.conchrepublic.backend.model.EventItem;
 import com.rodellison.conchrepublic.backend.model.KeysLocations;
+import com.rodellison.conchrepublic.backend.utils.DateFormatterUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
-import org.jsoup.parser.*;
 import org.jsoup.select.Elements;
 
 import java.util.*;
 
 
-public class ExtractWebEventsUtil {
+public class WebEventsFormattingManager {
 
     private final String LISTING_BLOCK = "listing-block listing-calendar";
     private final String LISTING_BLOCK_WITH_IMG = "listing-block listing-calendar listing-calendar-img";
@@ -23,11 +23,10 @@ public class ExtractWebEventsUtil {
     private final String LISTING_PHONE = "listing-phone";
 
 
-    public EventsList theEventList = new EventsList();
-    public Map<String, EventItem> theEventsMap = new HashMap<>() ;
-
     public List<EventItem> convertRawHTMLToEventList(ArrayList<String> rawEventDataList) {
 
+        EventsList theEventList = new EventsList();
+        Map<String, EventItem> theEventsMap = new HashMap<>() ;
 
         Elements elementsNoImg = null;
         Elements elementsWithImg = null;
@@ -91,7 +90,7 @@ public class ExtractWebEventsUtil {
         thisEventItem.setEventContact(eventContact.size() > 0 ? eventContact.get(0).text() : "No contact phone provided");
 
         Elements eventDates = thisEventElement.getElementsByClass(LISTING_DATE);
-        String[] formattedDates = DateFormatter.formatEventDates(eventDates.text());
+        String[] formattedDates = DateFormatterUtil.formatEventDates(eventDates.text());
         thisEventItem.setEventStartAndEndDate(formattedDates[0], formattedDates[1]);
 
 

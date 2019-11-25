@@ -1,6 +1,6 @@
 package com.rodellison.conchrepublic.backend.managers;
 
-import com.rodellison.conchrepublic.backend.utils.DataFetchUtilTestDoubleShould;
+import com.rodellison.conchrepublic.backend.utils.DataFetchUtilTestDouble;
 import com.rodellison.conchrepublic.backend.utils.ExternalAPIFetchUtil;
 import com.rodellison.conchrepublic.backend.utils.SearchDateUtil;
 import org.hamcrest.collection.IsEmptyCollection;
@@ -19,21 +19,21 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-@DisplayName("Web Event Collector should")
-class WebEventsCollectorShould {
+@DisplayName("Web Event Collection Manager should")
+class WebEventsCollectionManagerShould {
 
-    private static final Logger log = LogManager.getLogger(WebEventsCollectorShould.class);
+    private static final Logger log = LogManager.getLogger(WebEventsCollectionManagerShould.class);
     private static final int monthsToSearch = 4;
 //    private final ExternalAPIFetchUtil myTestDataFetchUtil = new DataFetchUtil();
-    private final ExternalAPIFetchUtil myTestDataFetchUtil = new DataFetchUtilTestDoubleShould();
-    private final WebEventsCollector testWebEventsCollector = new WebEventsCollector(myTestDataFetchUtil, monthsToSearch);
+    private final ExternalAPIFetchUtil myTestDataFetchUtil = new DataFetchUtilTestDouble();
+    private final WebEventsCollectionManager testWebEventsCollectionManager = new WebEventsCollectionManager(myTestDataFetchUtil, monthsToSearch);
 
     @Test
     @DisplayName("return fetched data for specific Year and Month")
     void returnURLFetchedDataForAYearAndMonth()
     {
-        String testYYYYMM = "202001";
-        String searchParmResults = testWebEventsCollector.getURLDataForAYearMonth(testYYYYMM);
+        String testYYYYMM = "202006";
+        String searchParmResults = testWebEventsCollectionManager.getURLDataForAYearMonth(testYYYYMM);
         assertTrue(searchParmResults.contains("<div id=\"wrapper\">"));
     }
 
@@ -41,7 +41,7 @@ class WebEventsCollectorShould {
     @DisplayName("return fetched data for all Search Dates")
     void returnArrayOfFetchedEventData()
     {
-        ArrayList<String> searchParmResults = testWebEventsCollector.collectEventsForSeachDates(SearchDateUtil.getSearchDates(monthsToSearch));
+        ArrayList<String> searchParmResults = testWebEventsCollectionManager.collectEventsForSeachDates(SearchDateUtil.getSearchDates(monthsToSearch));
         assertAll(
                 () -> assertNotNull(searchParmResults),
                 () -> assertTrue(searchParmResults.get(0).contains("<div id=\"wrapper\">")),

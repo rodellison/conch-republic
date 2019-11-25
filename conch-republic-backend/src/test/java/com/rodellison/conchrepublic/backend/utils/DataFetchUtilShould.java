@@ -7,16 +7,14 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("Data Fetch Util should")
 class DataFetchUtilShould {
 
-    private DataFetchUtil myDataFetchUtilObject = new DataFetchUtil();
+    private DataFetchUtilTestDouble myDataFetchUtilObject = new DataFetchUtilTestDouble();
 
     @Test
     @DisplayName("retrieve data from the external URL")
     void retrieveURLData() {
 
-        String testYear = "2020";
-        String testMonth = "06";
-
-        String responseBody = myDataFetchUtilObject.fetchURLData(testYear + testMonth);
+        String testYYYYMM = "202006";
+        String responseBody = myDataFetchUtilObject.fetchURLData(testYYYYMM);
 
         assertTrue(responseBody.contains("<div id=\"wrapper\">"));
 

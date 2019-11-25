@@ -7,15 +7,15 @@ import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
 
-public class WebEventsCollector {
+public class WebEventsCollectionManager {
 
-    private static final Logger log = LogManager.getLogger(WebEventsCollector.class);
+    private static final Logger log = LogManager.getLogger(WebEventsCollectionManager.class);
 
     private final ExternalAPIFetchUtil theDataFetchUtil;
     private final int monthsToSearch;
     private static ArrayList<String> rawEventDataList = new ArrayList<>();
 
-    public WebEventsCollector(ExternalAPIFetchUtil dataUtilToUse, int countMonthsToSearch)
+    public WebEventsCollectionManager(ExternalAPIFetchUtil dataUtilToUse, int countMonthsToSearch)
     {
         this.theDataFetchUtil = dataUtilToUse;
         this.monthsToSearch = countMonthsToSearch;

@@ -1,4 +1,4 @@
-package com.rodellison.conchrepublic.backend.managers;
+package com.rodellison.conchrepublic.backend.model;
 
 import com.rodellison.conchrepublic.backend.model.EventItem;
 import com.rodellison.conchrepublic.backend.model.KeysLocations;
