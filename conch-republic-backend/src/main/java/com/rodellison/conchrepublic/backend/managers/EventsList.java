@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class EventsList implements Iterable<EventItem> {
 
-    private static List<EventItem> listOfEvents = new ArrayList<>();
+    private List<EventItem> listOfEvents = new ArrayList<>();
     private static final Date today = new Date();
     private static final SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
     private static final String strYYYYMMDD = formatter.format(today);
@@ -32,6 +32,12 @@ public class EventsList implements Iterable<EventItem> {
         return listOfEvents.iterator();
 
     }
+
+    public int size()
+    {
+        return listOfEvents.size();
+    }
+
 
     public void clearEvents()
     {

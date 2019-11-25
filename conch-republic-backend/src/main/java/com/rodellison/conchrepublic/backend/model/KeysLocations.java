@@ -51,4 +51,45 @@ public enum KeysLocations {
 
     };
 
+    public static final KeysLocations convertToEnumLocation(String item)
+    {
+        KeysLocations returnVal;
+
+        if (item.isEmpty())
+            return KeysLocations.ALL_FLORIDA_KEYS;
+
+        switch (item.toLowerCase())
+        {
+            case "florida keys": {
+                returnVal = KeysLocations.ALL_FLORIDA_KEYS;
+                break;
+            }
+            case "key largo": {
+                returnVal = KeysLocations.KEY_LARGO;
+                break;
+            }
+            case "islamorada": {
+                returnVal = KeysLocations.ISLAMORADA;
+                break;
+            }
+            case "marathon": {
+                returnVal = KeysLocations.MARATHON;
+                break;
+            }
+            case "the lower keys": {
+                returnVal = KeysLocations.THE_LOWER_KEYS;
+                break;
+            }
+            case "key west": {
+                returnVal = KeysLocations.KEY_WEST;
+                break;
+            }
+            default:
+                returnVal = KeysLocations.ALL_FLORIDA_KEYS;
+
+        }
+        return returnVal;
+
+
+    };
 }

@@ -11,6 +11,7 @@ public class EventItem {
     private String eventContact;
     private KeysLocations eventLocation;
     private String eventImgURL;
+    private String eventURL;
     private String eventDescription;
 
     public static final Comparator<EventItem> BY_START_DATE =
@@ -57,6 +58,10 @@ public class EventItem {
         this.eventImgURL = eventImgURL;
     }
 
+    public void setEventURL(String eventURL) {
+        this.eventURL = eventURL;
+    }
+
     public void setEventDescription(String eventDescription) {
         this.eventDescription = eventDescription;
     }
@@ -76,6 +81,7 @@ public class EventItem {
                 ", eventContact='" + eventContact + '\'' +
                 ", eventLocation='" + eventLocation + '\'' +
                 ", eventImgURL='" + eventImgURL + '\'' +
+                ", eventURL='" + eventURL + '\'' +
                 ", eventDescription='" + eventDescription + '\'' +
                 '}';
     }
