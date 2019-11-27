@@ -45,36 +45,25 @@ class TestEventHandler {
 
     }
 
+    @Test
     @DisplayName(" ensure /getdata/{location} call returns with success")
     public void testGetDataReturnsSuccess() throws Throwable {
 
         Map<String, Object> map = new HashMap<>();
         map.put("httpMethod", "GET");
-        map.put("resource", "/data/{yearmonth}");
-        map.put("path", "/data/201910");
-        map.put("pathParameters", "{yearmonth=201910}");
+        map.put("resource", "/getdata/{location}");
+        map.put("path", "/getdata/islamorada");
+        map.put("pathParameters", "{\"location\":\"islamorada\"}");
+        logger.info("Test EventHubVerticle responds for GET:/getdata");
 
-        logger.info("Test RemoteDataHandlerVerticle responds for GET:/data/{yearmonth}");
-        //running two concurrent requests
         CompletableFuture<ApiGatewayResponse> cf1 = new CompletableFuture<>();
         CompletableFuture.runAsync(() -> {
             ApiGatewayResponse api1 = sl.handleRequest(map, testContext);
-
-            try
-            {
-                //Just waiting one second for verticles to get up, before running tests
-                Thread.sleep(5000);
-
-            } catch (InterruptedException ie)
-            {
-
-            }
-
-
             cf1.complete(api1);
         });
 
-        assertTrue(cf1.get().getBody().contains(map.get("pathParameters").toString()));
+        String result = cf1.get().getBody();
+        assertTrue(result.contains("eventID"));
 
     }
 

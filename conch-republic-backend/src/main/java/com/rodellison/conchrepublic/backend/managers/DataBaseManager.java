@@ -16,6 +16,11 @@ public class DataBaseManager implements DataBaseManagerInterface {
         this.dbInterface = theDBInterfaceToUse;
     }
 
+    @Override
+    public ArrayList<EventItem> getEventsDataForLocation(String location) {
+        return dbInterface.getEventsDataForLocation(location);
+    }
+
     /**
      * insertEventDataIntoDB is used to interface with a dynamoDB table for the purposes of inserting EventInfo Data
      *

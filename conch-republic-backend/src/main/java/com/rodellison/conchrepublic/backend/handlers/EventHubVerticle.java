@@ -126,27 +126,26 @@ public class EventHubVerticle extends AbstractVerticle {
 
             String theMessage = message.body().toString();
             JsonObject messageJson = new JsonObject(theMessage);
-            String theMessagePathParm = messageJson.getValue("pathParameters").toString();  //location=all, location=marathon, location=key-largo,etc.
 
-            logger.info("GET:/getdata/{location} function invoked with parm: " + theMessagePathParm);
+            logger.info("GET:/getdata/{location} function invoked with body: " + messageJson);
 
             //Connecting to, and getting data could take time...
             vertx.<String>executeBlocking(execBlockFuture -> {
-                final CompletableFuture<String> remoteDataHandlerFuture = new CompletableFuture<String>();
+                final CompletableFuture<String> databaseFuture = new CompletableFuture<String>();
 
                 eventBus.request(Services.GETDBDATA.toString(), messageJson, rs -> {
                     if (rs.succeeded()) {
                         logger.info("DataBase: SUCCESS");
-                        remoteDataHandlerFuture.complete(rs.result().body().toString());
+                        databaseFuture.complete(rs.result().body().toString());
                     } else {
                         logger.info("DataBase: FAILED");
-                        remoteDataHandlerFuture.complete(rs.cause().getMessage());
+                        databaseFuture.complete(rs.cause().getMessage());
                     }
                 });
 
                 String DBHandlerResult = "";
                 try {
-                    DBHandlerResult = remoteDataHandlerFuture.get();
+                    DBHandlerResult = databaseFuture.get();
                 } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();
                     DBHandlerResult = e.getMessage();
@@ -157,9 +156,7 @@ public class EventHubVerticle extends AbstractVerticle {
             }, res -> {
 
                 final Map<String, Object> response = new HashMap<>();
-                response.put("statusCode", 200);
-                response.put("body", res.result());
-                message.reply(new JsonObject(response).encode());
+                message.reply(new JsonObject(res.result()));
 
             });
         });

@@ -10,7 +10,6 @@ import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import static org.junit.jupiter.api.Assertions.*;
-// Import log4j classes.
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 

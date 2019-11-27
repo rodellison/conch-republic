@@ -2,6 +2,7 @@ package com.rodellison.conchrepublic.backend.handlers;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.rodellison.conchrepublic.backend.managers.DataBaseManager;
 import com.rodellison.conchrepublic.backend.managers.DynamoDBManager;
 import com.rodellison.conchrepublic.backend.model.EventItem;
@@ -32,30 +33,40 @@ public class DataBaseVerticle extends AbstractVerticle {
         myDataBaseManager.insertEventDataIntoDB(itemsToInsert);
 
     }
+    public ArrayList<EventItem> getData(String location) {
+
+        DynamoDBClient myClient = new DynamoDBClient();
+        DataBaseManager myDataBaseManager = new DataBaseManager(new DynamoDBManager(myClient.getDynamoDBClient()));
+        return myDataBaseManager.getEventsDataForLocation(location);
+
+    }
 
     @Override
     public void start(Promise<Void> startPromise) {
         final EventBus eventBus = vertx.eventBus();
 
+
         thisContext = context.toString();
         thisContext = thisContext.substring(thisContext.lastIndexOf("@") + 1);
-
 
         eventBus.consumer(Services.GETDBDATA.toString(), message -> {
             // Do something with Vert.x async, reactive APIs
 
-            JsonObject dbItemsToGet = JsonObject.mapFrom(message.body());
-             String theMessagePathParm = dbItemsToGet.getValue("pathParameters").toString();
+            ArrayList<EventItem> result = new ArrayList<>();
+            JsonObject fetchMessage = JsonObject.mapFrom(message.body());
+            String theMessagePathParm = fetchMessage.getValue("pathParameters").toString();
+            JsonObject segmentObject = new JsonObject(theMessagePathParm);
+            theMessagePathParm = segmentObject.getValue("location").toString();
 
-            logger.info("DBHandlerVerticle received Get request: " + dbItemsToGet.getValue("pathParameters"));
-        //    executeLongRunningBlockingOperation();
-            logger.info("DBHandlerVerticle processed Get request: " + dbItemsToGet.getValue("pathParameters"));
+            logger.info("DBHandlerVerticle received Get request for location: " + theMessagePathParm);
+            result = getData(theMessagePathParm);
+            String jsonResult = new Gson().toJson(result);
+            logger.info("DBHandlerVerticle processed Get request for location: " + theMessagePathParm);
 
             final Map<String, Object> response = new HashMap<>();
-
             response.put("statusCode", 200);
             response.put("pathParameters", theMessagePathParm);
-            response.put("body", "...database get completed for: " + theMessagePathParm);
+            response.put("body", jsonResult);
 
             message.reply(new JsonObject(response).encode());
         });

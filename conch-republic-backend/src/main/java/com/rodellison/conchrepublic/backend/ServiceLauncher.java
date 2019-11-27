@@ -28,6 +28,7 @@ public class ServiceLauncher implements RequestHandler<Map<String, Object>, ApiG
     private static final Logger logger = LogManager.getLogger(ServiceLauncher.class);
     public Vertx vertx;
     private static List<Boolean> verticleResult = new ArrayList<>();
+    private boolean verticlesDeployed = false;
 
     {
         VertxOptions vertxOptions = new VertxOptions()
@@ -68,6 +69,7 @@ public class ServiceLauncher implements RequestHandler<Map<String, Object>, ApiG
 
         ).whenComplete((res, err) -> {
             logger.info("Deploy all verticles complete.");
+            verticlesDeployed = true;
             for (Boolean result : verticleResult) {
                 if (result == false) {
                     logger.info("One or more verticles did NOT deploy successfully.");
@@ -75,6 +77,7 @@ public class ServiceLauncher implements RequestHandler<Map<String, Object>, ApiG
                 }
             }
         });
+
     }
 
     private CompletableFuture<Boolean> deploy(String name, DeploymentOptions opts) {
@@ -97,6 +100,23 @@ public class ServiceLauncher implements RequestHandler<Map<String, Object>, ApiG
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> map, Context context) {
 
+        int count = 0;
+        while (!verticlesDeployed)
+        {
+            try{
+                Thread.sleep(500);
+                count++;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (count>5)
+            {
+                return ApiGatewayResponse.builder().
+                        setObjectBody(new Response("TIMEOUT"))
+                        .build();
+            }
+        }
+
         final CompletableFuture<String> future = new CompletableFuture<String>();
         logger.info(map);
         vertx.eventBus().request(map.get("httpMethod").toString() + ":" + map.get("resource"), new JsonObject(map).encode(), rs -> {
@@ -116,10 +136,8 @@ public class ServiceLauncher implements RequestHandler<Map<String, Object>, ApiG
 
             //different seconds value to account for different values - if calling loaddata, then it could take longer to process
             int seconds = 0;
-            seconds = map.get("resource").toString().contains("loaddata") ? 60 : 10;
-
-            return ApiGatewayResponse.builder()
-                    .setObjectBody(new Response("Sent by : " + this.toString() + " - " + future.get(seconds, TimeUnit.SECONDS)))
+             return ApiGatewayResponse.builder()
+                    .setObjectBody(new Response(future.get(30, TimeUnit.SECONDS)))
                     .setHeaders(contentHeader)
                     .build();
         } catch (InterruptedException | ExecutionException | TimeoutException e) {

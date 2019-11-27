@@ -5,6 +5,9 @@ import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
 
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import com.amazonaws.services.dynamodbv2.model.ScanRequest;
+import com.amazonaws.services.dynamodbv2.model.ScanResult;
 import com.rodellison.conchrepublic.backend.model.EventItem;
 
 import com.rodellison.conchrepublic.backend.model.KeysLocations;
@@ -21,6 +24,52 @@ public class DynamoDBManager implements DataBaseManagerInterface {
         this.client = theClient;
     }
 
+    @Override
+    public ArrayList<EventItem> getEventsDataForLocation(String location) {
+
+        String strDataBaseTableName = System.getenv("DYNAMO_DB_TABLENAME");
+        try {
+
+            ArrayList<EventItem> eventListResults = new ArrayList<>();
+            DynamoDB dynamoDB = new DynamoDB(client);
+
+            Table table = dynamoDB.getTable(strDataBaseTableName);
+            log.info("Attempting to get Event Data items from DynamoDB for location: " + location);
+
+            Map<String, AttributeValue> expressionAttributeValues = new HashMap<String, AttributeValue>();
+            expressionAttributeValues.put(":el", new AttributeValue().withS(location));
+
+            ScanRequest scanRequest = new ScanRequest()
+                    .withTableName(strDataBaseTableName)
+                    .withFilterExpression("EventLocation = :el")
+                    .withExpressionAttributeValues(expressionAttributeValues);
+
+            ScanResult result = client.scan(scanRequest);
+
+            for (Map<String, AttributeValue> item : result.getItems()) {
+
+                EventItem thisEventItem = new EventItem();
+                thisEventItem.setEventID(item.get("EventID").getS());
+                thisEventItem.setEventStartAndEndDate(item.get("StartDate").getS(), item.get("EndDate").getS());
+                thisEventItem.setEventContact(item.get("EventContact").getS());
+                thisEventItem.setEventLocation(KeysLocations.convertToEnumLocation(item.get("EventLocation").getS()));
+                thisEventItem.setEventURL(item.get("EventURL").getS());
+                thisEventItem.setEventImgURL(item.get("ImgURL").getS());
+                thisEventItem.setEventDescription(item.get("EventDescription").getS());
+                thisEventItem.setEventName(item.get("EventName").getS());
+                eventListResults.add(thisEventItem);
+             }
+
+            return eventListResults;
+
+
+        } catch (Exception e) {
+            log.error(strDataBaseTableName + " DynamoDB creation failed: " + e.getMessage());
+
+        }
+        return null;
+
+    }
 
     @Override
     public Boolean insertEventDataIntoDB(ArrayList<EventItem> theEventList) {
