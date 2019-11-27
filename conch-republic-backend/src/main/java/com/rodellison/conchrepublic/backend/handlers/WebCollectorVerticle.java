@@ -7,6 +7,7 @@ import com.rodellison.conchrepublic.backend.utils.SearchDateUtil;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.eventbus.EventBus;
+import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,13 +24,12 @@ public class WebCollectorVerticle extends AbstractVerticle {
     private static final Logger logger = LogManager.getLogger(WebCollectorVerticle.class);
 
 
-    public LinkedHashMap<String, String> handleCollectionOfWebData() {
+    public LinkedHashMap<String, String> handleCollectionOfWebData(int segment) {
 
         logger.debug("\tWebCollectorVerticle " + thisContext + " getting search parms needed for WebEventsCollectionManager");
         ArrayList<String> theSearchDateParms;
         String monthsToSearch = System.getenv("MONTHS_TO_FETCH");
-        logger.info("WebCollectorVerticle intending to process " + monthsToSearch + " months worth of data");
-        theSearchDateParms = SearchDateUtil.getSearchDates(Integer.valueOf(monthsToSearch));
+        theSearchDateParms = SearchDateUtil.getSearchDates(Integer.valueOf(monthsToSearch), segment);
 
         ExternalAPIFetchUtil theFetchUtility = new DataFetchUtil();
         WebEventsCollectionManager theWebEventCollectionsManager;
@@ -46,8 +46,8 @@ public class WebCollectorVerticle extends AbstractVerticle {
         {
             lhmRawCollectedData.put(String.valueOf(counter.getAndIncrement()), item);
         });
-        return lhmRawCollectedData;
 
+        return lhmRawCollectedData;
     }
 
     @Override
@@ -59,9 +59,15 @@ public class WebCollectorVerticle extends AbstractVerticle {
         eventBus.consumer(Services.COLLECTWEBDATA.toString(), message -> {
             // Do something with Vert.x async, reactive APIs
 
+            JsonObject fetchMessage = JsonObject.mapFrom(message.body());
+            String theMessagePathParm = fetchMessage.getValue("pathParameters").toString();
+            JsonObject segmentObject = new JsonObject(theMessagePathParm);
+
+            theMessagePathParm = segmentObject.getValue("segment").toString();
+
             logger.info("\tWebCollectorVerticle " + thisContext + " handling request to collect Web Data");
 
-            LinkedHashMap<String, String> rawWebCollectionResults = handleCollectionOfWebData();
+            LinkedHashMap<String, String> rawWebCollectionResults = handleCollectionOfWebData(Integer.valueOf(theMessagePathParm));
 
             logger.info("\tWebCollectorVerticle " + thisContext + " finished collecting Web data");
 

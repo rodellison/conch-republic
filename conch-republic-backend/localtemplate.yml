@@ -18,10 +18,11 @@ Resources:
       Handler: com.rodellison.conchrepublic.backend.ServiceLauncher::handleRequest
       MemorySize: 512
       Environment:
-        CONCH_REPUBLIC_BASE_URL: PlaceholderURL
-        DYNAMO_DB_TABLENAME: PlaceholderTableName
-        MONTHS_TO_FETCH: PlaceholderMonths
-        DYNAMO_DB_ENV: PlaceHolderDBEnv
+        Variables:
+          CONCH_REPUBLIC_BASE_URL: https://fla-keys.com/calendar/all
+          DYNAMO_DB_TABLENAME: FloridaKeysEvents
+          MONTHS_TO_FETCH: 12
+          DYNAMO_DB_ENV: Dev
       Events:
         Api: 
           Type: Api
@@ -31,5 +32,5 @@ Resources:
         Api2:
           Type: Api
           Properties:
-            Path: /loaddata
+            Path: /loaddata/{segment}
             Method: GET

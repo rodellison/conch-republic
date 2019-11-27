@@ -24,12 +24,12 @@ public class EventHubVerticle extends AbstractVerticle {
     public void start(Promise<Void> startPromise) {
         final EventBus eventBus = vertx.eventBus();
 
-        eventBus.consumer("GET:/loaddata", message -> {
+        eventBus.consumer("GET:/loaddata/{segment}", message -> {
 
             String theMessage = message.body().toString();
             JsonObject messageJson = new JsonObject(theMessage);
 
-            logger.info("GET:/loaddata function invoked");
+            logger.info("GET:/loaddata function invoked with body: " + theMessage);
             //This send gets the entire process kicked off
             //Calling out to an external web page to get data could take time, trying executeBlocking here
             vertx.<String>executeBlocking(execBlockFuture -> {

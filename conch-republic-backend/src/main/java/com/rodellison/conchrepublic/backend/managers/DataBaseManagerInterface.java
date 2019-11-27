@@ -1,7 +1,6 @@
 package com.rodellison.conchrepublic.backend.managers;
 
 import com.rodellison.conchrepublic.backend.model.EventItem;
-
 import java.util.ArrayList;
 
 

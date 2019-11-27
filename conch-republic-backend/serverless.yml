@@ -12,13 +12,20 @@ package:
 functions:
   users:
     handler: com.rodellison.conchrepublic.backend.ServiceLauncher
+    region: us-east-1
+    memorySize: 512
+    environment:
+      CONCH_REPUBLIC_BASE_URL: https://fla-keys.com/calendar/all
+      DYNAMO_DB_TABLENAME: FloridaKeysEvents
+      MONTHS_TO_FETCH: 12
+      DYNAMO_DB_ENV: Prod
     events:
       - http:
           path: getdata/{location}
           method: get
           cors: true
       - http:
-          path: loaddata
+          path: loaddata/{segment}
           method: get
           cors: true
 

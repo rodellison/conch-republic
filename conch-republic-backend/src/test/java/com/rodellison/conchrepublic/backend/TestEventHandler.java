@@ -28,8 +28,9 @@ class TestEventHandler {
 
         Map<String, Object> map = new HashMap<>();
         map.put("httpMethod", "GET");
-        map.put("resource", "/loaddata");
-        map.put("path", "/loaddata");
+        map.put("resource", "/loaddata/{segment}");
+        map.put("path", "/loaddata/1");
+        map.put("pathParameters", "{\"segment\":\"1\"}");
         logger.info("Test EventHubVerticle responds for GET:/loaddata");
 
         //running two concurrent requests
@@ -76,17 +77,6 @@ class TestEventHandler {
         assertTrue(cf1.get().getBody().contains(map.get("pathParameters").toString()));
 
     }
-
-//
-//    @AfterAll
-//    public static void tearDown()
-//    {
-//        sl.vertx.undeploy(DataBaseVerticle.class.getName());
-//        sl.vertx.undeploy(DataExtractorVerticle.class.getName());
-//        sl.vertx.undeploy(RemoteDataFetchVerticle.class.getName());
-//        sl.vertx.undeploy(EventHubVerticle.class.getName());
-//        sl = null;
-//    }
 
 
 }

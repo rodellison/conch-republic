@@ -24,12 +24,13 @@ class SearchDateUtilShould {
     @DisplayName("get a list of the next x valid YYYYMM search parm dates")
     void getSearchDates() {
 
-        int intTestMonthsToFetch = 4;
-        ArrayList<String> theSearchDateParms = SearchDateUtil.getSearchDates(intTestMonthsToFetch);
+        int intTestMonthsToFetch = 4;  //even numbers only
+        int intSegment = 2;  //value of 1 or 2 to represent first half or second half respectively
+        ArrayList<String> theSearchDateParms = SearchDateUtil.getSearchDates(intTestMonthsToFetch, 2);
         assertAll(
                 () -> assertThat(theSearchDateParms, not(IsEmptyCollection.empty())),
                 () -> assertThat(theSearchDateParms, hasItem("202001")),
-                () -> assertThat(theSearchDateParms, hasSize(intTestMonthsToFetch))
+                () -> assertThat(theSearchDateParms, hasSize(intTestMonthsToFetch/2))
         );
 
         theSearchDateParms.forEach(log::debug);  //log.info print each item

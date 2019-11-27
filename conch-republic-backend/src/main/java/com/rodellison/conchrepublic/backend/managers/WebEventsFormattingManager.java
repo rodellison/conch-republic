@@ -7,7 +7,6 @@ import com.rodellison.conchrepublic.backend.utils.DateFormatterUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
 import org.jsoup.select.Elements;
-
 import java.util.*;
 
 

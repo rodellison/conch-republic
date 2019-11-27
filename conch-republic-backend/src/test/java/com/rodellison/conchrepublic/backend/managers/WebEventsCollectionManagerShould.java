@@ -41,11 +41,11 @@ class WebEventsCollectionManagerShould {
     @DisplayName("return fetched data for all Search Dates")
     void returnArrayOfFetchedEventData()
     {
-        ArrayList<String> searchParmResults = testWebEventsCollectionManager.collectEventsForSeachDates(SearchDateUtil.getSearchDates(monthsToSearch));
+        ArrayList<String> searchParmResults = testWebEventsCollectionManager.collectEventsForSeachDates(SearchDateUtil.getSearchDates(monthsToSearch, 1));
         assertAll(
                 () -> assertNotNull(searchParmResults),
                 () -> assertTrue(searchParmResults.get(0).contains("<div id=\"wrapper\">")),
-                () -> assertEquals(4, searchParmResults.size())
+                () -> assertEquals(monthsToSearch/2, searchParmResults.size())
         );
     }
 
@@ -53,12 +53,11 @@ class WebEventsCollectionManagerShould {
     @DisplayName("get a list of the next x valid YYYYMM search parm dates")
     void getSearchDates() {
 
-        int intTestMonthsToFetch = 4;
-        ArrayList<String> theSearchDateParms = SearchDateUtil.getSearchDates(intTestMonthsToFetch);
+        ArrayList<String> theSearchDateParms = SearchDateUtil.getSearchDates(monthsToSearch, 1);
         assertAll(
                 () -> assertThat(theSearchDateParms, not(IsEmptyCollection.empty())),
-                () -> assertThat(theSearchDateParms, hasItem("202001")),
-                () -> assertThat(theSearchDateParms, hasSize(intTestMonthsToFetch))
+                () -> assertThat(theSearchDateParms, hasItem("201912")),
+                () -> assertThat(theSearchDateParms, hasSize(monthsToSearch/2))
         );
 
         theSearchDateParms.forEach(log::debug);  //log.info print each item

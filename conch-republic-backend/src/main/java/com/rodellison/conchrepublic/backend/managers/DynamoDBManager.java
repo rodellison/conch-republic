@@ -10,8 +10,6 @@ import com.rodellison.conchrepublic.backend.model.EventItem;
 import com.rodellison.conchrepublic.backend.model.KeysLocations;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.lang.reflect.Type;
 import java.util.*;
 
 public class DynamoDBManager implements DataBaseManagerInterface {
