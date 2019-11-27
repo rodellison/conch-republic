@@ -5,9 +5,10 @@
     <parent>
         <artifactId>conchrepublic</artifactId>
         <groupId>net.rodellison.alexa</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <version>1.0</version>
 
     <artifactId>conch-republic-skill</artifactId>
 
@@ -16,9 +17,9 @@
     <description>The Conch Republic Alexa Skill</description>
 
     <properties>
-        <ask-sdk-version>[2.9.10,)</ask-sdk-version>
-        <aws-sns-version>[1.11.475,)</aws-sns-version>
-        <apache-http-version>[4.5.9,)</apache-http-version>
+        <ask-sdk-version>2.26.0</ask-sdk-version>
+        <aws-sns-version>1.11.682</aws-sns-version>
+        <apache-http-version>4.5.9</apache-http-version>
 
     </properties>
 

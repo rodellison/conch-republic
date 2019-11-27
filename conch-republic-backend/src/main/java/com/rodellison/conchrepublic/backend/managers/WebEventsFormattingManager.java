@@ -26,7 +26,7 @@ public class WebEventsFormattingManager {
     public List<EventItem> convertRawHTMLToEventList(ArrayList<String> rawEventDataList) {
 
         EventsList theEventList = new EventsList();
-        Map<String, EventItem> theEventsMap = new HashMap<>() ;
+        Map<String, EventItem> theEventsMap = new HashMap<>();
 
         Elements elementsNoImg = null;
         Elements elementsWithImg = null;
@@ -45,7 +45,7 @@ public class WebEventsFormattingManager {
                 theEventsMap.put(thisEventItem.getEventID(), thisEventItem);
         }
 
-        theEventsMap.forEach((k,v) ->
+        theEventsMap.forEach((k, v) ->
         {
             theEventList.addEventItem(v);
         });
@@ -60,31 +60,24 @@ public class WebEventsFormattingManager {
         thisEventItem.setEventID(thisEventElement.attr("id"));
 
         Elements imgElements = thisEventElement.getElementsByClass(LISTING_IMG);
-        if (imgElements.size() > 0)
-        {
-            thisEventItem.setEventImgURL(imgElements.attr("href"));
-        }
-        else
-            thisEventItem.setEventImgURL("");
+        if (imgElements.size() > 0) {
+            thisEventItem.setEventImgURL(imgElements.attr("href").replace(" ", "%20"));
+        } else
+            thisEventItem.setEventImgURL(" ");  //DynamoDB needs at least some value
 
         Elements eventDescription = thisEventElement.getElementsByClass(LISTING_DESCRIPTION);
-        if (eventDescription.size() > 0)
-            thisEventItem.setEventDescription(eventDescription.html());
+        thisEventItem.setEventDescription(eventDescription.html());
 
         Elements eventLocation = thisEventElement.getElementsByClass(LISTING_LOCATION);
-
-        if (eventLocation.size() > 0)
-            thisEventItem.setEventLocation(convertToKeysLocation(eventLocation.get(0).children().html()));
+        thisEventItem.setEventLocation(convertToKeysLocation(eventLocation.get(0).text()));
 
         Elements eventName = thisEventElement.getElementsByClass(LISTING_NAME);
-        if (eventName.size() > 0)
-        {
-            thisEventItem.setEventName(eventName.get(0).text());
-            if (eventName.get(0).children().hasAttr("href"))
-                thisEventItem.setEventURL(eventName.get(0).children().attr("href"));
-            else
-                thisEventItem.setEventURL("");
-        }
+        thisEventItem.setEventName(eventName.get(0).text());
+        if (eventName.get(0).children().hasAttr("href"))
+            thisEventItem.setEventURL(eventName.get(0).children().attr("href").replace(" ", "%20"));
+        else
+            thisEventItem.setEventURL(" "); //DynamoDB needs at least some value
+
 
         Elements eventContact = thisEventElement.getElementsByClass(LISTING_PHONE);
         thisEventItem.setEventContact(eventContact.size() > 0 ? eventContact.get(0).text() : "No contact phone provided");
@@ -97,8 +90,7 @@ public class WebEventsFormattingManager {
         return thisEventItem;
     }
 
-    private KeysLocations convertToKeysLocation(String rawHTMLLocation)
-    {
+    private KeysLocations convertToKeysLocation(String rawHTMLLocation) {
         return KeysLocations.convertToEnumLocation(rawHTMLLocation.substring(rawHTMLLocation.lastIndexOf(": ") + 2));
     }
 

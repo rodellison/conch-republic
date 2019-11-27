@@ -1,0 +1,25 @@
+
+service: conch-republic-backend # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: java8
+
+# you can add packaging information here
+package:
+  artifact: target/conch-republic-backend-1.0.jar
+
+functions:
+  users:
+    handler: com.rodellison.conchrepublic.backend.ServiceLauncher
+    events:
+      - http:
+          path: getdata/{location}
+          method: get
+          cors: true
+      - http:
+          path: loaddata
+          method: get
+          cors: true
+
+

@@ -10,15 +10,12 @@ import java.util.ArrayList;
 public class WebEventsCollectionManager {
 
     private static final Logger log = LogManager.getLogger(WebEventsCollectionManager.class);
-
     private final ExternalAPIFetchUtil theDataFetchUtil;
-    private final int monthsToSearch;
     private static ArrayList<String> rawEventDataList = new ArrayList<>();
 
-    public WebEventsCollectionManager(ExternalAPIFetchUtil dataUtilToUse, int countMonthsToSearch)
+    public WebEventsCollectionManager(ExternalAPIFetchUtil dataUtilToUse)
     {
         this.theDataFetchUtil = dataUtilToUse;
-        this.monthsToSearch = countMonthsToSearch;
     }
 
     public ArrayList<String> collectEventsForSeachDates(ArrayList<String> searchDates)

@@ -24,9 +24,9 @@ class WebEventsCollectionManagerShould {
 
     private static final Logger log = LogManager.getLogger(WebEventsCollectionManagerShould.class);
     private static final int monthsToSearch = 4;
-//    private final ExternalAPIFetchUtil myTestDataFetchUtil = new DataFetchUtil();
+
     private final ExternalAPIFetchUtil myTestDataFetchUtil = new DataFetchUtilTestDouble();
-    private final WebEventsCollectionManager testWebEventsCollectionManager = new WebEventsCollectionManager(myTestDataFetchUtil, monthsToSearch);
+    private final WebEventsCollectionManager testWebEventsCollectionManager = new WebEventsCollectionManager(myTestDataFetchUtil);
 
     @Test
     @DisplayName("return fetched data for specific Year and Month")

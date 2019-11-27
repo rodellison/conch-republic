@@ -3,11 +3,14 @@ package com.rodellison.conchrepublic.backend.managers;
 import com.rodellison.conchrepublic.backend.model.EventsList;
 import com.rodellison.conchrepublic.backend.model.EventItem;
 import com.rodellison.conchrepublic.backend.model.KeysLocations;
+import com.rodellison.conchrepublic.backend.utils.DynamoDBClient;
 import com.rodellison.conchrepublic.backend.utils.DynamoDBClientTestDouble;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -20,13 +23,10 @@ public class DataBaseManagerShould {
     @DisplayName("insert an EventItem into the DataBase Table")
     void insertEventItemIntoDynamoDB() {
 
-        DynamoDBClientTestDouble myDynamoDBTestDouble = new DynamoDBClientTestDouble();
-        DynamoDBManager myDynamoDBManager = new DynamoDBManager(myDynamoDBTestDouble.getDynamoDBClient());
+        DynamoDBClient myDynamoClient = new DynamoDBClient();
+        DataBaseManager myDataBaseManager = new DataBaseManager(new DynamoDBManager(myDynamoClient.getDynamoDBClient()));
 
-        //dep injection
-        DataBaseManager myDataBaseManager = new DataBaseManager(myDynamoDBManager);
-
-        EventsList myEventList = new EventsList();
+        ArrayList<EventItem> myEvents = new ArrayList<>();
 
         EventItem event1 = new EventItem();
         event1.setEventID("calendar-3333");
@@ -38,7 +38,7 @@ public class DataBaseManagerShould {
         event1.setEventImgURL("http://someImgURL.com");
         event1.setEventContact("Contact for Event");
         event1.setEventDescription("Long test description for event 1");
-        myEventList.addEventItem(event1);
+        myEvents.add(event1);
 
         EventItem event2 = new EventItem();
         event2.setEventID("calendar-4444");
@@ -49,9 +49,9 @@ public class DataBaseManagerShould {
         event2.setEventURL("http://someURL.com");
         event2.setEventImgURL("http://someImgURL.com");
         event2.setEventDescription("Long test description for event 2");
-        myEventList.addEventItem(event2);
+        myEvents.add(event2);
 
-        Boolean result = myDataBaseManager.insertEventDataIntoDB(myEventList);
+        Boolean result = myDataBaseManager.insertEventDataIntoDB(myEvents);
 
         assertTrue(result);
 

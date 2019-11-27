@@ -1,8 +1,10 @@
 package com.rodellison.conchrepublic.backend.managers;
 
-import com.rodellison.conchrepublic.backend.model.EventsList;
+import com.rodellison.conchrepublic.backend.model.EventItem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
 
 
 public class DataBaseManager implements DataBaseManagerInterface {
@@ -21,7 +23,7 @@ public class DataBaseManager implements DataBaseManagerInterface {
      * @return true/false DB insert success
      */
     @Override
-    public Boolean insertEventDataIntoDB(EventsList theEventList) {
+    public Boolean insertEventDataIntoDB(ArrayList<EventItem> theEventList) {
 
         return dbInterface.insertEventDataIntoDB(theEventList);
     }

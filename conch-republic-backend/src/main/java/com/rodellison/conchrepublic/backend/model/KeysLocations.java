@@ -61,11 +61,13 @@ public enum KeysLocations {
         switch (item.toLowerCase())
         {
             case "florida keys":
+            case "florida_keys":
             case "florida-keys" : {
                 returnVal = KeysLocations.ALL_FLORIDA_KEYS;
                 break;
             }
             case "key largo":
+            case "key_largo":
             case "key-largo": {
                 returnVal = KeysLocations.KEY_LARGO;
                 break;
@@ -79,12 +81,15 @@ public enum KeysLocations {
                 break;
             }
             case "the lower keys":
+            case "the_lower_keys":
             case "lower-keys" :
+            case "lower_keys" :
             case "the-lower-keys": {
                 returnVal = KeysLocations.THE_LOWER_KEYS;
                 break;
             }
             case "key west":
+            case "key_west":
             case "key-west": {
                 returnVal = KeysLocations.KEY_WEST;
                 break;

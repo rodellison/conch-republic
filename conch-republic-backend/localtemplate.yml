@@ -1,0 +1,35 @@
+# using port 3001 since alot of other stuff, node, etc.. typically runs on 3000
+# sam local start-api -p 3001 -t localtemplate.yml  --env-vars env.json
+# sam local start-api -p 3001 -t localtemplate.yml  --env-vars env.json  --skip-pull-image     (after initial runs)
+
+# note: CodeURI element can be a .jar file, or path to the code extracted from a shaded jar  - using the Unarchiver
+
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  FloridaKeysAPI:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: Conch-Republic
+      Runtime: java8
+      Timeout: 60
+      CodeUri: target/conch-republic-backend-1.0.jar
+      Handler: com.rodellison.conchrepublic.backend.ServiceLauncher::handleRequest
+      MemorySize: 512
+      Environment:
+        CONCH_REPUBLIC_BASE_URL: PlaceholderURL
+        DYNAMO_DB_TABLENAME: PlaceholderTableName
+        MONTHS_TO_FETCH: PlaceholderMonths
+        DYNAMO_DB_ENV: PlaceHolderDBEnv
+      Events:
+        Api: 
+          Type: Api
+          Properties: 
+            Path: /getdata/{location}
+            Method: GET
+        Api2:
+          Type: Api
+          Properties:
+            Path: /loaddata
+            Method: GET
