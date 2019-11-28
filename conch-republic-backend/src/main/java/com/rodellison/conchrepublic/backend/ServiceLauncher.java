@@ -137,8 +137,9 @@ public class ServiceLauncher implements RequestHandler<Map<String, Object>, ApiG
             //different seconds value to account for different values - if calling loaddata, then it could take longer to process
             int seconds = 0;
              return ApiGatewayResponse.builder()
-                    .setObjectBody(new Response(future.get(30, TimeUnit.SECONDS)))
-                    .setHeaders(contentHeader)
+                    .setRawBody(future.get(30, TimeUnit.SECONDS))
+ //                    .setObjectBody(new Response(future.get(30, TimeUnit.SECONDS)))
+                     .setHeaders(contentHeader)
                     .build();
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
             e.printStackTrace();

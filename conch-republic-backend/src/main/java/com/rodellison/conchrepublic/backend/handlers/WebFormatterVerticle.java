@@ -50,7 +50,9 @@ public class WebFormatterVerticle extends AbstractVerticle {
             // Do something with Vert.x async, reactive APIs
 
             JsonObject messageJson = new JsonObject(message.body().toString());
-            LinkedHashMap<String, String> lhmResult = new Gson().fromJson(messageJson.toString(), LinkedHashMap.class);
+            String theMessagePathParm = messageJson.getValue("pathParameters").toString();
+
+            LinkedHashMap<String, String> lhmResult = new Gson().fromJson(messageJson.getValue("collectedData").toString(), LinkedHashMap.class);
             ArrayList<String> theRawDataList = new ArrayList<>(lhmResult.values());
 
             logger.info("\tWebFormatterVerticle " + thisContext + " handling request to format raw Web Data");
@@ -59,10 +61,10 @@ public class WebFormatterVerticle extends AbstractVerticle {
 
             logger.info("\tWebFormatterVerticle " + thisContext + " finished reformatting raw Web data");
 
-            JsonObject messageToSend = new JsonObject();
-            messageToSend = JsonObject.mapFrom(rawWebFormattingResults);
-
-            message.reply(messageToSend.encode());
+            JsonObject results = new JsonObject();
+            results.put("formattedData", JsonObject.mapFrom(rawWebFormattingResults));
+            results.put("pathParameters", theMessagePathParm);
+            message.reply(results.encode());
 
         });
 

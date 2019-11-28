@@ -28,6 +28,9 @@ public class EventHubVerticle extends AbstractVerticle {
 
             String theMessage = message.body().toString();
             JsonObject messageJson = new JsonObject(theMessage);
+//            String theMessagePathParm = messageJson.getValue("pathParameters").toString();
+//            JsonObject segmentObject = new JsonObject(theMessagePathParm);
+//            theMessagePathParm = segmentObject.getValue("segment").toString();
 
             logger.info("GET:/loaddata function invoked with body: " + theMessage);
             //This send gets the entire process kicked off
@@ -112,11 +115,11 @@ public class EventHubVerticle extends AbstractVerticle {
 
                     }, resDB -> {
 
-                        final Map<String, Object> response = new HashMap<>();
-                        response.put("statusCode", 200);
-                        response.put("path", "/loaddata");
-                        response.put("body", "Processed GET:/loaddata");
-                        message.reply(new JsonObject(response).encode());
+                    //    final Map<String, Object> response = new HashMap<>();
+                        JsonObject replyObj = new JsonObject(resDB.result());
+                        replyObj.put("statusCode", 200);
+                        replyObj.put("body", "Processed GET:/loaddata for segment: " + replyObj.getValue("pathParameters"));
+                        message.reply(replyObj.encode());
                     });
                 });
             });
@@ -155,7 +158,6 @@ public class EventHubVerticle extends AbstractVerticle {
 
             }, res -> {
 
-                final Map<String, Object> response = new HashMap<>();
                 message.reply(new JsonObject(res.result()));
 
             });

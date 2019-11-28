@@ -62,7 +62,6 @@ public class WebCollectorVerticle extends AbstractVerticle {
             JsonObject fetchMessage = JsonObject.mapFrom(message.body());
             String theMessagePathParm = fetchMessage.getValue("pathParameters").toString();
             JsonObject segmentObject = new JsonObject(theMessagePathParm);
-
             theMessagePathParm = segmentObject.getValue("segment").toString();
 
             logger.info("\tWebCollectorVerticle " + thisContext + " handling request to collect Web Data");
@@ -71,10 +70,10 @@ public class WebCollectorVerticle extends AbstractVerticle {
 
             logger.info("\tWebCollectorVerticle " + thisContext + " finished collecting Web data");
 
-            JsonObject messageToSend;
-            messageToSend = JsonObject.mapFrom(rawWebCollectionResults);
-
-            message.reply(messageToSend.encode());
+            JsonObject results = new JsonObject();
+            results.put("collectedData", JsonObject.mapFrom(rawWebCollectionResults));
+            results.put("pathParameters", theMessagePathParm);
+            message.reply(results.encode());
 
         });
 

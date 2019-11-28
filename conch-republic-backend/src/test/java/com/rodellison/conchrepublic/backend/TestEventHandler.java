@@ -41,7 +41,7 @@ class TestEventHandler {
         });
 
         logger.info(cf1.get().getBody());
-        assertTrue(cf1.get().getBody().contains("Processed GET:/loaddata"));
+        assertTrue(cf1.get().getBody().contains("Processed GET:/loaddata for segment: 1"));
 
     }
 
