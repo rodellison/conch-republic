@@ -11,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 
 import com.rodellison.conchrepublic.backend.handlers.*;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +22,7 @@ import java.util.concurrent.TimeoutException;
 
 // Import log4j classes.
 
-public class ServiceLauncher implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
+public class ServiceLauncher {
 
     private static final Logger logger = LogManager.getLogger(ServiceLauncher.class);
     public Vertx vertx;
@@ -59,6 +58,7 @@ public class ServiceLauncher implements RequestHandler<Map<String, Object>, ApiG
                 .setMaxWorkerExecuteTime(25)
                 .setMaxWorkerExecuteTimeUnit(TimeUnit.SECONDS)
                 .setInstances(instanceCount);
+
 
         CompletableFuture.allOf(
 
@@ -97,25 +97,8 @@ public class ServiceLauncher implements RequestHandler<Map<String, Object>, ApiG
         return cf;
     }
 
-    @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> map, Context context) {
 
-        int count = 0;
-        while (!verticlesDeployed)
-        {
-            try{
-                Thread.sleep(500);
-                count++;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if (count>5)
-            {
-                return ApiGatewayResponse.builder().
-                        setObjectBody(new Response("TIMEOUT"))
-                        .build();
-            }
-        }
 
         final CompletableFuture<String> future = new CompletableFuture<String>();
         logger.info(map);
@@ -136,10 +119,10 @@ public class ServiceLauncher implements RequestHandler<Map<String, Object>, ApiG
 
             //different seconds value to account for different values - if calling loaddata, then it could take longer to process
             int seconds = 0;
-             return ApiGatewayResponse.builder()
+            return ApiGatewayResponse.builder()
                     .setRawBody(future.get(30, TimeUnit.SECONDS))
- //                    .setObjectBody(new Response(future.get(30, TimeUnit.SECONDS)))
-                     .setHeaders(contentHeader)
+                    //                    .setObjectBody(new Response(future.get(30, TimeUnit.SECONDS)))
+                    .setHeaders(contentHeader)
                     .build();
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
             e.printStackTrace();

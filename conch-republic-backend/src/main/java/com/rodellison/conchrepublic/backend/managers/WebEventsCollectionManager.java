@@ -1,7 +1,11 @@
 package com.rodellison.conchrepublic.backend.managers;
 
+import com.rodellison.conchrepublic.backend.model.KeysLocations;
 import com.rodellison.conchrepublic.backend.utils.ExternalAPIFetchUtil;
 // Import log4j classes.
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -18,7 +22,7 @@ public class WebEventsCollectionManager {
         this.theDataFetchUtil = dataUtilToUse;
     }
 
-    public ArrayList<String> collectEventsForSeachDates(ArrayList<String> searchDates)
+    public ArrayList<String> collectEventsForSearchDates(ArrayList<String> searchDates)
     {
          try
         {
@@ -41,7 +45,14 @@ public class WebEventsCollectionManager {
     public String getURLDataForAYearMonth(String strYYYYMM) {
 
         log.info("Fetching external URL results for date: " + strYYYYMM);
-        return theDataFetchUtil.fetchURLData(strYYYYMM);
+
+        CloseableHttpClient clientToUse = HttpClients.createDefault();
+        String strExternalAPIURL = System.getenv("CONCH_REPUBLIC_BASE_URL");
+        String strLocation = KeysLocations.getLocation(KeysLocations.ALL_FLORIDA_KEYS);
+        String requestURL = strExternalAPIURL + "/" + strLocation + "/" + strYYYYMM + "/";
+        HttpGet httpget = new HttpGet(requestURL);
+
+        return theDataFetchUtil.fetchURLData(httpget, clientToUse);
 
     }
 }

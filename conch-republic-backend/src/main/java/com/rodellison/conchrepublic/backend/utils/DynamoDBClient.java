@@ -27,8 +27,6 @@ public class DynamoDBClient implements DynamoDBClientInterface {
                     .build();
         }
 
-
-
         return client;
     }
 

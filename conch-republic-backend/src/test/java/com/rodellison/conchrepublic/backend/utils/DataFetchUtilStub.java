@@ -1,12 +1,6 @@
 package com.rodellison.conchrepublic.backend.utils;
 
-public class DataFetchUtilTestDouble implements ExternalAPIFetchUtil{
-
-    @Override
-    public String fetchURLData(String strYYYYMM) {
-
-        return getTestHTMLString();
-    }
+public class DataFetchUtilStub {
 
     public static String getTestHTMLString()
     {
@@ -331,7 +325,7 @@ public class DataFetchUtilTestDouble implements ExternalAPIFetchUtil{
                         "<span class=\"listing-email\"><a href=\"/cdn-cgi/l/email-protection#7a13141c153a1c0813141d1f0e121f1b0e1f085415081d\"><span class=\"fa fa-fw fa-paper-plane\"></span>Email</a></span>\n" +
                         "<span class=\"listing-website\"><a href=\"https://www.fringetheater.org/five-lesbians\" target=\"_blank\"><span class=\"fa fa-fw fa-external-link\"></span>Website</a></span>\n" +
                         "</li>\n" +
-                        "<li class=\"listing-desc\">It’s 1956, and the Susan B. Anthony Society for the Sisters of Gertrude Stein are meeting for their annual quiche breakfast. Will they be able to keep their cool when a Communist attack threatens their idyllic way of life? Performance 7 p.m. at Key West Armory, 600 white St. Fringe Theater is Key West's community-focused theater providing unique opportunities for people to see and do theater. </li>\n" +
+                        "<li class=\"listing-desc\">It’s 1956, and the Susan B. Anthony Society for the Sisters of Gertrude Stein are meeting for their annual quiche breakfast. Will they be able to keep their cool when a Communist attack threatens their idyllic way of life? Performance 7 p.m. at Key West Armory, 600 white St. Fringe Theater is Key West's community-focused theater providing unique opportunities for people to see and do theater. </li>\n" +
                         "</ul>\n" +
                         "</div> \n" +
                         "\n" +
@@ -484,7 +478,7 @@ public class DataFetchUtilTestDouble implements ExternalAPIFetchUtil{
                         "<li class=\"listing-contact\">\n" +
                         "<span class=\"listing-website\"><a href=\"https://mangofestkeywest.com/\" target=\"_blank\"><span class=\"fa fa-fw fa-external-link\"></span>Website</a></span>\n" +
                         "</li>\n" +
-                        "<li class=\"listing-desc\">Mango Fest of Key West features all things mango including mango tasting, mango trees and mango daiquiris. The culinary competitions between local chefs and residents alike showcases the colorful abilities of what the mango, also known as the king of fruit, has to offer. The Vendor Village gives art collectors and foodies the experience of a festival atmosphere. Music is provided along with live radio broadcasts. From 10AM to 3PM, Bayview Park, 1400 Truman Ave.</li>\n" +
+                        "<li class=\"listing-desc\">Mango Fest of Key West features all things mango including mango tasting, mango trees and mango daiquiris. The culinary competitions between local chefs and residents alike showcases the colorful abilities of what the mango, also known as the king of fruit, has to offer. The Vendor Village gives art collectors and foodies the experience of a festival atmosphere. Music is provided along with live radio broadcasts. From 10AM to 3PM, Bayview Park, 1400 Truman Ave.</li>\n" +
                         "</ul>\n" +
                         "</div> \n" +
                         "\n" +
@@ -504,7 +498,7 @@ public class DataFetchUtilTestDouble implements ExternalAPIFetchUtil{
                         "<li class=\"listing-contact\">\n" +
                         "<span class=\"listing-website\"><a href=\"http://mysteryfestkeywest.com/\" target=\"_blank\"><span class=\"fa fa-fw fa-external-link\"></span>Website</a></span>\n" +
                         "</li>\n" +
-                        "<li class=\"listing-desc\">Renowned mystery writers, aspiring authors, true crime experts and fans meet in America’s southernmost city. The Fest features a who’s-who of award-winning and bestselling mystery/suspense authors and true crime experts, Mystery Fest Key West is a fun and fascinating meet-and-greet where writers can catch up with old friends and readers can meet leading authors, collect signed books and participate in workshops, panels, and presentations where the most devious of minds explain why—and how—they do it.</li>\n" +
+                        "<li class=\"listing-desc\">Renowned mystery writers, aspiring authors, true crime experts and fans meet in America’s southernmost city. The Fest features a who’s-who of award-winning and bestselling mystery/suspense authors and true crime experts, Mystery Fest Key West is a fun and fascinating meet-and-greet where writers can catch up with old friends and readers can meet leading authors, collect signed books and participate in workshops, panels, and presentations where the most devious of minds explain why—and how—they do it.</li>\n" +
                         "</ul>\n" +
                         "</div> \n" +
                         "\n" +
@@ -640,4 +634,5 @@ public class DataFetchUtilTestDouble implements ExternalAPIFetchUtil{
         return testHTML;
 
     };
+
 }

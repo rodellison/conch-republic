@@ -19,9 +19,12 @@ public class DynamoDBManager implements DataBaseManagerInterface {
 
     private static final Logger log = LogManager.getLogger(DynamoDBManager.class);
     private AmazonDynamoDB client;
+    private DynamoDB dynamoDB;
 
-    public DynamoDBManager(AmazonDynamoDB theClient) {
+    public DynamoDBManager(AmazonDynamoDB theClient, DynamoDB dynamoDB)
+    {
         this.client = theClient;
+        this.dynamoDB = dynamoDB;
     }
 
     @Override
@@ -31,9 +34,7 @@ public class DynamoDBManager implements DataBaseManagerInterface {
         try {
 
             ArrayList<EventItem> eventListResults = new ArrayList<>();
-            DynamoDB dynamoDB = new DynamoDB(client);
 
-            Table table = dynamoDB.getTable(strDataBaseTableName);
             log.info("Attempting to get Event Data items from DynamoDB for location: " + location);
 
             Map<String, AttributeValue> expressionAttributeValues = new HashMap<String, AttributeValue>();
@@ -62,14 +63,12 @@ public class DynamoDBManager implements DataBaseManagerInterface {
 
             return eventListResults;
 
-
         } catch (Exception e) {
             log.error(strDataBaseTableName + " DynamoDB creation failed: " + e.getMessage());
+            return null;
 
         }
-        return null;
-
-    }
+     }
 
     @Override
     public Boolean insertEventDataIntoDB(ArrayList<EventItem> theEventList) {
@@ -78,7 +77,7 @@ public class DynamoDBManager implements DataBaseManagerInterface {
 
         try {
 
-            DynamoDB dynamoDB = new DynamoDB(client);
+  //          DynamoDB dynamoDB = new DynamoDB(client);
 
             Table table = dynamoDB.getTable(strDataBaseTableName);
             log.info("Attempting to insert " + theEventList.size() + " Event Data items Into DynamoDB " + strDataBaseTableName);
@@ -97,7 +96,6 @@ public class DynamoDBManager implements DataBaseManagerInterface {
                     table.putItem(item);
 
                 } catch (Exception e) {
-
                     log.error(strDataBaseTableName + " PUT Item failed: " + e.getMessage());
                 }
             });
@@ -105,7 +103,7 @@ public class DynamoDBManager implements DataBaseManagerInterface {
 
         } catch (Exception e) {
             log.error(strDataBaseTableName + " DynamoDB creation failed: " + e.getMessage());
-
+            return false;
         }
         return true;
     }

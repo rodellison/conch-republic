@@ -1,8 +1,5 @@
 package com.rodellison.conchrepublic.backend.model;
 
-import com.rodellison.conchrepublic.backend.model.EventItem;
-import com.rodellison.conchrepublic.backend.model.KeysLocations;
-
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Predicate;

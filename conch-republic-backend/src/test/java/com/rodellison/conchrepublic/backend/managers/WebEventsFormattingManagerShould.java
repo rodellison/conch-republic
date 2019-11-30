@@ -1,7 +1,7 @@
 package com.rodellison.conchrepublic.backend.managers;
 
 import com.rodellison.conchrepublic.backend.model.EventItem;
-import com.rodellison.conchrepublic.backend.utils.DataFetchUtilTestDouble;
+import com.rodellison.conchrepublic.backend.utils.DataFetchUtilStub;  //stub containing some actual return data
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ public class WebEventsFormattingManagerShould {
 
         WebEventsFormattingManager myWebEventsFormattingManager = new WebEventsFormattingManager();
         ArrayList<String> rawHTMLDataTest = new ArrayList<>();
-        rawHTMLDataTest.add(DataFetchUtilTestDouble.getTestHTMLString());
+        rawHTMLDataTest.add(DataFetchUtilStub.getTestHTMLString());
         List<EventItem> theEventListData = myWebEventsFormattingManager.convertRawHTMLToEventList(rawHTMLDataTest);
         theEventListData.forEach(log::info);
 

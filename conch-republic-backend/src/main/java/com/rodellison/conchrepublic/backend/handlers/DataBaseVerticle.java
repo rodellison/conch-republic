@@ -1,9 +1,9 @@
 package com.rodellison.conchrepublic.backend.handlers;
 
 
+import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.rodellison.conchrepublic.backend.managers.DataBaseManager;
 import com.rodellison.conchrepublic.backend.managers.DynamoDBManager;
 import com.rodellison.conchrepublic.backend.model.EventItem;
 
@@ -29,15 +29,19 @@ public class DataBaseVerticle extends AbstractVerticle {
     public void insertData(ArrayList<EventItem> itemsToInsert) {
 
         DynamoDBClient myClient = new DynamoDBClient();
-        DataBaseManager myDataBaseManager = new DataBaseManager(new DynamoDBManager(myClient.getDynamoDBClient()));
-        myDataBaseManager.insertEventDataIntoDB(itemsToInsert);
+        DynamoDB myDynamoDB = new DynamoDB(myClient.getDynamoDBClient());
+        DynamoDBManager myDynamoDBManager = new DynamoDBManager(myClient.getDynamoDBClient(), myDynamoDB);
+
+        myDynamoDBManager.insertEventDataIntoDB(itemsToInsert);
 
     }
     public ArrayList<EventItem> getData(String location) {
 
         DynamoDBClient myClient = new DynamoDBClient();
-        DataBaseManager myDataBaseManager = new DataBaseManager(new DynamoDBManager(myClient.getDynamoDBClient()));
-        return myDataBaseManager.getEventsDataForLocation(location);
+        DynamoDB myDynamoDB = new DynamoDB(myClient.getDynamoDBClient());
+        DynamoDBManager myDynamoDBManager = new DynamoDBManager(myClient.getDynamoDBClient(), myDynamoDB);
+
+        return myDynamoDBManager.getEventsDataForLocation(location);
 
     }
 
@@ -58,10 +62,10 @@ public class DataBaseVerticle extends AbstractVerticle {
             JsonObject segmentObject = new JsonObject(theMessagePathParm);
             theMessagePathParm = segmentObject.getValue("location").toString();
 
-            logger.info("DBHandlerVerticle received Get request for location: " + theMessagePathParm);
+            logger.info("DBHandlerVerticle " + thisContext +  " received Get request for location: " + theMessagePathParm);
             result = getData(theMessagePathParm);
             String jsonResult = new Gson().toJson(result);
-            logger.info("DBHandlerVerticle processed Get request for location: " + theMessagePathParm);
+            logger.info("DBHandlerVerticle " + thisContext +  " processed Get request for location: " + theMessagePathParm);
 
             final Map<String, Object> response = new HashMap<>();
             response.put("statusCode", 200);
@@ -97,9 +101,9 @@ public class DataBaseVerticle extends AbstractVerticle {
             }
             //----- This section to convert from LinkedHashMap entries that are riding through the event bus
 
-            logger.info("DataBaseVerticle received insert request");
+            logger.info("DataBaseVerticle " + thisContext + " received insert request");
             insertData(convertedEventItems);
-            logger.info("DBHandlerVerticle completed insert request ");
+            logger.info("DBHandlerVerticle "  + thisContext +  " completed insert request ");
 
             final Map<String, Object> response = new HashMap<>();
             response.put("pathParameters", theMessagePathParm);

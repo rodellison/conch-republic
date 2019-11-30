@@ -1,6 +1,7 @@
 package com.rodellison.conchrepublic.backend.handlers;
 
 import com.rodellison.conchrepublic.backend.managers.WebEventsCollectionManager;
+import com.rodellison.conchrepublic.backend.model.KeysLocations;
 import com.rodellison.conchrepublic.backend.utils.DataFetchUtil;
 import com.rodellison.conchrepublic.backend.utils.ExternalAPIFetchUtil;
 import com.rodellison.conchrepublic.backend.utils.SearchDateUtil;
@@ -38,7 +39,7 @@ public class WebCollectorVerticle extends AbstractVerticle {
         //This call will take a while
         logger.debug("\tWebCollectorVerticle " + thisContext + " performing long running collectEventsForSearchDates");
         ArrayList<String> rawHTMLData;
-        rawHTMLData = theWebEventCollectionsManager.collectEventsForSeachDates(theSearchDateParms);
+        rawHTMLData = theWebEventCollectionsManager.collectEventsForSearchDates(theSearchDateParms);
         LinkedHashMap<String, String> lhmRawCollectedData = new LinkedHashMap<>();
 
         AtomicInteger counter = new AtomicInteger();
