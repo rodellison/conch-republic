@@ -18,8 +18,7 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @DisplayName("Dynamo DB Manager should ")
 class DynamoDBManagerTest {
@@ -56,6 +55,7 @@ class DynamoDBManagerTest {
 
         ArrayList<EventItem> myEventItems = myDynamoDBManager.getEventsDataForLocation("islamorada");
         assertEquals("calendar-0001", myEventItems.get(0).getEventID());
+
 
     }
 

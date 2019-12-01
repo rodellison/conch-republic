@@ -23,6 +23,7 @@ Resources:
           DYNAMO_DB_TABLENAME: FloridaKeysEvents
           MONTHS_TO_FETCH: 12
           DYNAMO_DB_ENV: Dev
+          SNS_TOPIC: <ARN of SNS TOPIC>
       Events:
         Api: 
           Type: Api

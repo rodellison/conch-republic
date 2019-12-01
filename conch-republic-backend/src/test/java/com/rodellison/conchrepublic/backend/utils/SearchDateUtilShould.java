@@ -28,7 +28,7 @@ class SearchDateUtilShould {
         ArrayList<String> theSearchDateParms = SearchDateUtil.getSearchDates(intTestMonthsToFetch, 2);
         assertAll(
                 () -> assertThat(theSearchDateParms, not(IsEmptyCollection.empty())),
-                () -> assertThat(theSearchDateParms, hasItem("202001")),
+                () -> assertThat(theSearchDateParms, hasItem("202002")),
                 () -> assertThat(theSearchDateParms, hasSize(intTestMonthsToFetch/2))
         );
 

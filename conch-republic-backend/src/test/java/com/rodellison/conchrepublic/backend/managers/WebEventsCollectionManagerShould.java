@@ -4,6 +4,9 @@ import com.rodellison.conchrepublic.backend.utils.DataFetchUtil;
 import com.rodellison.conchrepublic.backend.utils.ExternalAPIFetchUtil;
 import com.rodellison.conchrepublic.backend.utils.SearchDateUtil;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,23 +27,25 @@ class WebEventsCollectionManagerShould {
     private static final Logger log = LogManager.getLogger(WebEventsCollectionManagerShould.class);
     private static final int monthsToSearch = 4;
 
-    private final ExternalAPIFetchUtil myTestDataFetchUtil = new DataFetchUtil();
-
-
     @Test
     @DisplayName("return fetched data for segment of Search Dates")
     void returnArrayOfFetchedEventData()
     {
+        ExternalAPIFetchUtil myMockDataFetch = mock(ExternalAPIFetchUtil.class);
         String divWrapperHtml = "</div id=\"wrapper\">";
 
         //mockito spy to leave one method as-is, but override the other with a when...
-        WebEventsCollectionManager testWebEventsCollectionManager = new WebEventsCollectionManager(myTestDataFetchUtil);
+        WebEventsCollectionManager testWebEventsCollectionManager = new WebEventsCollectionManager(myMockDataFetch);
         WebEventsCollectionManager aSpyTestEventsCollectionManager = spy(testWebEventsCollectionManager);
-        when(aSpyTestEventsCollectionManager.getURLDataForAYearMonth(any(String.class)))
+ //       when(aSpyTestEventsCollectionManager.getURLDataForAYearMonth(anyString()))
+ //               .thenReturn(divWrapperHtml);
+
+        when(myMockDataFetch.fetchURLData(any(HttpGet.class), any(CloseableHttpClient.class)))
                 .thenReturn(divWrapperHtml);
 
         ArrayList<String> searchDateList = SearchDateUtil.getSearchDates(monthsToSearch, 1);
         ArrayList<String> searchParmResults = aSpyTestEventsCollectionManager.collectEventsForSearchDates(searchDateList);
+
         assertAll(
                 () -> assertNotNull(searchParmResults),
                 () -> assertTrue(searchParmResults.get(0).equals(divWrapperHtml)),

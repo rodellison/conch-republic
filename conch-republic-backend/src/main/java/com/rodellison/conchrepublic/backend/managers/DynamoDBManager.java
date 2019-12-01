@@ -77,8 +77,6 @@ public class DynamoDBManager implements DataBaseManagerInterface {
 
         try {
 
-  //          DynamoDB dynamoDB = new DynamoDB(client);
-
             Table table = dynamoDB.getTable(strDataBaseTableName);
             log.info("Attempting to insert " + theEventList.size() + " Event Data items Into DynamoDB " + strDataBaseTableName);
             theEventList.forEach(eventItem -> {

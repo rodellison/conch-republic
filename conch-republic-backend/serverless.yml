@@ -20,6 +20,7 @@ functions:
       DYNAMO_DB_TABLENAME: FloridaKeysEvents
       MONTHS_TO_FETCH: 12
       DYNAMO_DB_ENV: Prod
+      SNS_TOPIC: <ARN of SNS TOPIC>
     events:
       - http:
           path: getdata/{location}

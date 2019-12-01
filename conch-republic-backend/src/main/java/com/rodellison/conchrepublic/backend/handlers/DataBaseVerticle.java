@@ -8,6 +8,8 @@ import com.rodellison.conchrepublic.backend.managers.DynamoDBManager;
 import com.rodellison.conchrepublic.backend.model.EventItem;
 
 import com.rodellison.conchrepublic.backend.utils.DynamoDBClient;
+import com.rodellison.conchrepublic.backend.utils.SNSClient;
+import com.rodellison.conchrepublic.backend.utils.SNSMessageUtil;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.eventbus.EventBus;
@@ -103,6 +105,9 @@ public class DataBaseVerticle extends AbstractVerticle {
 
             logger.info("DataBaseVerticle " + thisContext + " received insert request");
             insertData(convertedEventItems);
+            //Quick SNS message to share results of this run...
+            String pubMessage = "Conch Republic Backend DynamoDB processed " + convertedEventItems.size() + " items";
+            SNSMessageUtil.SendSMSMessage(SNSClient.getSNSClient(), pubMessage);
             logger.info("DBHandlerVerticle "  + thisContext +  " completed insert request ");
 
             final Map<String, Object> response = new HashMap<>();

@@ -26,8 +26,7 @@ public class WebEventsFormattingManagerShould {
         ArrayList<String> rawHTMLDataTest = new ArrayList<>();
         rawHTMLDataTest.add(DataFetchUtilStub.getTestHTMLString());
         List<EventItem> theEventListData = myWebEventsFormattingManager.convertRawHTMLToEventList(rawHTMLDataTest);
-        theEventListData.forEach(log::info);
-
+    //    theEventListData.forEach(log::info);
         assertEquals(12, theEventListData.size());
 
     }

@@ -46,10 +46,11 @@ public class WebEventsCollectionManager {
 
         log.info("Fetching external URL results for date: " + strYYYYMM);
 
-        CloseableHttpClient clientToUse = HttpClients.createDefault();
         String strExternalAPIURL = System.getenv("CONCH_REPUBLIC_BASE_URL");
         String strLocation = KeysLocations.getLocation(KeysLocations.ALL_FLORIDA_KEYS);
         String requestURL = strExternalAPIURL + "/" + strLocation + "/" + strYYYYMM + "/";
+
+        CloseableHttpClient clientToUse = HttpClients.createDefault();
         HttpGet httpget = new HttpGet(requestURL);
 
         return theDataFetchUtil.fetchURLData(httpget, clientToUse);

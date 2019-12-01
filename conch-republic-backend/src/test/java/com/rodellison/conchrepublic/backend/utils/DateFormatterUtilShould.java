@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DateFormatterUtilShould {
 
     @Test
-    @DisplayName("convert a MMM DD, YYYY oriented set of dates to YYYYMMDD")
+    @DisplayName("convert a set of MMM DD, YYYY from/to dates to YYYYMMDD equivalents")
     void convertDateTestStartAndEnd() {
 
         String testDate = "Jun 6, 2020 - Jun 30, 2020";
@@ -21,7 +21,7 @@ public class DateFormatterUtilShould {
     }
 
     @Test
-    @DisplayName("convert a MMM DD, YYYY oriented single date to YYYYMMDD")
+    @DisplayName("convert a single MMM DD, YYYY date to YYYYMMDD equivalent")
     void convertDateTestSingleDate() {
 
         String testDate = "Jun 30, 2020";
