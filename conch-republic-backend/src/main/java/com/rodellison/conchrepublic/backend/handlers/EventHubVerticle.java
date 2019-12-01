@@ -28,11 +28,8 @@ public class EventHubVerticle extends AbstractVerticle {
 
             String theMessage = message.body().toString();
             JsonObject messageJson = new JsonObject(theMessage);
-//            String theMessagePathParm = messageJson.getValue("pathParameters").toString();
-//            JsonObject segmentObject = new JsonObject(theMessagePathParm);
-//            theMessagePathParm = segmentObject.getValue("segment").toString();
 
-            logger.info("GET:/loaddata function invoked with body: " + theMessage);
+       //   logger.info("GET:/loaddata function invoked with body: " + theMessage);
             //This send gets the entire process kicked off
             //Calling out to an external web page to get data could take time, trying executeBlocking here
             vertx.<String>executeBlocking(execBlockFuture -> {

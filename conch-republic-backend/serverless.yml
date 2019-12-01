@@ -16,11 +16,11 @@ functions:
     memorySize: 512
     timeout: 30
     environment:
-      CONCH_REPUBLIC_BASE_URL: https://fla-keys.com/calendar/all
-      DYNAMO_DB_TABLENAME: FloridaKeysEvents
+      CONCH_REPUBLIC_BASE_URL: ${env:CONCH_REPUBLIC_BASE_URL}
+      DYNAMO_DB_TABLENAME: ${env:DYNAMO_DB_TABLENAME}
       MONTHS_TO_FETCH: 12
       DYNAMO_DB_ENV: Prod
-      SNS_TOPIC: <ARN of SNS TOPIC>
+      SNS_TOPIC: ${env:SNS_TOPIC}
     events:
       - http:
           path: getdata/{location}

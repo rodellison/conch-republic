@@ -20,15 +20,13 @@ public class ServiceLauncher implements RequestHandler<Map<String, Object>, ApiG
 
     {
         VertxOptions vertxOptions = new VertxOptions()
-                .setBlockedThreadCheckInterval(10)
+                .setMaxEventLoopExecuteTime(20)
+                .setMaxEventLoopExecuteTimeUnit(TimeUnit.SECONDS)
+                .setWarningExceptionTime(20)
+                .setWarningExceptionTimeUnit(TimeUnit.SECONDS)
+                .setBlockedThreadCheckInterval(20)
                 .setBlockedThreadCheckIntervalUnit(TimeUnit.SECONDS);
         vertx = Vertx.vertx(vertxOptions);
-
-        vertxOptions.setMaxEventLoopExecuteTime(10);
-        vertxOptions.setMaxEventLoopExecuteTimeUnit(TimeUnit.SECONDS);
-
-        vertxOptions.setMaxWorkerExecuteTime(10);
-        vertxOptions.setMaxWorkerExecuteTimeUnit(TimeUnit.SECONDS);
 
         // log the stack trace if an event loop or worker handler took more than 20s to execute
         vertxOptions.setWarningExceptionTime(20);
@@ -49,9 +47,9 @@ public class ServiceLauncher implements RequestHandler<Map<String, Object>, ApiG
 
         CompletableFuture.allOf(
 
-                deploy(WebCollectorVerticle.class.getName(), standardDeploymentOptions),
+                deploy(WebCollectorVerticle.class.getName(), workerDeploymentOptions),
                 deploy(DataBaseVerticle.class.getName(), workerDeploymentOptions),
-                deploy(WebFormatterVerticle.class.getName(), standardDeploymentOptions),
+                deploy(WebFormatterVerticle.class.getName(), workerDeploymentOptions),
                 deploy(EventHubVerticle.class.getName(), standardDeploymentOptions)
 
         ).whenComplete((res, err) -> {
@@ -106,10 +104,10 @@ public class ServiceLauncher implements RequestHandler<Map<String, Object>, ApiG
 
             //different seconds value to account for different values - if calling loaddata, then it could take longer to process
             int seconds = 0;
-            seconds = map.get("resource").toString().contains("loaddata") ? 20 : 5;
+            seconds = map.get("resource").toString().contains("loaddata") ? 20 : 10;
 
             return ApiGatewayResponse.builder()
-                    .setRawBody(future.get(30, TimeUnit.SECONDS))
+                    .setRawBody(future.get(seconds, TimeUnit.SECONDS))
                     //        .setObjectBody(new Response("Sent by : " + this.toString() + " - " + future.get(seconds, TimeUnit.SECONDS)))
                     .setHeaders(contentHeader)
                     .build();

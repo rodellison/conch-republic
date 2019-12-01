@@ -2,6 +2,7 @@
 # sam local start-api -p 3001 -t localtemplate.yml  --env-vars env.json
 # sam local start-api -p 3001 -t localtemplate.yml  --env-vars env.json  --skip-pull-image     (after initial runs)
 
+
 # note: CodeURI element can be a .jar file, or path to the code extracted from a shaded jar  - using the Unarchiver
 
 AWSTemplateFormatVersion: '2010-09-09'
@@ -19,11 +20,11 @@ Resources:
       MemorySize: 512
       Environment:
         Variables:
-          CONCH_REPUBLIC_BASE_URL: https://fla-keys.com/calendar/all
-          DYNAMO_DB_TABLENAME: FloridaKeysEvents
-          MONTHS_TO_FETCH: 12
-          DYNAMO_DB_ENV: Dev
-          SNS_TOPIC: <ARN of SNS TOPIC>
+          CONCH_REPUBLIC_BASE_URL: ${env:CONCH_REPUBLIC_BASE_URL}
+          DYNAMO_DB_TABLENAME: ${env:DYNAMO_DB_TABLENAME}
+          MONTHS_TO_FETCH: ${env:MONTHS_TO_FETCH}
+          DYNAMO_DB_ENV: ${env:DYNAMO_DB_ENV}
+          SNS_TOPIC: ${env:SNS_TOPIC}
       Events:
         Api: 
           Type: Api
