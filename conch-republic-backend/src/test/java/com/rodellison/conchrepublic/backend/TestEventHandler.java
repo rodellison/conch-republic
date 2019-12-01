@@ -22,7 +22,7 @@ class TestEventHandler {
     private static Context testContext = null;
 
 
-    @Test
+//    @Test
     @DisplayName(" ensure /loaddata call returns with success")
     public void testLoadDataReturnsSuccess() throws Throwable {
 
@@ -45,7 +45,7 @@ class TestEventHandler {
 
     }
 
-    @Test
+ //   @Test
     @DisplayName(" ensure /getdata/{location} call returns with success")
     public void testGetDataReturnsSuccess() throws Throwable {
 

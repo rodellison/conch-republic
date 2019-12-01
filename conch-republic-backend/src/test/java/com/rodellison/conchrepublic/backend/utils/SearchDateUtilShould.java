@@ -25,7 +25,8 @@ class SearchDateUtilShould {
 
         int intTestMonthsToFetch = 4;  //even numbers only
         int intSegment = 2;  //value of 1 or 2 to represent first half or second half respectively
-        ArrayList<String> theSearchDateParms = SearchDateUtil.getSearchDates(intTestMonthsToFetch, 2);
+
+        ArrayList<String> theSearchDateParms = SearchDateUtil.getSearchDates(intTestMonthsToFetch, intSegment);
         assertAll(
                 () -> assertThat(theSearchDateParms, not(IsEmptyCollection.empty())),
                 () -> assertThat(theSearchDateParms, hasItem("202002")),
