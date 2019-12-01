@@ -1,6 +1,7 @@
 package com.rodellison.conchrepublic.backend.handlers;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.rodellison.conchrepublic.backend.Services;
 import com.rodellison.conchrepublic.backend.managers.WebEventsFormattingManager;
 import com.rodellison.conchrepublic.backend.model.EventItem;
@@ -12,6 +13,7 @@ import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -47,12 +49,13 @@ public class WebFormatterVerticle extends AbstractVerticle {
         thisContext = thisContext.substring(thisContext.lastIndexOf("@") + 1);
 
         eventBus.consumer(Services.FORMATWEBDATA.toString(), message -> {
-            // Do something with Vert.x async, reactive APIs
+           // Do something with Vert.x async, reactive APIs
 
             JsonObject messageJson = new JsonObject(message.body().toString());
             String theMessagePathParm = messageJson.getValue("pathParameters").toString();
 
-            LinkedHashMap<String, String> lhmResult = new Gson().fromJson(messageJson.getValue("collectedData").toString(), LinkedHashMap.class);
+            Type lhmSSType = new TypeToken<LinkedHashMap<String, String>>() {}.getType();
+            LinkedHashMap<String, String> lhmResult = new Gson().fromJson(messageJson.getValue("collectedData").toString(), lhmSSType);
             ArrayList<String> theRawDataList = new ArrayList<>(lhmResult.values());
 
             logger.info("\tWebFormatterVerticle " + thisContext + " handling request to format raw Web Data");
