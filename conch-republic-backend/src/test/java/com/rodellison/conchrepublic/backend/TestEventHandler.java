@@ -45,7 +45,7 @@ class TestEventHandler {
 
     }
 
- //   @Test
+    @Test
     @DisplayName(" ensure /getdata/{location} call returns with success")
     public void testGetDataReturnsSuccess() throws Throwable {
 

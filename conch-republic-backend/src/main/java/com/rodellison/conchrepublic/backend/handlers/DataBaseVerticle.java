@@ -1,6 +1,8 @@
 package com.rodellison.conchrepublic.backend.handlers;
 
 
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -30,18 +32,19 @@ public class DataBaseVerticle extends AbstractVerticle {
 
     public void insertData(ArrayList<EventItem> itemsToInsert) {
 
-        DynamoDBClient myClient = new DynamoDBClient();
-        DynamoDB myDynamoDB = new DynamoDB(myClient.getDynamoDBClient());
-        DynamoDBManager myDynamoDBManager = new DynamoDBManager(myClient.getDynamoDBClient(), myDynamoDB);
+    //    DynamoDBClient myClient = new DynamoDBClient();
+        AmazonDynamoDB myClient = new DynamoDBClient().getDynamoDBClient();
+        DynamoDB myDynamoDB = new DynamoDB(myClient);
+        DynamoDBManager myDynamoDBManager = new DynamoDBManager(myClient, myDynamoDB);
 
         myDynamoDBManager.insertEventDataIntoDB(itemsToInsert);
 
     }
     public ArrayList<EventItem> getData(String location) {
 
-        DynamoDBClient myClient = new DynamoDBClient();
-        DynamoDB myDynamoDB = new DynamoDB(myClient.getDynamoDBClient());
-        DynamoDBManager myDynamoDBManager = new DynamoDBManager(myClient.getDynamoDBClient(), myDynamoDB);
+        AmazonDynamoDB myClient = new DynamoDBClient().getDynamoDBClient();
+        DynamoDB myDynamoDB = new DynamoDB(myClient);
+        DynamoDBManager myDynamoDBManager = new DynamoDBManager(myClient, myDynamoDB);
 
         return myDynamoDBManager.getEventsDataForLocation(location);
 
