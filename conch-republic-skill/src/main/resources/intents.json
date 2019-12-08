@@ -1,0 +1,200 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "the conch republic",
+      "intents": [
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": [
+            "cancel",
+            "I'm done",
+            "I'm finished"
+          ]
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+            "help me please",
+            "i need help",
+            "please help me",
+            "help"
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": [
+            "stop",
+            "stop please",
+            "please stop"
+          ]
+        },
+        {
+          "name": "AMAZON.StartOverIntent",
+          "samples": [
+            "please start over",
+            "start over",
+            "i want to start over",
+            "restart",
+            "new search"
+          ]
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": [
+            "yes please",
+            "yes"
+          ]
+        },
+        {
+          "name": "AMAZON.NoIntent",
+          "samples": [
+            "no thank you",
+            "no"
+          ]
+        },
+        {
+          "name": "FullyBakedAskIntent",
+          "slots": [
+            {
+              "name": "location",
+              "type": "location"
+            },
+            {
+              "name": "month",
+              "type": "AMAZON.Month"
+            }
+          ],
+          "samples": [
+            "what events are happening in {month}",
+            "what events are happening in {location}",
+            "what events are in {location} in {month}",
+            "what events are around {location}",
+            "what events are around {location} in {month}",
+            "what events are near {location}",
+            "what events are near {location} in {month}",
+            "what events are in {month} around {location}",
+            "what events are happening in {month} around {location}",
+            "what events are in {month} in {location}",
+            "what events are happening in {month} in {location}",
+            "what's happening in {month}",
+            "what's happening in {location}",
+            "what's happening in {location} in {month}",
+            "what's happening around {location}",
+            "what's happening around {location} in {month}",
+            "what's happening near {location}",
+            "what's happening near {location} in {month}",
+            "what's happening in {month} around {location}",
+            "what's happening in {month} in {location}",
+            "what's on the calendar in {month}",
+            "what's on the calendar in {location}",
+            "what's on the calendar in {location} in {month}",
+            "what's on the calendar around {location}",
+            "what's on the calendar around {location} in {month}",
+            "what's on the calendar near {location}",
+            "what's on the calendar near {location} in {month}",
+            "what's on the calendar in {month} around {location}",
+            "what's on the calendar in {month} in {location}",
+            "for events in {month}",
+            "for events in {location}",
+            "for events in {location} in {month}",
+            "for events around {location}",
+            "for events around {location} in {month}",
+            "for events near {location}",
+            "for events near {location} in {month}",
+            "for events in {month} around {location}",
+            "for events in {month} in {location}"
+          ]
+        },
+        {
+          "name": "MoreDetailsIntent",
+          "slots": [
+            {
+              "name": "ItemOrdinal",
+              "type": "AMAZON.Ordinal"
+            }
+          ],
+          "samples": [
+            "more details for the {ItemOrdinal} please.",
+            "{ItemOrdinal}",
+            "more details for the {ItemOrdinal} event please.",
+            "more details for the {ItemOrdinal} event"
+          ]
+        },
+        {
+          "name": "EventLocationIntent",
+          "slots": [
+            {
+              "name": "EventLocation",
+              "type": "location"
+            }
+          ],
+          "samples": [
+            "All of the Florida Keys",
+            "All of the Keys",
+            "{EventLocation}",
+            "All Locations"
+          ]
+        },
+        {
+          "name": "EventTimeFrameIntent",
+          "slots": [
+            {
+              "name": "month",
+              "type": "AMAZON.Month"
+            }
+          ],
+          "samples": [
+            "{month}",
+            "all",
+            "all months"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        }
+      ],
+      "types": [
+        {
+          "name": "location",
+          "values": [
+            {
+              "name": {
+                "value": "florida keys"
+              }
+            },
+            {
+              "name": {
+                "value": "Key West"
+              }
+            },
+            {
+              "name": {
+                "value": "The lower keys"
+              }
+            },
+            {
+              "name": {
+                "value": "Marathon"
+              }
+            },
+            {
+              "name": {
+                "value": "Islamorada"
+              }
+            },
+            {
+              "name": {
+                "value": "Key Largo"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

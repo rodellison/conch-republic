@@ -15,7 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.*;
 
-public class DynamoDBManager implements DataBaseManagerInterface {
+public class DynamoDBManager implements DataBaseManager {
 
     private static final Logger log = LogManager.getLogger(DynamoDBManager.class);
     private AmazonDynamoDB client;
@@ -37,7 +37,7 @@ public class DynamoDBManager implements DataBaseManagerInterface {
 
             log.info("Attempting to get Event Data items from DynamoDB for location: " + location);
 
-            Map<String, AttributeValue> expressionAttributeValues = new HashMap<String, AttributeValue>();
+            Map<String, AttributeValue> expressionAttributeValues = new HashMap<>();
             expressionAttributeValues.put(":el", new AttributeValue().withS(location));
 
             ScanRequest scanRequest = new ScanRequest()

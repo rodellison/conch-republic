@@ -1,0 +1,835 @@
+{
+  "document": {
+    "type": "APL",
+    "version": "1.0",
+    "theme": "dark",
+    "import": [
+      {
+        "name": "alexa-viewport-profiles",
+        "version": "1.0.0"
+      },
+      {
+        "name": "alexa-layouts",
+        "version": "1.0.0"
+      },
+      {
+        "name": "alexa-styles",
+        "version": "1.0.0"
+      }
+    ],
+    "resources": [
+      {
+        "description": "Stock color for the light theme",
+        "colors": {
+          "colorTextPrimary": "#151920"
+        }
+      },
+      {
+        "description": "Stock color for the dark theme",
+        "when": "${viewport.theme == 'dark'}",
+        "colors": {
+          "colorTextPrimary": "#f0f1ef"
+        }
+      },
+      {
+        "description": "Standard font sizes",
+        "dimensions": {
+          "textSizeBody": 44,
+          "textSizePrimary": 24,
+          "textSizePrimary2": 30,
+          "textSizePrimary3": 36,
+          "textSizeSecondary": 23,
+          "textSizeSecondaryHint": 18
+        }
+      },
+      {
+        "description": "Common spacing values",
+        "dimensions": {
+          "spacingThin": 6,
+          "spacingSmall": 12,
+          "spacingMedium": 24,
+          "spacingLarge": 48,
+          "spacingExtraLarge": 72
+        }
+      },
+      {
+        "description": "Common margins and padding",
+        "dimensions": {
+          "marginTop": 40,
+          "marginLeft": 60,
+          "marginRight": 60,
+          "marginBottom": 40
+        }
+      }
+    ],
+    "styles": {
+      "textStyleBase": {
+        "description": "Base font description; set color and core font family",
+        "values": [
+          {
+            "color": "@colorTextPrimary",
+            "fontFamily": "Amazon Ember"
+          }
+        ]
+      },
+      "textStyleBase0": {
+        "description": "Thin version of basic font",
+        "extend": "textStyleBase",
+        "values": {
+          "fontWeight": "100"
+        }
+      },
+      "textStyleBase1": {
+        "description": "Light version of basic font",
+        "extend": "textStyleBase",
+        "values": {
+          "fontWeight": "300"
+        }
+      },
+      "mixinBody": {
+        "values": {
+          "fontSize": "@textSizeBody"
+        }
+      },
+      "mixinPrimary": {
+        "values": {
+          "fontSize": "@textSizePrimary"
+        }
+      },
+      "mixinPrimary2": {
+        "values": {
+          "fontSize": "@textSizePrimary2"
+        }
+      },
+      "mixinPrimary3": {
+        "values": {
+          "fontSize": "@textSizePrimary3"
+        }
+      },
+      "mixinSecondary": {
+        "values": {
+          "fontSize": "@textSizeSecondary"
+        }
+      },
+      "textStylePrimary": {
+        "extend": [
+          "textStyleBase1",
+          "mixinPrimary"
+        ]
+      },
+      "textStylePrimary2": {
+        "extend": [
+          "textStyleBase1",
+          "mixinPrimary2"
+        ]
+      },
+      "textStyleSecondary": {
+        "extend": [
+          "textStyleBase0",
+          "mixinSecondary"
+        ]
+      },
+      "textStyleSecondary2": {
+        "extend": [
+          "textStyleBase1",
+          "mixinSecondary"
+        ]
+      },
+      "textStyleBody": {
+        "extend": [
+          "textStyleBase1",
+          "mixinBody"
+        ]
+      },
+      "textStyleSecondaryHint": {
+        "values": {
+          "fontFamily": "Bookerly",
+          "fontStyle": "italic",
+          "fontSize": "@textSizeSecondaryHint",
+          "color": "@colorTextPrimary"
+        }
+      },
+      "textStyleBodySmall": {
+        "values": {
+          "fontFamily": "Amazon Ember",
+          "fontSize": "@textSizeSecondaryHint",
+          "color": "@colorTextPrimary"
+        }
+      }
+    },
+    "layouts": {
+      "Home": {
+        "items": [
+          {
+            "when": "${@viewportProfile == @hubRoundSmall}",
+            "type": "Container",
+            "direction": "column",
+            "width": "100vw",
+            "height": "100vh",
+            "items": [
+              {
+                "type": "Image",
+                "source": "${payload.ConchRepublicTemplateData.properties.HomeImageUrlXSMALL}",
+                "scale": "best-fill",
+                "width": "100vw",
+                "height": "100vh",
+                "position": "absolute",
+                "overlayColor": "rgba(0, 0, 0, 0.3)"
+              },
+              {
+                "type": "Text",
+                "style": "textStyleBody",
+                "width": "90vw",
+                "paddingLeft": "10vw",
+                "paddingTop": "10vw",
+                "textAlign": "center",
+                "text": "<b>Welcome to the Conch Republic</b>",
+                "fontWeight": "normal"
+              },
+              {
+                "type": "ScrollView",
+                "width": "100vw",
+                "height": "45vh",
+                "item": [
+                  {
+                    "type": "Container",
+                    "paddingLeft": 30,
+                    "paddingRight": 30,
+                    "paddingBottom": "10",
+                    "alignItems": "center",
+                    "direction": "column",
+                    "items": [
+                      {
+                        "type": "Text",
+                        "text": "Ask a question similar to one of these:",
+                        "paddingTop": 40,
+                        "style": "textStylePrimary",
+                        "width": "90vw",
+                        "textAlign": "center"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "What is happening in Key West in October?",
+                        "paddingTop": 20,
+                        "style": "textStylePrimary",
+                        "width": "90vw",
+                        "textAlign": "center"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "What is happening around Key Largo in May?",
+                        "paddingTop": 20,
+                        "style": "textStylePrimary",
+                        "width": "90vw",
+                        "textAlign": "center"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "Text",
+                "text": "Photo by: Alfred Schrock",
+                "paddingTop": 15,
+                "style": "textStyleSecondaryHint",
+                "width": "100vw",
+                "textAlign": "center"
+              }
+            ]
+          },
+          {
+            "type": "Container",
+            "direction": "column",
+            "width": "100vw",
+            "height": "100vh",
+            "items": [
+              {
+                "type": "Image",
+                "source": "${payload.ConchRepublicTemplateData.properties.HomeImageUrlXLARGE}",
+                "scale": "best-fill",
+                "width": "100vw",
+                "height": "100vh",
+                "position": "absolute",
+                "overlayColor": "rgba(0, 0, 0, 0.1)"
+              },
+              {
+                "type": "AlexaHeader",
+                "headerAttributionImage": "${payload.ConchRepublicTemplateData.properties.LogoUrl}"
+              },
+              {
+                "type": "Text",
+                "text": "<b>Welcome to the Conch Republic</b>",
+                "style": "textStyleBody",
+                "width": "100vw",
+                "textAlign": "center"
+              },
+              {
+                "type": "ScrollView",
+                "width": "100vw",
+                "height": "50vh",
+                "item": [
+                  {
+                    "type": "Container",
+                    "direction": "column",
+                    "alignItems": "center",
+                    "paddingLeft": 30,
+                    "paddingRight": 30,
+                    "paddingTop": 10,
+                    "paddingBottom": 10,
+                    "items": [
+                      {
+                        "type": "Text",
+                        "text": "Ask a question similar to one of these:",
+                        "paddingTop": 40,
+                        "style": "textStylePrimary2",
+                        "width": "90vw",
+                        "textAlign": "center"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "What is happening in Key West in October?",
+                        "paddingTop": 40,
+                        "style": "textStylePrimary2",
+                        "width": "90vw",
+                        "textAlign": "center"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "What is happening around Key Largo in May?",
+                        "paddingTop": 40,
+                        "style": "textStylePrimary2",
+                        "width": "90vw",
+                        "textAlign": "center"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "Text",
+                "text": "Photo by: Alfred Schrock</b>",
+                "style": "textStyleSecondaryHint",
+                "width": "90vw",
+                "paddingLeft": "10vw",
+                "textAlign": "center"
+              }
+            ]
+          }
+        ]
+      },
+      "Events": {
+        "items": [
+          {
+            "when": "${@viewportProfile == @hubRoundSmall}",
+            "type": "Container",
+            "direction": "column",
+            "width": "100vw",
+            "height": "100vh",
+            "items": [
+              {
+                "type": "Image",
+                "width": "100vw",
+                "height": "100vh",
+                "source": "${payload.ConchRepublicTemplateData.properties.EventsImageUrlXSMALL}",
+                "scale": "best-fill",
+                "align": "center",
+                "overlayColor": "rgba(0, 0, 0, 0.3)",
+                "position": "absolute"
+              },
+              {
+                "type": "ScrollView",
+                "width": "100vw",
+                "height": "100vh",
+                "item": [
+                  {
+                    "type": "Container",
+                    "direction": "column",
+                    "alignItems": "center",
+                    "paddingLeft": 30,
+                    "paddingRight": 30,
+                    "paddingTop": 60,
+                    "paddingBottom": 10,
+                    "items": [
+                      {
+                        "type": "Text",
+                        "text": "<b>${payload.ConchRepublicTemplateData.properties.HeadingText}</b>",
+                        "style": "textStyleBody",
+                        "width": "80vw",
+                        "textAlign": "center"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[0]}",
+                        "paddingTop": 40,
+                        "style": "textStylePrimary",
+                        "width": "80vw",
+                        "textAlign": "center"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[1]}",
+                        "paddingTop": 40,
+                        "style": "textStylePrimary",
+                        "width": "80vw",
+                        "textAlign": "center"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[2]}",
+                        "paddingTop": 40,
+                        "style": "textStylePrimary",
+                        "width": "80vw",
+                        "textAlign": "center"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "Photo by: Bruce Warrington</b>",
+                        "style": "textStyleSecondaryHint",
+                        "paddingTop": 25,
+                        "width": "100vw",
+                        "textAlign": "center"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Container",
+            "width": "100vw",
+            "height": "100vh",
+            "items": [
+              {
+                "type": "Image",
+                "source": "${payload.ConchRepublicTemplateData.properties.EventsImageUrlXLARGE}",
+                "scale": "best-fill",
+                "width": "100vw",
+                "height": "100vh",
+                "position": "absolute",
+                "overlayColor": "rgba(0, 0, 0, 0.3)"
+              },
+              {
+                "type": "AlexaHeader",
+                "headerAttributionImage": "${payload.ConchRepublicTemplateData.properties.LogoUrl}"
+              },
+              {
+                "type": "Container",
+                "direction": "row",
+                "paddingLeft": 40,
+                "paddingRight": 72,
+                "grow": 1,
+                "items": [
+                  {
+                    "type": "Container",
+                    "direction": "column",
+                    "paddingLeft": 15,
+                    "width": "90vw",
+                    "items": [
+                      {
+                        "type": "Text",
+                        "text": "<b>${payload.ConchRepublicTemplateData.properties.HeadingText}</b>",
+                        "style": "textStyleBody"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[0]}",
+                        "paddingTop": 20,
+                        "style": "textStylePrimary2"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[1]}",
+                        "paddingTop": 20,
+                        "style": "textStylePrimary2"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[2]}",
+                        "paddingTop": 20,
+                        "style": "textStylePrimary2"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "Container",
+                "direction": "row",
+                "paddingRight": 150,
+                "grow": 1,
+                "items": [
+                  {
+                    "type": "AlexaFooter",
+                    "footerHint": "${payload.ConchRepublicTemplateData.properties.HintString}"
+                  }
+                ]
+              },
+              {
+                "type": "Text",
+                "text": "Photo by: Bruce Warrington</b>",
+                "style": "textStyleSecondaryHint",
+                "paddingLeft": 60,
+                "width": "100vw",
+                "textAlign": "left"
+              }
+            ]
+          }
+        ]
+      },
+      "EventItem": {
+        "items": [
+          {
+            "when": "${@viewportProfile == @hubRoundSmall}",
+            "type": "Container",
+            "direction": "column",
+            "width": "100vw",
+            "height": "100vh",
+            "items": [
+              {
+                "type": "Image",
+                "source": "${payload.ConchRepublicTemplateData.properties.EventItemImageUrlXSMALL}",
+                "scale": "best-fill",
+                "width": "100vw",
+                "height": "100vh",
+                "position": "absolute",
+                "overlayColor": "rgba(0, 0, 0, 0.3)"
+              },
+              {
+                "type": "ScrollView",
+                "width": "100vw",
+                "height": "100vh",
+                "item": [
+                  {
+                    "type": "Container",
+                    "direction": "column",
+                    "alignItems": "center",
+                    "paddingLeft": 30,
+                    "paddingRight": 30,
+                    "paddingBottom": 10,
+                    "items": [
+                      {
+                        "type": "Text",
+                        "text": "<b>${payload.ConchRepublicTemplateData.properties.HeadingText}</b>",
+                        "style": "textStyleBody",
+                        "paddingTop": 60,
+                        "width": "80vw",
+                        "textAlign": "center"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[0]}",
+                        "paddingTop": 40,
+                        "style": "textStyleBodySmall",
+                        "width": "80vw",
+                        "textAlign": "center"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "Photo by: Keith Luke",
+                        "style": "textStyleSecondaryHint",
+                        "paddingTop": 40,
+                        "width": "100vw",
+                        "textAlign": "center"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Container",
+            "width": "100vw",
+            "height": "100vh",
+            "items": [
+              {
+                "type": "Image",
+                "source": "${payload.ConchRepublicTemplateData.properties.EventItemImageUrlXLARGE}",
+                "scale": "best-fill",
+                "width": "100vw",
+                "height": "100vh",
+                "position": "absolute",
+                "overlayColor": "rgba(0, 0, 0, 0.3)"
+              },
+              {
+                "type": "Container",
+                "direction": "row",
+                "paddingLeft": 40,
+                "paddingRight": 72,
+                "paddingTop": 60,
+                "grow": 1,
+                "items": [
+                  {
+                    "type": "Container",
+                    "items": [
+                      {
+                        "when": "${payload.ConchRepublicTemplateData.properties.EventImageUrl != 'NA'}",
+                        "type": "Image",
+                        "source": "${payload.ConchRepublicTemplateData.properties.EventImageUrl}",
+                        "width": 340,
+                        "height": 360,
+                        "scale": "best-fit",
+                        "align": "top"
+                      },
+                      {
+                        "when": "${payload.ConchRepublicTemplateData.properties.EventImageUrl == 'NA'}",
+                        "type": "Image",
+                        "source": "${payload.ConchRepublicTemplateData.properties.GeneralSquareImageUrl}",
+                        "width": 340,
+                        "height": 360,
+                        "scale": "best-fit",
+                        "align": "top"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Container",
+                    "direction": "column",
+                    "paddingLeft": 15,
+                    "width": "63vw",
+                    "items": [
+                      {
+                        "type": "Text",
+                        "text": "<b>${payload.ConchRepublicTemplateData.properties.HeadingText}</b>",
+                        "style": "textStyleBody"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[0]}",
+                        "paddingTop": 20,
+                        "style": "textStylePrimary2"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "Text",
+                "text": "Photo by: Keith Luke",
+                "style": "textStyleSecondaryHint",
+                "paddingLeft": 60,
+                "textAlign": "left"
+              }
+            ]
+          }
+        ]
+      },
+      "Help": {
+        "items": [
+          {
+            "when": "${@viewportProfile == @hubRoundSmall}",
+            "type": "Container",
+            "direction": "column",
+            "width": "100vw",
+            "height": "100vh",
+            "items": [
+              {
+                "type": "Image",
+                "source": "${payload.ConchRepublicTemplateData.properties.HelpImageUrlXSMALL}",
+                "scale": "best-fill",
+                "width": "100vw",
+                "height": "100vh",
+                "position": "absolute",
+                "overlayColor": "rgba(0, 0, 0, 0.1)"
+              },
+              {
+                "type": "ScrollView",
+                "width": "100vw",
+                "height": "100vh",
+                "item": [
+                  {
+                    "type": "Container",
+                    "direction": "column",
+                    "alignItems": "center",
+                    "paddingTop": 40,
+                    "paddingLeft": 30,
+                    "paddingRight": 30,
+                    "items": [
+                      {
+                        "type": "Text",
+                        "text": "<b>${payload.ConchRepublicTemplateData.properties.HeadingText}</b>",
+                        "style": "textStyleBody",
+                        "width": "80vw",
+                        "textAlign": "center"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[0]}",
+                        "paddingTop": 40,
+                        "style": "textStylePrimary",
+                        "width": "80vw",
+                        "textAlign": "center"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[1]}",
+                        "paddingTop": 40,
+                        "style": "textStylePrimary",
+                        "width": "80vw",
+                        "textAlign": "center"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[2]}",
+                        "paddingTop": 40,
+                        "style": "textStylePrimary",
+                        "width": "80vw",
+                        "textAlign": "center"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "Photo by: Charles Jackson</b>",
+                        "style": "textStyleSecondaryHint",
+                        "paddingTop": 30,
+                        "width": "100vw",
+                        "textAlign": "center"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Container",
+            "width": "100vw",
+            "height": "100vh",
+            "items": [
+              {
+                "type": "Image",
+                "source": "${payload.ConchRepublicTemplateData.properties.HelpImageUrlXLARGE}",
+                "scale": "best-fill",
+                "width": "100vw",
+                "height": "100vh",
+                "position": "absolute",
+                "overlayColor": "rgba(0, 0, 0, 0.3)"
+              },
+              {
+                "type": "AlexaHeader",
+                "headerAttributionImage": "${payload.ConchRepublicTemplateData.properties.LogoUrl}"
+              },
+              {
+                "type": "Container",
+                "direction": "row",
+                "paddingLeft": 40,
+                "paddingRight": 72,
+                "grow": 1,
+                "items": [
+                  {
+                    "type": "Container",
+                    "direction": "column",
+                    "paddingLeft": 15,
+                    "width": "90vw",
+                    "items": [
+                      {
+                        "type": "Text",
+                        "text": "<b>${payload.ConchRepublicTemplateData.properties.HeadingText}</b>",
+                        "style": "textStyleBody"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[0]}",
+                        "paddingTop": 20,
+                        "style": "textStylePrimary2"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[1]}",
+                        "paddingTop": 20,
+                        "style": "textStylePrimary2"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[2]}",
+                        "paddingTop": 20,
+                        "style": "textStylePrimary2"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "Container",
+                "direction": "row",
+                "paddingRight": 150,
+                "grow": 1,
+                "items": [
+                  {
+                    "type": "AlexaFooter",
+                    "footerHint": "${payload.ConchRepublicTemplateData.properties.HintString}"
+                  }
+                ]
+              },
+              {
+                "type": "Text",
+                "text": "Photo by: Charles Jackson</b>",
+                "style": "textStyleSecondaryHint",
+                "width": "100vw",
+                "paddingLeft": 60,
+                "textAlign": "left"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "mainTemplate": {
+      "parameters": [
+        "payload"
+      ],
+      "items": [
+        {
+          "when": "${payload.ConchRepublicTemplateData.properties.LayoutToUse == 'Home'}",
+          "type": "Home"
+        },
+        {
+          "when": "${payload.ConchRepublicTemplateData.properties.LayoutToUse == 'Events'}",
+          "type": "Events"
+        },
+        {
+          "when": "${payload.ConchRepublicTemplateData.properties.LayoutToUse == 'EventItem'}",
+          "type": "EventItem"
+        },
+        {
+          "when": "${payload.ConchRepublicTemplateData.properties.LayoutToUse == 'Help'}",
+          "type": "Help"
+        }
+      ]
+    }
+  },
+  "datasources": {
+    "ConchRepublicTemplateData": {
+      "type": "object",
+      "objectId": "ConchRepublicSample",
+      "properties": {
+        "Title": "The Conch Republic",
+        "LayoutToUse": "Home",
+        "HeadingText": "Welcome to the Conch Republic",
+        "HintString": "What is happening in Key West in May?",
+        "HomeImageUrlXSMALL": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/Keys4-X_SMALL.jpg",
+        "HomeImageUrlXLARGE": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/Keys4-X_LARGE.jpg",
+        "EventItemImageUrlXSMALL": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/Keys3-X_SMALL.jpg",
+        "EventItemImageUrlXLARGE": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/Keys3-X_LARGE.jpg",
+        "HelpImageUrlXSMALL": "https://d3d9reei5h7cvh.cloudfront.netConchRepublic/images/Keys2-X_SMALL.jpg",
+        "HelpImageUrlXLARGE": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/Keys2-X_LARGE.jpg",
+        "EventsImageUrlXSMALL": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/Keys1-X_SMALL.jpg",
+        "EventsImageUrlXLARGE": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/Keys1-X_LARGE.jpg",
+        "LogoUrl": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/ConchRepublicSquare108.jpg",
+        "GeneralSquareImageUrl": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/ConchRepublicSquare512.jpg",
+        "EventText": [
+          "test1",
+          "test2",
+          "test3"
+        ],
+        "EventImageUrl": "NA"
+      },
+      "transformers": [
+        {
+          "inputPath": "HintString",
+          "transformer": "textToHint"
+        }
+      ]
+    }
+  }
+}

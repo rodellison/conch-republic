@@ -10,10 +10,14 @@ import java.util.List;
 // Import log4j classes.
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Web Events Formatting Manager should")
+
 public class WebEventsFormattingManagerShould {
 
     private static final Logger log = LogManager.getLogger(WebEventsFormattingManagerShould.class);

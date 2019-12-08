@@ -9,7 +9,7 @@ public enum KeysLocations {
     THE_LOWER_KEYS,
     KEY_WEST;
 
-    public static final String getLocation(KeysLocations item)
+    public static String getLocation(KeysLocations item)
     {
         String returnVal;
 
@@ -47,11 +47,9 @@ public enum KeysLocations {
 
         }
         return returnVal;
+    }
 
-
-    };
-
-    public static final KeysLocations convertToEnumLocation(String item)
+    public static KeysLocations convertToEnumLocation(String item)
     {
         KeysLocations returnVal;
 
@@ -99,7 +97,5 @@ public enum KeysLocations {
 
         }
         return returnVal;
-
-
-    };
+    }
 }

@@ -4,23 +4,20 @@ import com.amazonaws.auth.EnvironmentVariableCredentialsProvider;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.regions.Regions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class DynamoDBClient implements DynamoDBClientInterface {
+public class DynamoDBClient {
 
     private static final Logger logger = LogManager.getLogger(DynamoDBClient.class);
 
-    private AmazonDynamoDB client;
-
-    @Override
     public AmazonDynamoDB getDynamoDBClient() {
 
         logger.info("Attempting to get AmazonDynamoDB Client");
         String strDynamoDBEnvironment = System.getenv("DYNAMO_DB_ENV"); //values to be: Prod or Dev
+        AmazonDynamoDB client;
         if (strDynamoDBEnvironment.toLowerCase().equals("prod"))
         {
             client = AmazonDynamoDBClientBuilder.standard()

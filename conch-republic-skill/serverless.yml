@@ -1,0 +1,26 @@
+
+service: conch-republic-skill # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: java8
+
+# you can add packaging information here
+package:
+  artifact: target/conch-republic-skill-1.0.jar
+
+functions:
+  users:
+    handler: com.rodellison.conchrepublicskill.ConchRepublicStreamHandler
+    region: us-east-1
+    memorySize: 1024
+    timeout: 30
+    environment:
+      LARGE_IMG_URL: https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/ConchRepublicSquare512.jpg
+      SMALL_IMG_URL: https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/ConchRepublicSquare256.jpg
+      INTRO_AUDIO: https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/audio/ConchRepublic.mp3
+      DYNAMO_DB_TABLENAME: FloridaKeysEvents
+      APP_TITLE: "The Conch Republic"
+      SKILL_ID: amzn1.ask.skill.f50db66c-4c49-4bdd-9ef6-c7972af993b3
+    events:
+      - alexaSkill: amzn1.ask.skill.f50db66c-4c49-4bdd-9ef6-c7972af993b3

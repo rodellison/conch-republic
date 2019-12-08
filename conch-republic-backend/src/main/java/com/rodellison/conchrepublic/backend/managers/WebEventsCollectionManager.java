@@ -1,7 +1,8 @@
 package com.rodellison.conchrepublic.backend.managers;
 
 import com.rodellison.conchrepublic.backend.model.KeysLocations;
-import com.rodellison.conchrepublic.backend.utils.ExternalAPIFetchUtil;
+import com.rodellison.conchrepublic.backend.utils.DataFetchUtil;
+
 // Import log4j classes.
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -14,10 +15,10 @@ import java.util.ArrayList;
 public class WebEventsCollectionManager {
 
     private static final Logger log = LogManager.getLogger(WebEventsCollectionManager.class);
-    private final ExternalAPIFetchUtil theDataFetchUtil;
+    private final DataFetchUtil theDataFetchUtil;
     private static ArrayList<String> rawEventDataList = new ArrayList<>();
 
-    public WebEventsCollectionManager(ExternalAPIFetchUtil dataUtilToUse)
+    public WebEventsCollectionManager(DataFetchUtil dataUtilToUse)
     {
         this.theDataFetchUtil = dataUtilToUse;
     }

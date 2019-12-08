@@ -25,7 +25,7 @@ public class WebFormatterVerticle extends AbstractVerticle {
     private static final Logger logger = LogManager.getLogger(WebFormatterVerticle.class);
 
 
-    public LinkedHashMap<String, EventItem> handleReformatData(ArrayList<String> rawData) {
+    private LinkedHashMap<String, EventItem> handleReformatData(ArrayList<String> rawData) {
 
         logger.debug("\tWebFormatterVerticle " + thisContext + " getting search parms needed for WebEventsCollectionManager");
 
@@ -34,10 +34,7 @@ public class WebFormatterVerticle extends AbstractVerticle {
 
         LinkedHashMap<String, EventItem> lhmRawCollectedData = new LinkedHashMap<>();
 
-        theEventItemList.forEach(item ->
-        {
-            lhmRawCollectedData.put(item.getEventID(), item);
-        });
+        theEventItemList.forEach(item -> lhmRawCollectedData.put(item.getEventID(), item));
         return lhmRawCollectedData;
 
     }

@@ -1,7 +1,6 @@
 package com.rodellison.conchrepublic.backend.managers;
 
 import com.rodellison.conchrepublic.backend.utils.DataFetchUtil;
-import com.rodellison.conchrepublic.backend.utils.ExternalAPIFetchUtil;
 import com.rodellison.conchrepublic.backend.utils.SearchDateUtil;
 
 import org.apache.http.client.HttpClient;
@@ -31,7 +30,7 @@ class WebEventsCollectionManagerShould {
     @DisplayName("return fetched data for segment of Search Dates")
     void returnArrayOfFetchedEventData()
     {
-        ExternalAPIFetchUtil myMockDataFetch = mock(ExternalAPIFetchUtil.class);
+        DataFetchUtil myMockDataFetch = mock(DataFetchUtil.class);
         String divWrapperHtml = "</div id=\"wrapper\">";
 
         //mockito spy to leave one method as-is, but override the other with a when...

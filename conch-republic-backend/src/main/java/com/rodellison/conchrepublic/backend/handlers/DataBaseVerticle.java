@@ -2,7 +2,6 @@ package com.rodellison.conchrepublic.backend.handlers;
 
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -30,9 +29,8 @@ public class DataBaseVerticle extends AbstractVerticle {
 
     private static final Logger logger = LogManager.getLogger(DataBaseVerticle.class);
 
-    public void insertData(ArrayList<EventItem> itemsToInsert) {
+    private void insertData(ArrayList<EventItem> itemsToInsert) {
 
-    //    DynamoDBClient myClient = new DynamoDBClient();
         AmazonDynamoDB myClient = new DynamoDBClient().getDynamoDBClient();
         DynamoDB myDynamoDB = new DynamoDB(myClient);
         DynamoDBManager myDynamoDBManager = new DynamoDBManager(myClient, myDynamoDB);
@@ -40,7 +38,7 @@ public class DataBaseVerticle extends AbstractVerticle {
         myDynamoDBManager.insertEventDataIntoDB(itemsToInsert);
 
     }
-    public ArrayList<EventItem> getData(String location) {
+    private ArrayList<EventItem> getData(String location) {
 
         AmazonDynamoDB myClient = new DynamoDBClient().getDynamoDBClient();
         DynamoDB myDynamoDB = new DynamoDB(myClient);
@@ -61,14 +59,13 @@ public class DataBaseVerticle extends AbstractVerticle {
         eventBus.consumer(Services.GETDBDATA.toString(), message -> {
             // Do something with Vert.x async, reactive APIs
 
-            ArrayList<EventItem> result = new ArrayList<>();
             JsonObject fetchMessage = JsonObject.mapFrom(message.body());
             String theMessagePathParm = fetchMessage.getValue("pathParameters").toString();
             JsonObject segmentObject = new JsonObject(theMessagePathParm);
             theMessagePathParm = segmentObject.getValue("location").toString();
 
             logger.info("DBHandlerVerticle " + thisContext +  " received Get request for location: " + theMessagePathParm);
-            result = getData(theMessagePathParm);
+            ArrayList<EventItem> result = getData(theMessagePathParm);
             String jsonResult = new Gson().toJson(result);
             logger.info("DBHandlerVerticle " + thisContext +  " processed Get request for location: " + theMessagePathParm);
 

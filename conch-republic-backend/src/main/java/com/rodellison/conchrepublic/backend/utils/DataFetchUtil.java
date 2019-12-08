@@ -1,14 +1,12 @@
 package com.rodellison.conchrepublic.backend.utils;
 
-import com.rodellison.conchrepublic.backend.model.KeysLocations;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 // Import log4j classes.
 import org.apache.logging.log4j.Logger;
@@ -16,7 +14,7 @@ import org.apache.logging.log4j.LogManager;
 
 import java.io.IOException;
 
-public class DataFetchUtil implements ExternalAPIFetchUtil {
+public class DataFetchUtil  {
 
     private static final String CLASS_NAME = "DataFetchUtil";
     private static final Logger log = LogManager.getLogger(DataFetchUtil.class);
@@ -31,7 +29,7 @@ public class DataFetchUtil implements ExternalAPIFetchUtil {
      *
      * @return String containing API response results (json text)
      */
-    @Override
+
     public String fetchURLData(HttpGet getURI, CloseableHttpClient clientToUse) {
 
         log.info("Performing " + CLASS_NAME + " API Request : " + getURI.getURI());

@@ -57,19 +57,18 @@ public class DateFormatterUtil {
 
     private static String convertShortDate(String inDate)
     {
-        String tempDate = inDate;
-        tempDate.replace("Jan ", "January ");
-        tempDate.replace("Feb ", "February ");
-        tempDate.replace("Mar ", "March ");
-        tempDate.replace("Apr ", "April ");
-        tempDate.replace("May ", "May ");
-        tempDate.replace("Jun ", "June ");
-        tempDate.replace("Jul ", "July ");
-        tempDate.replace("Aug ", "August ");
-        tempDate.replace("Sep ", "September ");
-        tempDate.replace("Oct ", "October ");
-        tempDate.replace("Nov ", "November ");
-        tempDate.replace("Dec ", "December ");
-        return tempDate;
+        inDate = inDate.replace("Jan ", "January ");
+        inDate = inDate.replace("Feb ", "February ");
+        inDate = inDate.replace("Mar ", "March ");
+        inDate = inDate.replace("Apr ", "April ");
+  //      inDate = inDate.replace("May ", "May ");
+        inDate = inDate.replace("Jun ", "June ");
+        inDate = inDate.replace("Jul ", "July ");
+        inDate = inDate.replace("Aug ", "August ");
+        inDate = inDate.replace("Sep ", "September ");
+        inDate = inDate.replace("Oct ", "October ");
+        inDate = inDate.replace("Nov ", "November ");
+        inDate = inDate.replace("Dec ", "December ");
+        return inDate;
     }
 }

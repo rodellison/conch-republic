@@ -8,11 +8,9 @@ public class SNSClient {
 
     public static AmazonSNS getSNSClient() {
 
-        AmazonSNS snsClient = AmazonSNSClientBuilder.standard()
+        return AmazonSNSClientBuilder.standard()
                 .withRegion(Regions.US_EAST_1)
                 .build();
-
-        return snsClient;
 
     }
 }

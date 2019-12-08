@@ -10,9 +10,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.rodellison.conchrepublic.backend.Services;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -33,7 +30,7 @@ public class EventHubVerticle extends AbstractVerticle {
             //This send gets the entire process kicked off
             //Calling out to an external web page to get data could take time, trying executeBlocking here
             vertx.<String>executeBlocking(execBlockFuture -> {
-                final CompletableFuture<String> webCollectorFuture = new CompletableFuture<String>();
+                final CompletableFuture<String> webCollectorFuture = new CompletableFuture<>();
 
                 eventBus.request(Services.COLLECTWEBDATA.toString(), messageJson, rs -> {
                     if (rs.succeeded()) {
@@ -45,7 +42,7 @@ public class EventHubVerticle extends AbstractVerticle {
                     }
                 });
 
-                String collectWebDataResult = "";
+                String collectWebDataResult;
                 try {
                     collectWebDataResult = webCollectorFuture.get();
                 } catch (InterruptedException | ExecutionException e) {
@@ -61,7 +58,7 @@ public class EventHubVerticle extends AbstractVerticle {
 
                 //Parsing entirety of fetched data could take some time
                 vertx.<String>executeBlocking(execBlockFuture -> {
-                    final CompletableFuture<String> webFormatterFuture = new CompletableFuture<String>();
+                    final CompletableFuture<String> webFormatterFuture = new CompletableFuture<>();
 
                     eventBus.request(Services.FORMATWEBDATA.toString(), collectorResult, rs -> {
                         if (rs.succeeded()) {
@@ -88,7 +85,7 @@ public class EventHubVerticle extends AbstractVerticle {
                      JsonObject formatterResult = new JsonObject(resFormatter.result());
                     //Inserting to Database could be time consuming
                     vertx.<String>executeBlocking(execBlockFuture -> {
-                        final CompletableFuture<String> databaseFuture = new CompletableFuture<String>();
+                        final CompletableFuture<String> databaseFuture = new CompletableFuture<>();
 
                         eventBus.request(Services.INSERTDBDATA.toString(), formatterResult, rs -> {
                             if (rs.succeeded()) {
@@ -131,7 +128,7 @@ public class EventHubVerticle extends AbstractVerticle {
 
             //Connecting to, and getting data could take time...
             vertx.<String>executeBlocking(execBlockFuture -> {
-                final CompletableFuture<String> databaseFuture = new CompletableFuture<String>();
+                final CompletableFuture<String> databaseFuture = new CompletableFuture<>();
 
                 eventBus.request(Services.GETDBDATA.toString(), messageJson, rs -> {
                     if (rs.succeeded()) {
@@ -153,11 +150,7 @@ public class EventHubVerticle extends AbstractVerticle {
 
                 execBlockFuture.complete(DBHandlerResult);
 
-            }, res -> {
-
-                message.reply(new JsonObject(res.result()));
-
-            });
+            }, res -> message.reply(new JsonObject(res.result())));
         });
 
         startPromise.complete();

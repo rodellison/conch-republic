@@ -15,7 +15,7 @@ public class EventsList implements Iterable<EventItem> {
 
     public List<EventItem> getListOfEventsSortedByStartDate()
     {
-        Collections.sort(listOfEvents, EventItem.BY_START_DATE);
+        listOfEvents.sort(EventItem.BY_START_DATE);
         return listOfEvents;
     }
 
@@ -29,12 +29,6 @@ public class EventsList implements Iterable<EventItem> {
         return listOfEvents.iterator();
 
     }
-
-    public int size()
-    {
-        return listOfEvents.size();
-    }
-
 
     public void clearEvents()
     {

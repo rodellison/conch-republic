@@ -45,9 +45,7 @@ public class WebEventsFormattingManager {
         }
 
         theEventsMap.forEach((k, v) ->
-        {
-            theEventList.addEventItem(v);
-        });
+                theEventList.addEventItem(v));
 
         return theEventList.getListOfEventsSortedByStartDate();
 

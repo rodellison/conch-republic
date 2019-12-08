@@ -28,7 +28,7 @@ public final class SearchDateUtil {
             searchDates.add(strYYYYMM);
             // roll month
             cal.roll(Calendar.MONTH, true);
-            if (cal.get(Calendar.MONTH) == 0) {
+            if (cal.get(Calendar.MONTH) == Calendar.JANUARY) {
                 cal.roll(Calendar.YEAR, true);
             }
         }
@@ -41,7 +41,7 @@ public final class SearchDateUtil {
 
     }
 
-    public static final ArrayList<String> getSearchDates(int monthsToFetch, int segment) {
+    public static ArrayList<String> getSearchDates(int monthsToFetch, int segment) {
         //the segment variable is to allow us to specify either the first half of the total dates,
         //or the second  e.g. value is 1, or 2
         List<String> returnSearch = setupSearchDates(monthsToFetch, segment);

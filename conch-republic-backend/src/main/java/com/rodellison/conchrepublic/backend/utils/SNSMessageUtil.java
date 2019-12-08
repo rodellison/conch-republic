@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 
 public class SNSMessageUtil {
 
-    private static final String CLASS_NAME = "SNSMessageUtil";
     private static final Logger log = LogManager.getLogger(SNSMessageUtil.class);
 
     public static void SendSMSMessage(AmazonSNS theClient, String pubMessage) {
@@ -27,8 +26,5 @@ public class SNSMessageUtil {
 
             log.error("SNS Message exception error: " + e.getMessage());
         }
-
-        return;
-
     }
 }
