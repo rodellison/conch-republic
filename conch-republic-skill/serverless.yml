@@ -19,8 +19,8 @@ functions:
       LARGE_IMG_URL: https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/ConchRepublicSquare512.jpg
       SMALL_IMG_URL: https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/ConchRepublicSquare256.jpg
       INTRO_AUDIO: https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/audio/ConchRepublic.mp3
-      DYNAMO_DB_TABLENAME: FloridaKeysEvents
+      DYNAMO_DB_TABLENAME: ${env:DYNAMO_DB_TABLENAME}
       APP_TITLE: "The Conch Republic"
-      SKILL_ID: amzn1.ask.skill.f50db66c-4c49-4bdd-9ef6-c7972af993b3
+      SKILL_ID: ${env:CONCH_REPUBLIC_SKILLID}
     events:
-      - alexaSkill: amzn1.ask.skill.f50db66c-4c49-4bdd-9ef6-c7972af993b3
+      - alexaSkill: ${env:CONCH_REPUBLIC_SKILLID}
