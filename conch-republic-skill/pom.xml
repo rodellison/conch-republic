@@ -12,31 +12,49 @@
 
     <artifactId>conch-republic-skill</artifactId>
 
-    <properties>
-        <ask-sdk-version>2.26.0</ask-sdk-version>
-        <aws-sns-version>1.11.682</aws-sns-version>
-        <apache-http-version>4.5.9</apache-http-version>
-
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.amazon.alexa</groupId>
             <artifactId>ask-sdk</artifactId>
             <version>${ask-sdk-version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sns -->
+<!--        -->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.httpcomponents</groupId>-->
+<!--            <artifactId>httpclient</artifactId>-->
+<!--            <version>${apache-http-version}</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>net.rodellison.alexa</groupId>
+            <artifactId>conch-republic-common</artifactId>
+            <version>1.0</version>
+        </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-sns</artifactId>
-            <version>${aws-sns-version}</version>
+            <artifactId>aws-java-sdk-dynamodb</artifactId>
+            <version>${aws-sdk-dynamodb-version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>${apache-http-version}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson-version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-cbor</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <!--  Gson: Java to Json conversion -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${google.gson.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -45,7 +63,7 @@
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>**/*.properties</include>
-                    <include>**/*.json</include>
+                    <include>**/ConchRepublic*.json</include>
                 </includes>
             </resource>
         </resources>

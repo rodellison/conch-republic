@@ -16,7 +16,7 @@ Resources:
       Runtime: java8
       Timeout: 30
       CodeUri: target/conch-republic-backend-1.0.jar
-      Handler: com.rodellison.conchrepublic.backend.ServiceLauncher::handleRequest
+      Handler: net.rodellison.conchrepublic.backend.ServiceLauncher::handleRequest
       MemorySize: 512
       Environment:
         Variables:

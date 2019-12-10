@@ -8,90 +8,8 @@
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <version>1.0</version>
 
-    <artifactId>conch-republic-backend</artifactId>
-
-    <properties>
-
-    </properties>
-
-    <dependencies>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>${httpcomponents-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.rodellison.alexa</groupId>
-            <artifactId>conch-republic-common</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-lambda-java-core</artifactId>
-            <version>${aws-lambda.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-lambda-java-log4j</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-sns</artifactId>
-            <version>${aws-sns-version}</version>
-        </dependency>
-        <!--  Gson: Java to Json conversion -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>${google.gson.version}</version>
-        </dependency>
-        <dependency>
-            <!-- jsoup HTML parser library @ https://jsoup.org/ -->
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-            <version>${jsoup-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-dynamodb</artifactId>
-            <version>${aws-sdk-dynamodb-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>${jackson-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.dataformat</groupId>
-            <artifactId>jackson-dataformat-cbor</artifactId>
-            <version>${jackson-version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-core</artifactId>
-            <version>${io.vertx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-junit5</artifactId>
-            <version>${io.vertx.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-
-    </dependencies>
-
+    <artifactId>conch-republic-common</artifactId>
     <build>
         <plugins>
             <!--
@@ -109,6 +27,16 @@
                 <version>2.3</version>
                 <configuration>
                     <createDependencyReducedPom>false</createDependencyReducedPom>
+                    <artifactSet>
+                        <excludes>
+                            <exclude>org.apache.logging.log4j:*:*:*</exclude>
+                            <exclude>org.apache.httpcomponents:httpclient:*</exclude>
+                            <exclude>org.apache.httpcomponents:httpcore:*</exclude>
+                            <exclude>commons-logging:*:*</exclude>
+                            <exclude>commons-codec:*:*</exclude>
+                        </excludes>
+                    </artifactSet>
+
                 </configuration>
                 <executions>
                     <execution>
@@ -151,6 +79,5 @@
 
         </plugins>
     </build>
-
 
 </project>
