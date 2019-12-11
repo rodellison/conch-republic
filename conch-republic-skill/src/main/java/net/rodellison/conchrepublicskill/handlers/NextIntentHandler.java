@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import net.rodellison.conchrepublic.common.model.EventItem;
+import net.rodellison.conchrepublicskill.models.LanguageLocalization;
+import net.rodellison.conchrepublicskill.util.CommonUtils;
 import net.rodellison.conchrepublicskill.util.ListEventsResponseUtil;
 import net.rodellison.conchrepublicskill.util.StandardResponseUtil;
 import org.apache.logging.log4j.LogManager;
@@ -35,6 +37,14 @@ public class NextIntentHandler implements RequestHandler {
         log.warn("NextIntentHandler called");
         Map<String, Object> attributes = input.getAttributesManager().getSessionAttributes();
 
+        LanguageLocalization locData;
+        String incomingLocale = input.getRequestEnvelope().getRequest().getLocale();
+        locData = CommonUtils.getLocalizationStrings(incomingLocale);
+        if (locData == null) {
+            log.error("Failed in getting language location data");
+            return null;
+        }
+
         String strTheLocation = (String) attributes.get("STR_LOCATION");
         if (strTheLocation == null || strTheLocation.isEmpty())
             strTheLocation = "";
@@ -42,7 +52,7 @@ public class NextIntentHandler implements RequestHandler {
         if (strTheMonth == null || strTheMonth.isEmpty())
             strTheMonth = "";
         int startItem = (int) attributes.get("INT_STARTITEM_VAL");
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             List<EventItem> eventItemsList;
             Gson gson = new Gson();
@@ -50,21 +60,19 @@ public class NextIntentHandler implements RequestHandler {
             }.getType();
             eventItemsList = gson.fromJson(attributes.get("EVENT_ITEMS").toString(), listEventItemsType);
             log.debug("In NextIntent handler, eventItemsList= " + eventItemsList);
-            return ListEventsResponseUtil.getResponse(input, startItem, strTheMonth, strTheLocation, eventItemsList);
+            return ListEventsResponseUtil.getResponse(input, startItem, strTheMonth, strTheLocation, eventItemsList, locData);
 
         } catch (Exception e) {
             //This is for graceful exit if tripped up trying to get attribute data for loop
             e.printStackTrace();
             String layoutToUse = "Home";
-            String hintString = "What is happening in Key West in October?";
+            String hintString = locData.getHINT1();
             String eventImgURL = "NA";
-            String primaryTextDisplay = "Welcome to the Conch Republic";
+            String primaryTextDisplay = locData.getLAUNCH_TITLE();
 
-            String speechText = "Sorry!, I ran into a problem, so starting over. Try asking a question like these:" +
-                    " What's happening in Key West in October, or What's happening around Key Largo in May";
-
-            String repromptSpeechText1 = "<p>Please ask a question similar to one of these:</p>";
-            String repromptSpeechText2 = "What's happening in Key West in October, or What's happening around Key Largo in May";
+            String speechText = locData.getNEXT_ERROR_SPEECH1();
+            String repromptSpeechText1 = locData.getSTANDARD_RESPONSE1();
+            String repromptSpeechText2 = locData.getSTANDARD_RESPONSE2();
             String Text1Display = "";
             String Text2Display = "";
             String Text3Display = "";

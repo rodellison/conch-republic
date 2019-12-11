@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.gson.Gson;
 import net.rodellison.conchrepublic.common.utils.DateUtils;
+import net.rodellison.conchrepublicskill.models.LanguageLocalization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import net.rodellison.conchrepublic.common.model.*;
@@ -25,19 +26,19 @@ public class ListEventsResponseUtil {
     private static Image myStandardCardImage;
     private static final Logger log = LogManager.getLogger(ListEventsResponseUtil.class);
 
-    public static Optional<Response> getResponse(HandlerInput input, int eventListStartItem, String strTheMonth, String strTheLocation, List<EventItem> eventItemsList) {
+    public static Optional<Response> getResponse(HandlerInput input, int eventListStartItem, String strTheMonth, String strTheLocation, List<EventItem> eventItemsList, LanguageLocalization locData) {
 
         Map<String, Object> attributes = input.getAttributesManager().getSessionAttributes();
 
         String layoutToUse = "Events";
-        String hintString = "What is happening in Key West in October?";
+        String hintString = locData.getEVENTLIST_HINT();
         String eventImgURL = "NA";
         String primaryTextDisplay = "";
         StringBuilder speechOutputBuilder = new StringBuilder();
 
         String speechText = "";
         String repromptSpeechText1 = "";
-        String repromptSpeechText2 = "You can say New Search to start over, or I'm done to exit.";
+        String repromptSpeechText2 = "";
         Boolean addLocationToEvent = false;
 
         String strFirst = "";
@@ -45,7 +46,7 @@ public class ListEventsResponseUtil {
         String strThird = "";
 
         if (strTheMonth.equals("") && strTheLocation.equals("")) {
-            primaryTextDisplay = "Upcoming Events in the Florida Keys";
+            primaryTextDisplay = locData.getEVENTLIST_PRIMARY_TEXT();
             addLocationToEvent = true;
         }
         if (!strTheMonth.equals("") && !strTheLocation.equals("")) {
@@ -56,8 +57,8 @@ public class ListEventsResponseUtil {
         }
         if (!strTheMonth.equals("") && strTheLocation.equals("")) {
             primaryTextDisplay = "Events in " + CommonUtils.toTitleCase(strTheMonth);
+            addLocationToEvent = true;
         }
-
 
         int startItem = eventListStartItem;
         log.debug("This loop starting item will be: " + startItem);
@@ -65,7 +66,7 @@ public class ListEventsResponseUtil {
         if (eventItemsList.size() > 0) {
             log.debug("This loop recognizes: " + eventItemsList.size() + " items");
             if (eventListStartItem == 0)
-                speechOutputBuilder.append("<p>Here's what I found: </p>");
+                speechOutputBuilder.append(locData.getEVENTLIST_SPEECH_INTRO() + "<break time=\"1s\"/>");
 
             Boolean atEnd = false;
             for (int i = 0; i < 3; i++) {
@@ -121,36 +122,36 @@ public class ListEventsResponseUtil {
             }
 
             if (thisIterationList.size() == 3) {
-                repromptSpeechText1 = "<p>To hear details for these events, just say First, Second or Third.</p>";
+                repromptSpeechText1 = locData.getEVENTLIST_RESPONSE1_3ITEMS();
             }
             if (thisIterationList.size() == 2) {
                 thisIterationList.add("");
-                repromptSpeechText1 = "<p>To hear details for these events, just say First or Second.</p>";
+                repromptSpeechText1 = locData.getEVENTLIST_RESPONSE1_2ITEMS();
             }
             if (thisIterationList.size() == 1) {
                 thisIterationList.add("");
                 thisIterationList.add("");
-                repromptSpeechText1 = "<p>To hear details for this event, just say First.</p>";
+                repromptSpeechText1 = locData.getEVENTLIST_RESPONSE1_1ITEM();
             }
             if (thisIterationList.size() == 0) {
-                thisIterationList.add("There are no additional events");
+                thisIterationList.add(locData.getEVENTLIST_DISPLAY_TEXT1_NOMORE());
                 thisIterationList.add("");
                 thisIterationList.add("");
                 atEnd = true;
             }
 
             if (!atEnd)
-                repromptSpeechText2 = "Say NEXT to hear more events, say New Search to start over, or I'm done to exit.";
+                repromptSpeechText2 = locData.getEVENTLIST_RESPONSE2_MORE();
             else
-                repromptSpeechText2 = "Say New Search to start over, or I'm done to exit.";
+                repromptSpeechText2 = locData.getEVENTLIST_RESPONSE2_NOMORE();
 
         } else {
 
-            thisIterationList.add("There are no additional events.");
+            thisIterationList.add(locData.getEVENTLIST_DISPLAY_TEXT1_NOMORE());
             thisIterationList.add("");
             thisIterationList.add("");
             repromptSpeechText1 = "";
-            repromptSpeechText2 = "Say New Search to start over, or I'm done to exit.";
+            repromptSpeechText2 = locData.getEVENTLIST_RESPONSE2_NOMORE();
 
         }
 
@@ -166,7 +167,7 @@ public class ListEventsResponseUtil {
 
         //Check if we're at the end of the events for this search
         if (startItem >= eventItemsList.size())
-            speechOutputBuilder.append("Theres no additional events. " + "<break time=\"1s\"/>");
+            speechOutputBuilder.append(locData.getEVENTLIST_DISPLAY_TEXT1_NOMORE() + "<break time=\"1s\"/>");
 
         speechOutputBuilder.append(repromptSpeechText1);
         speechOutputBuilder.append(repromptSpeechText2);

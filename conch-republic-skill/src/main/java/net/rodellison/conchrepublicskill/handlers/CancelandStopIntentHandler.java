@@ -3,6 +3,8 @@ package net.rodellison.conchrepublicskill.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
+import net.rodellison.conchrepublicskill.models.LanguageLocalization;
+import net.rodellison.conchrepublicskill.util.CommonUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,7 +26,15 @@ public class CancelandStopIntentHandler implements RequestHandler {
     public Optional<Response> handle(HandlerInput input) {
 
         log.warn("CancelandStopIntentHandler called");
-        String speechText = "<p>Thanks for visiting the Conch Republic. Ready for a Margarita?</p>";
+        LanguageLocalization locData;
+        String incomingLocale = input.getRequestEnvelope().getRequest().getLocale();
+        locData = CommonUtils.getLocalizationStrings(incomingLocale);
+        if (locData == null) {
+            log.error("Failed in getting language location data");
+            return null;
+        }
+
+        String speechText = locData.getCANCEL_SPEECH1();
         speechText += "<audio src='" + System.getenv("INTRO_AUDIO") + "'/>";
 
         return input.getResponseBuilder()

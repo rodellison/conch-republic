@@ -191,7 +191,7 @@
                 "paddingLeft": "10vw",
                 "paddingTop": "10vw",
                 "textAlign": "center",
-                "text": "<b>Welcome to the Conch Republic</b>",
+                "text": "${payload.ConchRepublicTemplateData.properties.HeadingText}",
                 "fontWeight": "normal"
               },
               {
@@ -209,7 +209,7 @@
                     "items": [
                       {
                         "type": "Text",
-                        "text": "Ask a question similar to one of these:",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[0]}",
                         "paddingTop": 40,
                         "style": "textStylePrimary",
                         "width": "90vw",
@@ -217,7 +217,7 @@
                       },
                       {
                         "type": "Text",
-                        "text": "What is happening in Key West in October?",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[1]}",
                         "paddingTop": 20,
                         "style": "textStylePrimary",
                         "width": "90vw",
@@ -225,7 +225,7 @@
                       },
                       {
                         "type": "Text",
-                        "text": "What is happening around Key Largo in May?",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[2]}",
                         "paddingTop": 20,
                         "style": "textStylePrimary",
                         "width": "90vw",
@@ -266,7 +266,7 @@
               },
               {
                 "type": "Text",
-                "text": "<b>Welcome to the Conch Republic</b>",
+                "text": "${payload.ConchRepublicTemplateData.properties.HeadingText}",
                 "style": "textStyleBody",
                 "width": "100vw",
                 "textAlign": "center"
@@ -287,7 +287,7 @@
                     "items": [
                       {
                         "type": "Text",
-                        "text": "Ask a question similar to one of these:",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[0]}",
                         "paddingTop": 40,
                         "style": "textStylePrimary2",
                         "width": "90vw",
@@ -295,7 +295,7 @@
                       },
                       {
                         "type": "Text",
-                        "text": "What is happening in Key West in October?",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[1]}",
                         "paddingTop": 40,
                         "style": "textStylePrimary2",
                         "width": "90vw",
@@ -303,7 +303,7 @@
                       },
                       {
                         "type": "Text",
-                        "text": "What is happening around Key Largo in May?",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[2]}",
                         "paddingTop": 40,
                         "style": "textStylePrimary2",
                         "width": "90vw",

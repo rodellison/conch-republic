@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import net.rodellison.conchrepublic.common.model.EventItem;
 import net.rodellison.conchrepublic.common.model.KeysLocations;
 import net.rodellison.conchrepublic.common.utils.DateUtils;
+import net.rodellison.conchrepublicskill.models.LanguageLocalization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,19 +27,19 @@ public class EventItemResponseUtil {
     private static Image myStandardCardImage;
     private static final Logger log = LogManager.getLogger(EventItemResponseUtil.class);
 
-    public static Optional<Response> getResponse(HandlerInput input, EventItem theItem) {
+    public static Optional<Response> getResponse(HandlerInput input, EventItem theItem, LanguageLocalization locData) {
 
         Map<String, Object> attributes = input.getAttributesManager().getSessionAttributes();
         final String domainURL = "https://fla-keys.com";
 
         String layoutToUse = "EventItem";
-        String hintString = "Say NEXT to continue, New Search to start over, or I'm done to exit.";
+        String hintString = locData.getEVENTITEM_HINT();
         String primaryTextDisplay = "";
         StringBuilder speechOutputBuilder = new StringBuilder();
 
         String speechText = "";
         String repromptSpeechText1 = "";
-        String repromptSpeechText2 = "Say NEXT to continue with events, New Search to start over, or I'm done to exit.";
+        String repromptSpeechText2 = locData.getEVENTITEM_HINT();
 
         String eventImgURL = "NA";
         String eventTextToDisplay;

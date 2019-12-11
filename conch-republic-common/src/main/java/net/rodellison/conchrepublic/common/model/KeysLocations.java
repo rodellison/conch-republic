@@ -74,6 +74,7 @@ public enum KeysLocations {
                 returnVal = KeysLocations.ISLAMORADA;
                 break;
             }
+            case "maratón":
             case "marathon": {
                 returnVal = KeysLocations.MARATHON;
                 break;
@@ -82,10 +83,12 @@ public enum KeysLocations {
             case "the_lower_keys":
             case "lower-keys" :
             case "lower_keys" :
+            case "los cayos inferiores":
             case "the-lower-keys": {
                 returnVal = KeysLocations.THE_LOWER_KEYS;
                 break;
             }
+            case "cayo hueso":
             case "key west":
             case "key_west":
             case "key-west": {

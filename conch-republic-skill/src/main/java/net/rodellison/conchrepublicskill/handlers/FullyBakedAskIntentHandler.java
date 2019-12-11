@@ -10,12 +10,10 @@ import com.amazon.ask.model.Slot;
 import com.amazon.ask.request.RequestHelper;
 import net.rodellison.conchrepublic.common.model.EventItem;
 import net.rodellison.conchrepublic.common.model.KeysLocations;
-import net.rodellison.conchrepublicskill.util.DynamoDBManager;
-import net.rodellison.conchrepublicskill.util.ListEventsResponseUtil;
-import net.rodellison.conchrepublicskill.util.StandardResponseUtil;
+import net.rodellison.conchrepublicskill.models.LanguageLocalization;
+import net.rodellison.conchrepublicskill.util.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import net.rodellison.conchrepublicskill.util.DynamoDBClient;
 
 import java.util.Arrays;
 import java.util.List;
@@ -48,11 +46,17 @@ public class FullyBakedAskIntentHandler implements IntentRequestHandler {
 
         RequestHelper requestHelper = RequestHelper.forHandlerInput(handlerInput);
 
-        AttributesManager attributesManager = handlerInput.getAttributesManager();
-        // Get the slots from the intent.
-        Map<String, Object> attributes = attributesManager.getSessionAttributes();
         Optional<String> slotLocation = requestHelper.getSlotValue(LOCATION_SLOT);
         Optional<String> slotMonth = requestHelper.getSlotValue(MONTH_SLOT);
+
+        LanguageLocalization locData;
+        String incomingLocale = intentRequest.getLocale();
+        locData = CommonUtils.getLocalizationStrings(incomingLocale);
+        if (locData == null) {
+            log.error("Failed in getting language location data");
+            return null;
+        }
+
 
         String strTheLocation = "";
         String strTheMonth = "";
@@ -68,14 +72,14 @@ public class FullyBakedAskIntentHandler implements IntentRequestHandler {
         {
              if (!validLocationsList.contains(strTheLocation.toLowerCase()))
             {
-                return getFailResponse(handlerInput);
+                return getFailResponse(handlerInput, locData);
             }
         }
         if (!strTheMonth.equals(""))
         {
             if (!validMonthsList.contains(strTheMonth.toLowerCase()))
             {
-                return getFailResponse(handlerInput);
+                return getFailResponse(handlerInput, locData);
             }
         }
 
@@ -94,26 +98,26 @@ public class FullyBakedAskIntentHandler implements IntentRequestHandler {
             if (myFilteredEventList.size() > maxEventsToKeep)
                 myFilteredEventList = myFilteredEventList.subList(0, maxEventsToKeep);
 
-            return ListEventsResponseUtil.getResponse(handlerInput, 0, strTheMonth, strTheLocation, myFilteredEventList);
+            return ListEventsResponseUtil.getResponse(handlerInput, 0, strTheMonth, strTheLocation, myFilteredEventList, locData);
 
         } else
         {
-            return getFailResponse(handlerInput);
+            return getFailResponse(handlerInput, locData);
         }
     }
 
-    public Optional<Response> getFailResponse(HandlerInput handlerInput) {
-        String speechText = "I had trouble understanding the location or month that you provided. Can you please try again. ";
+    public Optional<Response> getFailResponse(HandlerInput handlerInput, LanguageLocalization locData) {
+
         return StandardResponseUtil.getResponse(handlerInput,
                 "Help",
-                "What is happening in Key West in October?",
+                locData.getHINT1(),
                 "NA",
-                speechText,
-                "<p>Please try again by asking a question similar to one of these:</p>",
-                "What's happening in Key West in October, or What's happening around Key Largo in May",
-                "The Conch Republic Help",
-                "Alexa, Ask The Conch Republic:",
-                "What is happening in {Key Largo, Islamorada, Marathon, the Lower Keys, Key West}<br/>",
+                locData.getFALLBACK_SPEECH1(),
+                locData.getSTANDARD_RESPONSE1(),
+                locData.getSTANDARD_RESPONSE2(),
+                locData.getHELP_PRIMARY_TEXT(),
+                locData.getHELP_DISPLAY_TEXT1(),
+                locData.getHELP_DISPLAY_TEXT2(),
                 "");
     }
 }

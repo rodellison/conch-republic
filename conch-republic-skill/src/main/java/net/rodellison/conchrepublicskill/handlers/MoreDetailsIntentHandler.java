@@ -10,6 +10,7 @@ import com.amazon.ask.model.Slot;
 import com.amazon.ask.request.RequestHelper;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import net.rodellison.conchrepublic.common.model.EventItem;
+import net.rodellison.conchrepublicskill.models.LanguageLocalization;
 import net.rodellison.conchrepublicskill.util.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -45,6 +46,14 @@ public class MoreDetailsIntentHandler implements IntentRequestHandler {
         if (slotOrdinal.isPresent())
             strOrdinal = slotOrdinal.get();
 
+        LanguageLocalization locData;
+        String incomingLocale = intentRequest.getLocale();
+        locData = CommonUtils.getLocalizationStrings(incomingLocale);
+        if (locData == null) {
+            log.error("Failed in getting language location data");
+            return null;
+        }
+
         log.info("MoreDetailsIntent values received.. Ordinal Slot value: " + slotOrdinal.get());
         String strEventID = "";
         Boolean ordinalInvalid = false;
@@ -69,7 +78,7 @@ public class MoreDetailsIntentHandler implements IntentRequestHandler {
          if (ordinalInvalid)
         {
             //We don't have a good id to use, need to throw an error message back to user
-            return getResponse(handlerInput);
+            return getResponse(handlerInput, locData);
         }
         else
         {
@@ -81,25 +90,25 @@ public class MoreDetailsIntentHandler implements IntentRequestHandler {
             if (theEventItem != null)
             {
                 log.debug(theEventItem);
-                return EventItemResponseUtil.getResponse(handlerInput, theEventItem);
+                return EventItemResponseUtil.getResponse(handlerInput, theEventItem, locData);
             }
             else
             {
-                return getResponse(handlerInput);
+                return getResponse(handlerInput, locData);
             }
        }
     }
 
-    public Optional<Response> getResponse(HandlerInput handlerInput) {
+    public Optional<Response> getResponse(HandlerInput handlerInput, LanguageLocalization locData) {
         //Setting these items in case of error..
         String layoutToUse = "Help";
-        String hintString = "What is happening in Key West in October?";
+        String hintString = locData.getHINT1();
         String eventImgURL = "NA";
-        String primaryTextDisplay = "The Conch Republic Help";
-        String speechText = "Sorry!, I couldn't find the item you asked. Please say NEXT to continue, or NEW SEARCH to start over.";
-        String repromptSpeechText1 = "<p>Please say NEXT to continue, or NEW SEARCH to start over.</p>";
+        String primaryTextDisplay = locData.getHELP_PRIMARY_TEXT();
+        String speechText = locData.getEVENTDETAIL_ERROR_SPEECH1();
+        String repromptSpeechText1 = locData.getEVENTDETAIL_ERROR_RESPONSE1();
         String repromptSpeechText2 = "";
-        String Text1Display = "Please say NEXT to continue, or NEW SEARCH to start over.";
+        String Text1Display = locData.getEVENTDETAIL_ERROR_TEXT1();
         String Text2Display = "" ;
         String Text3Display = "";
 

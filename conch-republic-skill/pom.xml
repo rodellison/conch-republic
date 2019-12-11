@@ -63,7 +63,7 @@
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>**/*.properties</include>
-                    <include>**/ConchRepublic*.json</include>
+                    <include>**/*.json</include>
                 </includes>
             </resource>
         </resources>

@@ -1,10 +1,13 @@
 package net.rodellison.conchrepublicskill.handlers;
 
+import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
+import net.rodellison.conchrepublicskill.models.LanguageLocalization;
+import net.rodellison.conchrepublicskill.util.CommonUtils;
 import net.rodellison.conchrepublicskill.util.StandardResponseUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,21 +31,30 @@ public class HelpIntentHandler implements IntentRequestHandler {
     public Optional<Response> handle(HandlerInput handlerInput, IntentRequest intentRequest) {
         log.warn("HelpIntentHandler called");
 
-        String speechText = "There's a few ways to ask for the Florida Keys event information. " +
-                "<p>The locations you can ask about are: Key Largo, Islamorada, Marathon, The Lower Keys, and Key West. " +
-                "You can ask about events at a location for a certain month. Try asking a question similar to one of these:</p>" +
-                " What's happening in Key West in October, or What events are happening near Islamorada";
+        LanguageLocalization locData;
+        String incomingLocale = intentRequest.getLocale();
+        log.info("Incoming intent locale: " + incomingLocale);
+        locData = CommonUtils.getLocalizationStrings(incomingLocale);
+        if (locData == null) {
+            log.error("Failed in getting language location data");
+            return null;
+        }
+
+        String speechText = locData.getHELP1()  +
+                locData.getHELP2() +
+                locData.getHELP3() +
+                locData.getHELP4();
 
         return StandardResponseUtil.getResponse(handlerInput,
                 "Help",
-                "What is happening in Key West in October?",
+                locData.getHINT1(),
                 "NA",
                 speechText,
-                "<p>Ask a question similar to one of these:</p>",
-                "What's happening in Key West, or What events are happening in Marathon in May?",
-                "The Conch Republic Help",
-                "Alexa, Ask The Conch Republic:",
-                "What is happening in {Key Largo, Islamorada, Marathon, the Lower Keys, Key West}<br/>",
+                locData.getSTANDARD_RESPONSE1(),
+                locData.getSTANDARD_RESPONSE2(),
+                locData.getHELP_PRIMARY_TEXT(),
+                locData.getHELP_DISPLAY_TEXT1(),
+                locData.getHELP_DISPLAY_TEXT2(),
                 "");
     }
 

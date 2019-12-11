@@ -1,0 +1,254 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "the conch republic",
+      "intents": [
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": [
+            "howdy",
+            "ummm",
+            "no sé"
+          ]
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": [
+            "cancelar",
+            "he terminado",
+            "he terminado",
+            "acabé"
+          ]
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+            "ayúdame por favor",
+            "ayúdame",
+            "ayuda",
+            "necesito ayuda"
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": [
+            "para",
+            "para por favor",
+            "detente por favor"
+          ]
+        },
+        {
+          "name": "AMAZON.StartOverIntent",
+          "samples": [
+            "por favor comienza de nuevo",
+            "empezar de nuevo",
+            "Quiero empezar de largo",
+            "reiniciar",
+            "nueva búsqueda"
+          ]
+        },
+        {
+          "name": "FullyBakedAskIntent",
+          "slots": [
+            {
+              "name": "location",
+              "type": "location"
+            },
+            {
+              "name": "month",
+              "type": "AMAZON.Month"
+            }
+          ],
+          "samples": [
+            "Qué está pasando en {location} en {month}",
+            "que eventos están ocurriendo en {month}",
+            "que eventos están ocurriendo en {location}",
+            "qué eventos están en {location} en {month}",
+            "qué eventos son alrededor de {location}",
+            "qué eventos son alrededor de {location} en {month}",
+            "qué eventos están cerca de {location}",
+            "qué eventos están cerca de {location} en {month}",
+            "qué eventos están ocurriendo en {month} alrededor de {location}",
+            "qué eventos están en {month} en {location}",
+            "qué eventos están ocurriendo en {month} en {location}",
+            "que esta pasando en {month}",
+            "que esta pasando en {location}",
+            "que esta pasando en {location} en {month}",
+            "que pasa alrededor {location}",
+            "que pasa alrededor {location} en {month}",
+            "que pasa cerca {location}",
+            "que pasa cerca {location} en {month}",
+            "lo que sucede en {month} alrededor de  {location}",
+            "que pasa en {month} en {location}",
+            "que esta pasando en {month}",
+            "que esta pasando en {location}",
+            "que esta pasando en {location} en {month}",
+            "que esta pasando alrededor {location}",
+            "que esta pasando alrededor {location} en {month}",
+            "lo que sucede cerca de {location}",
+            "lo que sucede cerca de {location} en {month}",
+            "lo que sucede en {month} alrededor de {location}",
+            "que esta pasando en {month} en {location}",
+            "qué hay en el calendario en {month}",
+            "qué hay en el calendario en {location}",
+            "qué hay en el calendario en {location} en {month}",
+            "qué hay en el calendario alrededor de {location}",
+            "qué hay en el calendario alrededor de {location} en {month}",
+            "qué hay en el calendario cerca de {location}",
+            "qué hay en el calendario cerca de {location} en {month}",
+            "qué hay en el calendario en {month} alrededor de {location}",
+            "qué hay en el calendario en {month} en {location}",
+            "qué hay en el calendario en {month}",
+            "qué hay en el calendario en {location}",
+            "qué hay en el calendario en {location} en {month}",
+            "qué hay en el calendario alrededor de {location}",
+            "qué hay en el calendario alrededor de {location} en {month}",
+            "qué hay en el calendario cerca de {location}",
+            "qué hay en el calendario cerca de {location} en {month}",
+            "lo que está en el calendario en {month} alrededor de {location}",
+            "lo que está en el calendario en {month} en {location}",
+            "para eventos en {month}",
+            "para eventos en {location}",
+            "para eventos en {location} en {month}",
+            "para eventos alrededor de {location}",
+            "para eventos alrededor de {location} en {month}",
+            "para eventos cerca de {location}",
+            "para eventos cerca de {location} en {month}",
+            "para eventos en {month} alrededor de {location}",
+            "para eventos en {month} en {location}"
+          ]
+        },
+        {
+          "name": "MoreDetailsIntent",
+          "slots": [
+            {
+              "name": "ItemOrdinal",
+              "type": "AMAZON.Ordinal"
+            }
+          ],
+          "samples": [
+            "más detalles para el {ItemOrdinal} por favor.",
+            "{ItemOrdinal}",
+            "más detalles para el evento {ItemOrdinal} por favor.",
+            "más detalles para el evento {ItemOrdinal}"
+          ]
+        },
+        {
+          "name": "AMAZON.NextIntent",
+          "samples": [
+            "próximos eventos",
+            "mas por favor",
+            "mas",
+            "siguiente"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        }
+      ],
+      "types": [
+        {
+          "name": "location",
+          "values": [
+            {
+              "name": {
+                "value": "florida keys"
+              }
+            },
+            {
+              "name": {
+                "value": "Key West"
+              }
+            },
+            {
+              "name": {
+                "value": "The lower keys"
+              }
+            },
+            {
+              "name": {
+                "value": "Marathon"
+              }
+            },
+            {
+              "name": {
+                "value": "Islamorada"
+              }
+            },
+            {
+              "name": {
+                "value": "Key Largo"
+              }
+            }
+          ]
+        },
+        {
+          "name": "AMAZON.Month",
+          "values": [
+            {
+              "name": {
+                "value": "diciembre"
+              }
+            },
+            {
+              "name": {
+                "value": "noviembre"
+              }
+            },
+            {
+              "name": {
+                "value": "octubre"
+              }
+            },
+            {
+              "name": {
+                "value": "septiembre"
+              }
+            },
+            {
+              "name": {
+                "value": "agosto"
+              }
+            },
+            {
+              "name": {
+                "value": "julio"
+              }
+            },
+            {
+              "name": {
+                "value": "junio"
+              }
+            },
+            {
+              "name": {
+                "value": "mayo"
+              }
+            },
+            {
+              "name": {
+                "value": "abril"
+              }
+            },
+            {
+              "name": {
+                "value": "marzo"
+              }
+            },
+            {
+              "name": {
+                "value": "febrero"
+              }
+            },
+            {
+              "name": {
+                "value": "enero"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -2,11 +2,22 @@ package net.rodellison.conchrepublicskill.util;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.SupportedInterfaces;
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+import net.rodellison.conchrepublicskill.handlers.CustomLaunchRequestHandler;
+import net.rodellison.conchrepublicskill.models.LanguageLocalization;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Map;
 
 public class CommonUtils {
 
-    public static String prepForSSMLSpeech(String text)
-    {
+    private static final Logger log = LogManager.getLogger(CommonUtils.class);
+
+    public static String prepForSSMLSpeech(String text) {
         String returnText = text.replace("& ", "and ");
         returnText = returnText.replace("&nbsp;", " ");
         returnText = returnText.replace("<a href=\"", " ");
@@ -18,8 +29,7 @@ public class CommonUtils {
     }
 
 
-    public static String prepForSimpleStandardCardText(String text)
-    {
+    public static String prepForSimpleStandardCardText(String text) {
         String returnText = text.replace("<br/>", "\n\n");
         returnText = returnText.replace("<p>", "");
         returnText = returnText.replace("</p>", "\n\n");
@@ -57,6 +67,25 @@ public class CommonUtils {
         return sb.toString().trim();
     }
 
+    public static LanguageLocalization getLocalizationStrings(String locale) {
+        Gson gson = new Gson();
+        LanguageLocalization theLanguageLocalization;
+        try {
+            JsonReader reader;
+            if (locale.equals("es-US")) //US Spanish
+                reader = new JsonReader(new FileReader("localization-es-US.json"));
+            else
+                reader = new JsonReader(new FileReader("localization-en-US.json"));
 
+            theLanguageLocalization = gson.fromJson(reader, LanguageLocalization.class);
+            reader.close();
+            return theLanguageLocalization;
 
+        } catch (IOException e) {
+            log.error("Failed in loading localization.json file");
+            e.printStackTrace();
+        }
+        return null;
+
+    }
 }

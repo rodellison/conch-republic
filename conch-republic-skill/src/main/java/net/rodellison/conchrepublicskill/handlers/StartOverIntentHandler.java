@@ -3,10 +3,13 @@ package net.rodellison.conchrepublicskill.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
+import net.rodellison.conchrepublicskill.models.LanguageLocalization;
+import net.rodellison.conchrepublicskill.util.CommonUtils;
 import net.rodellison.conchrepublicskill.util.StandardResponseUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Map;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
@@ -27,21 +30,27 @@ public class StartOverIntentHandler implements RequestHandler {
 
         log.warn("StartOverIntentHandler called");
 
+        LanguageLocalization locData;
+        String incomingLocale = input.getRequestEnvelope().getRequest().getLocale();
+        locData = CommonUtils.getLocalizationStrings(incomingLocale);
+        if (locData == null) {
+            log.error("Failed in getting language location data");
+            return null;
+        }
         String layoutToUse = "Home";
-        String hintString = "What is happening in Key West in October?";
+        String hintString = locData.getHINT1();
         String eventImgURL = "NA";
-        String primaryTextDisplay = "Welcome to the Conch Republic";
 
-        String speechText = "Ok, <p>starting over. Try asking a question like these:</p>" +
-                " What's happening in Key West in October, or What's happening around Key Largo in May";
-
-        String repromptSpeechText1 = "<p>Please ask a question similar to one of these:</p>";
-        String repromptSpeechText2 = "What's happening in Key West in October, or What's happening around Key Largo in May";
-        String Text1Display = "";
-        String Text2Display = "";
-        String Text3Display = "";
-
-        return StandardResponseUtil.getResponse(input, layoutToUse, hintString, eventImgURL, speechText, repromptSpeechText1, repromptSpeechText2, primaryTextDisplay, Text1Display, Text2Display, Text3Display);
-
+        return StandardResponseUtil.getResponse(input,
+                layoutToUse,
+                hintString,
+                eventImgURL,
+                locData.getSTARTOVER_SPEECH1(),
+                locData.getSTANDARD_RESPONSE1(),
+                locData.getSTANDARD_RESPONSE2(),
+                locData.getLAUNCH_TITLE(),
+                locData.getHOME_DISPLAY_TEXT1(),
+                locData.getHOME_DISPLAY_TEXT2(),
+                locData.getHOME_DISPLAY_TEXT3());
     }
 }
