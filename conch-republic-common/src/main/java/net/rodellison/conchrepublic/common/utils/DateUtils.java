@@ -18,52 +18,67 @@ public class DateUtils {
         switch (inMonth.toLowerCase())
         {
             case "jan":
+            case "enero":
             case "january":
                 returnMonth = "01";
                 break;
             case "feb":
+            case "febrero":
             case "february":
                 returnMonth = "02";
                 break;
             case "mar":
+            case "marzo":
             case "march":
                 returnMonth = "03";
                 break;
             case "apr":
+            case "abril":
             case "april":
                 returnMonth = "04";
                 break;
             case "may":
+            case "mayo":
                 returnMonth = "05";
                 break;
             case "jun":
+            case "junio":
             case "june":
                 returnMonth = "06";
                 break;
             case "jul":
+            case "julio":
             case "july":
                 returnMonth = "07";
                 break;
             case "aug":
+            case "agosto":
             case "august":
                 returnMonth = "08";
                 break;
             case "sep":
+            case "septiembre":
             case "sept":
             case "september":
                 returnMonth = "09";
                 break;
             case "oct":
+            case "octubre":
             case "october":
                 returnMonth = "10";
                 break;
             case "nov":
+            case "noviembre":
             case "november":
                 returnMonth = "11";
                 break;
             case "dec":
+            case "diciembre":
             case "december":
                 returnMonth = "12";
+                break;
+            default:
+                returnMonth = getFormattedTodayDate().substring(4,6);
         }
 
         return returnMonth;

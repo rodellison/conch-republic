@@ -5,7 +5,11 @@
       "intents": [
         {
           "name": "AMAZON.FallbackIntent",
-          "samples": []
+          "samples": [
+            "howdy",
+            "ummm",
+            "I don't know"
+          ]
         },
         {
           "name": "AMAZON.CancelIntent",
@@ -89,6 +93,15 @@
             "what's happening near {location} in {month}",
             "what's happening in {month} around {location}",
             "what's happening in {month} in {location}",
+            "what is happening in {month}",
+            "what is happening in {location}",
+            "what is happening in {location} in {month}",
+            "what is happening around {location}",
+            "what is happening around {location} in {month}",
+            "what is happening near {location}",
+            "what is happening near {location} in {month}",
+            "what is happening in {month} around {location}",
+            "what is happening in {month} in {location}",
             "what's on the calendar in {month}",
             "what's on the calendar in {location}",
             "what's on the calendar in {location} in {month}",
@@ -98,6 +111,15 @@
             "what's on the calendar near {location} in {month}",
             "what's on the calendar in {month} around {location}",
             "what's on the calendar in {month} in {location}",
+            "what is on the calendar in {month}",
+            "what is on the calendar in {location}",
+            "what is on the calendar in {location} in {month}",
+            "what is on the calendar around {location}",
+            "what is on the calendar around {location} in {month}",
+            "what is on the calendar near {location}",
+            "what is on the calendar near {location} in {month}",
+            "what is on the calendar in {month} around {location}",
+            "what is on the calendar in {month} in {location}",
             "for events in {month}",
             "for events in {location}",
             "for events in {location} in {month}",
@@ -125,37 +147,19 @@
           ]
         },
         {
-          "name": "EventLocationIntent",
-          "slots": [
-            {
-              "name": "EventLocation",
-              "type": "location"
-            }
-          ],
-          "samples": [
-            "All of the Florida Keys",
-            "All of the Keys",
-            "{EventLocation}",
-            "All Locations"
-          ]
-        },
-        {
-          "name": "EventTimeFrameIntent",
-          "slots": [
-            {
-              "name": "month",
-              "type": "AMAZON.Month"
-            }
-          ],
-          "samples": [
-            "{month}",
-            "all",
-            "all months"
-          ]
-        },
-        {
           "name": "AMAZON.NavigateHomeIntent",
-          "samples": []
+          "samples": [
+            "home"
+          ]
+        },
+        {
+          "name": "AMAZON.NextIntent",
+          "samples": [
+            "next events",
+            "more please",
+            "more",
+            "next"
+          ]
         }
       ],
       "types": [

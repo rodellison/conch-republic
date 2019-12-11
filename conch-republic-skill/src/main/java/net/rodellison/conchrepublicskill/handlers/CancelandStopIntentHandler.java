@@ -26,7 +26,6 @@ public class CancelandStopIntentHandler implements RequestHandler {
         log.warn("CancelandStopIntentHandler called");
         String speechText = "<p>Thanks for visiting the Conch Republic. Ready for a Margarita?</p>";
         speechText += "<audio src='" + System.getenv("INTRO_AUDIO") + "'/>";
-//        speechText += "<audio src='soundbank://soundlibrary/musical/amzn_sfx_musical_drone_intro_02'/>";
 
         return input.getResponseBuilder()
                 .withSpeech(speechText)

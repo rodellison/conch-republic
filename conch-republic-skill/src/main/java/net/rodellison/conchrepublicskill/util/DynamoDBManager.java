@@ -63,6 +63,18 @@ public class DynamoDBManager {
                     .withReturnConsumedCapacity(ReturnConsumedCapacity.NONE);
             ScanResult result = null;
 
+            Boolean limitMaxResults = false;
+            int intMaxResults = 64;
+
+            //If BOTH month and location are blank, this is an open ended query so limit the actual DynamoDB items to be scanned
+            //Initiated by user asking alexa, what's on the calendar
+            if (strMonth.equals("") && strLocation.equals(""))
+            {
+                scanRequest.withLimit(intMaxResults);
+                limitMaxResults = true;
+            }
+
+
             try
             {
                 do {
@@ -94,7 +106,10 @@ public class DynamoDBManager {
                         totalCountOfItems++;
                     }
 
-                } while (result.getLastEvaluatedKey() != null);
+                    if (limitMaxResults && (totalCountOfItems < intMaxResults))
+                        break;
+
+                } while (result.getLastEvaluatedKey() != null );
 
             } catch (AmazonClientException ace)
             {
@@ -106,6 +121,11 @@ public class DynamoDBManager {
 
                log.debug(eventListResults.toString());
 
+                if (strMonth.equals("") && strLocation.equals(""))
+                {
+                    log.info("Returning EventList data for all months and locations (open ended scan) ");
+                    return eventListResults.getListOfEventsSortedByStartDate();
+                }
                if (!strMonth.equals("") && !strLocation.equals(""))
                 {
                     log.info("Returning EventList data for specific month and location: " + DateUtils.convertMonth(strMonth) + ", " + strLocation);
@@ -137,6 +157,52 @@ public class DynamoDBManager {
         }
     }
 
+    public EventItem getEventItemInfo(String strEventID) {
+
+        final String EVENT_ID_EXPRESSION = "EventID = :eID";
+
+        String strDataBaseTableName = System.getenv("DYNAMO_DB_TABLENAME");
+
+        log.info("Attempting to get Event Data item from DynamoDB for EventID: " + strEventID);
+
+        Map<String, AttributeValue> expressionAttributeValues = new HashMap<>();
+        expressionAttributeValues.put(":eID", new AttributeValue().withS(strEventID));
+
+        QueryRequest queryRequest = new QueryRequest()
+                .withTableName(strDataBaseTableName)
+                .withKeyConditionExpression(EVENT_ID_EXPRESSION)
+                .withExpressionAttributeValues(expressionAttributeValues)
+                .withConsistentRead(false)
+                .withSelect(Select.ALL_ATTRIBUTES)
+                .withReturnConsumedCapacity(ReturnConsumedCapacity.NONE);
+        QueryResult queryResult = null;
+
+        try {
+            queryResult = client.query(queryRequest);
+            if (queryResult != null) {
+                log.info("Query item result count: " + queryResult.getCount());
+                List<Map<String, AttributeValue>> items = queryResult.getItems();
+                //There SHOULD only be one resulting item fetched.. if more, then just use first..
+
+                EventItem thisEventItem = new EventItem();
+                thisEventItem.setEventID(items.get(0).get("EventID").getS());
+                thisEventItem.setEventStartAndEndDate(items.get(0).get("StartDate").getS(), items.get(0).get("EndDate").getS());
+                thisEventItem.setEventLocation(KeysLocations.convertToEnumLocation(items.get(0).get("EventLocation").getS()));
+                thisEventItem.setEventName(items.get(0).get("EventName").getS());
+                thisEventItem.setEventURL(items.get(0).get("EventURL").getS());
+                thisEventItem.setEventImgURL(items.get(0).get("ImgURL").getS());
+                thisEventItem.setEventDescription(items.get(0).get("EventDescription").getS());
+
+                return thisEventItem;
+
+            }
+
+        } catch (AmazonClientException ace) {
+            log.error("DynamoDB Query Exception: " + ace.getMessage());
+
+        }
+        return null;
+    }
 }
 
 /*
@@ -167,6 +233,42 @@ var params = {
     ReturnConsumedCapacity: 'NONE', // optional (NONE | TOTAL | INDEXES)
 };
 dynamodb.scan(params, function(err, data) {
+    if (err) ppJson(err); // an error occurred
+    else ppJson(data); // successful response
+});
+
+
+var params = {
+    TableName: 'FloridaKeysEvents',
+//    IndexName: 'index_name', // optional (if querying an index)
+    KeyConditionExpression: 'EventID = :eID', // a string representing a constraint on the attribute
+//    FilterExpression: 'attr_name = :val', // a string representing a constraint on the attribute
+//    ExpressionAttributeNames: { // a map of substitutions for attribute names with special characters
+        //'#name': 'attribute name'
+//    },
+    ExpressionAttributeValues: { // a map of substitutions for all attribute values
+      ':eID': 'calendar-2722'
+    },
+    ScanIndexForward: true, // optional (true | false) defines direction of Query in the index
+//    Limit: 0, // optional (limit the number of items to evaluate)
+    ConsistentRead: false, // optional (true | false)
+    Select: 'ALL_ATTRIBUTES', // optional (ALL_ATTRIBUTES | ALL_PROJECTED_ATTRIBUTES |
+                              //           SPECIFIC_ATTRIBUTES | COUNT)
+//    AttributesToGet: [ // optional (list of specific attribute names to return)
+//        'EventURL',
+//        'EventDescription',
+//        'ImgURL',
+        // ... more attributes ...
+//    ],
+//    ExclusiveStartKey: { // optional (for pagination, returned by prior calls as LastEvaluatedKey)
+//        attribute_name: attribute_value,
+        // attribute_value (string | number | boolean | null | Binary | DynamoDBSet | Array | Object)
+        // anotherKey: ...
+
+//    },
+    ReturnConsumedCapacity: 'NONE', // optional (NONE | TOTAL | INDEXES)
+};
+docClient.query(params, function(err, data) {
     if (err) ppJson(err); // an error occurred
     else ppJson(data); // successful response
 });

@@ -3,11 +3,20 @@ package net.rodellison.conchrepublicskill.util;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.SupportedInterfaces;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
-
 public class CommonUtils {
+
+    public static String prepForSSMLSpeech(String text)
+    {
+        String returnText = text.replace("& ", "and ");
+        returnText = returnText.replace("&nbsp;", " ");
+        returnText = returnText.replace("<a href=\"", " ");
+        returnText = returnText.replace("\">", " ");
+        returnText = returnText.replace("here</a>", " ");
+        returnText = returnText.replace("</a>", " ");
+
+        return returnText;
+    }
+
 
     public static String prepForSimpleStandardCardText(String text)
     {

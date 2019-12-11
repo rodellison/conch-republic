@@ -43,7 +43,7 @@ public enum KeysLocations {
                 break;
             }
             default:
-                returnVal = "florida-keys";
+                returnVal = "invalid-location";
 
         }
         return returnVal;

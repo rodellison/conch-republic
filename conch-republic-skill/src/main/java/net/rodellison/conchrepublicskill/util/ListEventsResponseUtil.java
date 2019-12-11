@@ -20,10 +20,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class EventsResponseUtil {
+public class ListEventsResponseUtil {
 
     private static Image myStandardCardImage;
-    private static final Logger log = LogManager.getLogger(EventsResponseUtil.class);
+    private static final Logger log = LogManager.getLogger(ListEventsResponseUtil.class);
 
     public static Optional<Response> getResponse(HandlerInput input, int eventListStartItem, String strTheMonth, String strTheLocation, List<EventItem> eventItemsList) {
 
@@ -38,8 +38,16 @@ public class EventsResponseUtil {
         String speechText = "";
         String repromptSpeechText1 = "";
         String repromptSpeechText2 = "You can say New Search to start over, or I'm done to exit.";
+        Boolean addLocationToEvent = false;
 
+        String strFirst = "";
+        String strSecond = "";
+        String strThird = "";
 
+        if (strTheMonth.equals("") && strTheLocation.equals("")) {
+            primaryTextDisplay = "Upcoming Events in the Florida Keys";
+            addLocationToEvent = true;
+        }
         if (!strTheMonth.equals("") && !strTheLocation.equals("")) {
             primaryTextDisplay = "Events for " + CommonUtils.toTitleCase(strTheLocation) + " in " + CommonUtils.toTitleCase(strTheMonth);
         }
@@ -75,32 +83,54 @@ public class EventsResponseUtil {
                             speechOutputBuilder.append("From " + startDate + " til " + endDate + ", the ");
                         }
 
-                        eventShortDescription += thisItem.getEventName();
+                        eventShortDescription += thisItem.getEventName().replace("&nbsp;", " ");
                         String strSpokenEvent = thisItem.getEventName();
                         strSpokenEvent = strSpokenEvent.replace("presents", "<phoneme alphabet='ipa' ph='pɹizɛnts'>presents</phoneme> <break time=\"0.25s\"/>");
+                        if (addLocationToEvent) {
+                            String titleLocation = CommonUtils.toTitleCase(KeysLocations.getLocation(thisItem.getEventLocation()));
+                            eventShortDescription += " in " + titleLocation;
+                            strSpokenEvent += " in " + titleLocation;
+                        }
+
                         speechOutputBuilder.append(strSpokenEvent + "<break time=\"1s\"/>");
                         thisIterationList.add(eventShortDescription);
+
                     } else {
                         log.debug("eventItemsList.get(startItem++) was null");
+                    }
+
+                    //load up the first, second and third variables that will be stored in session vars for later use
+                    //if user asks for details on an event
+                    switch (i) {
+                        case 0:
+                            strFirst = thisItem.getEventID();
+                            break;
+                        case 1:
+                            strSecond = thisItem.getEventID();
+                            break;
+                        case 2:
+                            strThird = thisItem.getEventID();
+                            break;
                     }
 
                 } catch (Exception ex) {
                     atEnd = true;
                     log.debug("atEnd = true");
+                    break;
                 }
             }
 
             if (thisIterationList.size() == 3) {
-                repromptSpeechText1 = "<p>To hear details about any of these events, just say First, Second or Third.</p>";
+                repromptSpeechText1 = "<p>To hear details for these events, just say First, Second or Third.</p>";
             }
             if (thisIterationList.size() == 2) {
                 thisIterationList.add("");
-                repromptSpeechText1 = "<p>To hear details about any of these events, just say First or Second.</p>";
+                repromptSpeechText1 = "<p>To hear details for these events, just say First or Second.</p>";
             }
             if (thisIterationList.size() == 1) {
                 thisIterationList.add("");
                 thisIterationList.add("");
-                repromptSpeechText1 = "<p>To hear details about this event, just say First.</p>";
+                repromptSpeechText1 = "<p>To hear details for this event, just say First.</p>";
             }
             if (thisIterationList.size() == 0) {
                 thisIterationList.add("There are no additional events");
@@ -110,9 +140,9 @@ public class EventsResponseUtil {
             }
 
             if (!atEnd)
-                repromptSpeechText2 = "You can say NEXT to hear more events, say New Search to start over, or I'm done to exit.";
+                repromptSpeechText2 = "Say NEXT to hear more events, say New Search to start over, or I'm done to exit.";
             else
-                repromptSpeechText2 = "You can say New Search to start over, or I'm done to exit.";
+                repromptSpeechText2 = "Say New Search to start over, or I'm done to exit.";
 
         } else {
 
@@ -120,13 +150,17 @@ public class EventsResponseUtil {
             thisIterationList.add("");
             thisIterationList.add("");
             repromptSpeechText1 = "";
-            repromptSpeechText2 = "You can say New Search to start over, or I'm done to exit.";
+            repromptSpeechText2 = "Say New Search to start over, or I'm done to exit.";
 
         }
 
         attributes.put("STR_MONTH", strTheMonth);
         attributes.put("STR_LOCATION", strTheLocation);
         attributes.put("INT_STARTITEM_VAL", startItem);
+        attributes.put("FIRST", strFirst);
+        attributes.put("SECOND", strSecond);
+        attributes.put("THIRD", strThird);
+
         Gson gson = new Gson();
         attributes.put("EVENT_ITEMS", gson.toJson(eventItemsList));
 
@@ -138,14 +172,11 @@ public class EventsResponseUtil {
         speechOutputBuilder.append(repromptSpeechText2);
 
         speechText = speechOutputBuilder.toString();
-        speechText = speechText.replace("(", "");
-        speechText = speechText.replace(")", "");
-        speechText = speechText.replace("&", " and ");
+        speechText = CommonUtils.prepForSSMLSpeech(speechText);
         log.debug("Heres whats being said: " + speechText);
 
         if (CommonUtils.supportsApl(input)) {
             //  ViewportProfile viewportProfile = ViewportUtils.getViewportProfile(input.getRequestEnvelope());
-
             try {
                 ObjectMapper mapper = new ObjectMapper();
                 JsonNode node = mapper.readTree(new File("ConchRepublic.json"));

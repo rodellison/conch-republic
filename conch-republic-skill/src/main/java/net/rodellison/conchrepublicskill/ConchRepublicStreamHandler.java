@@ -12,11 +12,12 @@ public class ConchRepublicStreamHandler extends SkillStreamHandler {
         return Skills.standard()
                 .addRequestHandlers(
                         new FullyBakedAskIntentHandler(),
+                        new MoreDetailsIntentHandler(),
                         new NextIntentHandler(),
                         new CancelandStopIntentHandler(),
                         new StartOverIntentHandler(),
                         new HelpIntentHandler(),
-                        new LaunchRequestHandler(),
+                        new CustomLaunchRequestHandler(),
                         new SessionEndedRequestHandler(),
                         new FallBackIntentHandler())
                 .withSkillId(System.getenv("SKILL_ID"))
