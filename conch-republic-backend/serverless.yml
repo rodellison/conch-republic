@@ -30,5 +30,8 @@ functions:
           path: loaddata/{segment}
           method: get
           cors: true
-
+      - http:
+          path: cleanupdata
+          method: get
+          cors: true
 

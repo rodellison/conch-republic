@@ -3,12 +3,15 @@ package net.rodellison.conchrepublic.backend.managers;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
+import com.amazonaws.services.dynamodbv2.document.PrimaryKey;
 import com.amazonaws.services.dynamodbv2.document.Table;
 
+import com.amazonaws.services.dynamodbv2.document.spec.DeleteItemSpec;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.ScanRequest;
 import com.amazonaws.services.dynamodbv2.model.ScanResult;
 import net.rodellison.conchrepublic.common.model.*;
+import net.rodellison.conchrepublic.common.utils.DateUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.*;
@@ -103,5 +106,76 @@ public class DynamoDBManager implements DataBaseManager {
         }
         return true;
     }
+
+    private List<String> getEventIDsFromOldEvents(String endDate)
+    {
+        String strDataBaseTableName = System.getenv("DYNAMO_DB_TABLENAME");
+        try {
+
+            List<String> eventListResults = new ArrayList<>();
+
+            log.info("Attempting to get EventIDs for items from DynamoDB that are no longer active.");
+
+            Map<String, AttributeValue> expressionAttributeValues = new HashMap<>();
+            expressionAttributeValues.put(":ed", new AttributeValue().withS(endDate));
+
+            ScanRequest scanRequest = new ScanRequest()
+                    .withTableName(strDataBaseTableName)
+                    .withFilterExpression("EndDate < :ed")
+                    .withExpressionAttributeValues(expressionAttributeValues);
+
+            ScanResult result = client.scan(scanRequest);
+
+            for (Map<String, AttributeValue> item : result.getItems()) {
+                eventListResults.add(item.get("EventID").getS());
+             }
+
+            return eventListResults;
+
+        } catch (Exception e) {
+            log.error(strDataBaseTableName + " DynamoDB creation failed: " + e.getMessage());
+            return null;
+
+        }
+
+    }
+
+    public Boolean purgeOldEventDataIntoDB() {
+
+        String strDataBaseTableName = System.getenv("DYNAMO_DB_TABLENAME");
+
+        String strFormattedTodayDate = DateUtils.getFormattedTodayDate();
+
+        List<String> eventsToPurge = getEventIDsFromOldEvents(strFormattedTodayDate);
+
+        int itemsDeleted = 0;
+        if (eventsToPurge.size() > 0)
+        {
+            try {
+                Table table = dynamoDB.getTable(strDataBaseTableName);
+                log.info("Attempting to delete Events that have ended from  " +  strDataBaseTableName);
+                for (String eventID: eventsToPurge) {
+                    DeleteItemSpec deleteItemSpec = new DeleteItemSpec()
+                            .withPrimaryKey(new PrimaryKey("EventID", eventID));
+                    try {
+
+                        log.debug("Attempting to delete for item: " + eventID);
+                        table.deleteItem(deleteItemSpec);
+                        itemsDeleted++;
+
+                    } catch (Exception e) {
+                        log.error(strDataBaseTableName + " delete item failed: " + e.getMessage());
+                    }
+
+                }
+
+            } catch (Exception e) {
+                log.error(strDataBaseTableName + " DynamoDB delete item process failed: " + e.getMessage());
+            }
+        }
+        log.info("purgeOldEventDataIntoDB item count deleted: " + itemsDeleted);
+        return true;
+    }
+
 
 }

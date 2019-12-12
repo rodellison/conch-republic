@@ -5,7 +5,7 @@ public enum Services {
     COLLECTWEBDATA,
     FORMATWEBDATA,
     INSERTDBDATA,
-    SENDSUMMARY,
+    PURGEDBDATA,
     GETDBDATA
 
 }

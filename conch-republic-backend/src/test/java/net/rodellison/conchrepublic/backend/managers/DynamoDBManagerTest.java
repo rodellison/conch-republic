@@ -9,6 +9,7 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.PutItemResult;
 import com.amazonaws.services.dynamodbv2.model.ScanRequest;
 import com.amazonaws.services.dynamodbv2.model.ScanResult;
+import net.rodellison.conchrepublic.backend.utils.DynamoDBClient;
 import net.rodellison.conchrepublic.common.model.EventItem;
 import net.rodellison.conchrepublic.common.model.KeysLocations;
 import org.junit.jupiter.api.DisplayName;
@@ -99,6 +100,19 @@ class DynamoDBManagerTest {
                 .thenReturn(new PutItemOutcome(new PutItemResult()));
 
         Boolean result = myDynamoDBManager.insertEventDataIntoDB(myEvents);
+        assertTrue(result);
+
+    }
+
+    @Test
+    @DisplayName(" get an EventItem from the Dynamo DB")
+    void purgeOldEventDataIntoDB() {
+
+
+        AmazonDynamoDB myClient = new DynamoDBClient().getDynamoDBClient();
+        DynamoDB myDynamoDB = new DynamoDB(myClient);
+        DynamoDBManager myDynamoDBManager = new DynamoDBManager(myClient, myDynamoDB);
+        Boolean result = myDynamoDBManager.purgeOldEventDataIntoDB();
         assertTrue(result);
 
     }

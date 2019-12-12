@@ -66,5 +66,26 @@ class TestEventHandler {
 
     }
 
+    @Test
+    @DisplayName(" ensure /cleanupdata call returns with success")
+    public void testPurgeDataReturnsSuccess() throws Throwable {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("httpMethod", "GET");
+        map.put("resource", "/cleanupdata");
+        map.put("path", "/cleanupdata");
+        map.put("pathParameters", "");
+        logger.info("Test EventHubVerticle responds for GET:/cleanupdata");
+
+        CompletableFuture<ApiGatewayResponse> cf1 = new CompletableFuture<>();
+        CompletableFuture.runAsync(() -> {
+            ApiGatewayResponse api1 = sl.handleRequest(map, testContext);
+            cf1.complete(api1);
+        });
+
+        String result = cf1.get().getBody();
+        assertTrue(result.contains("purge completed"));
+
+    }
 
 }

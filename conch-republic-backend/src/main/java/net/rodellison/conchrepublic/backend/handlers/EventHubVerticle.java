@@ -152,8 +152,43 @@ public class EventHubVerticle extends AbstractVerticle {
             }, res -> message.reply(new JsonObject(res.result())));
         });
 
+        eventBus.consumer("GET:/cleanupdata", message -> {
+
+            String theMessage = message.body().toString();
+
+            logger.info("GET:/cleanupdata function invoked" );
+
+            //Connecting to, and getting data could take time...
+            vertx.<String>executeBlocking(execBlockFuture -> {
+                final CompletableFuture<String> databaseFuture = new CompletableFuture<>();
+
+                eventBus.request(Services.PURGEDBDATA.toString(), message.body(), rs -> {
+                    if (rs.succeeded()) {
+                        logger.info("DataBase: SUCCESS");
+                        databaseFuture.complete(rs.result().body().toString());
+                    } else {
+                        logger.info("DataBase: FAILED");
+                        databaseFuture.complete(rs.cause().getMessage());
+                    }
+                });
+
+                String DBHandlerResult = "";
+                try {
+                    DBHandlerResult = databaseFuture.get();
+                } catch (InterruptedException | ExecutionException e) {
+                    e.printStackTrace();
+                    DBHandlerResult = e.getMessage();
+                }
+
+                execBlockFuture.complete(DBHandlerResult);
+
+            }, res -> message.reply(new JsonObject(res.result())));
+        });
+
         startPromise.complete();
     }
+
+
 
 }
 

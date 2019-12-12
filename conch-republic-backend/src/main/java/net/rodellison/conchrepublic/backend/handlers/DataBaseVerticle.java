@@ -48,6 +48,16 @@ public class DataBaseVerticle extends AbstractVerticle {
 
     }
 
+    private Boolean purgeData() {
+
+        AmazonDynamoDB myClient = new DynamoDBClient().getDynamoDBClient();
+        DynamoDB myDynamoDB = new DynamoDB(myClient);
+        DynamoDBManager myDynamoDBManager = new DynamoDBManager(myClient, myDynamoDB);
+
+        return myDynamoDBManager.purgeOldEventDataIntoDB();
+
+    }
+
     @Override
     public void start(Promise<Void> startPromise) {
         final EventBus eventBus = vertx.eventBus();
@@ -116,6 +126,19 @@ public class DataBaseVerticle extends AbstractVerticle {
             message.reply(new JsonObject(response));
 
         });
+
+        eventBus.consumer(Services.PURGEDBDATA.toString(), message -> {
+            // Do something with Vert.x async, reactive APIs
+
+            logger.info("DBHandlerVerticle " + thisContext +  " received data base purge request");
+            Boolean result = purgeData();
+
+            final Map<String, Object> response = new HashMap<>();
+            response.put("statusCode", 200);
+            response.put("body", "purge completed with result: " + result);
+            message.reply(new JsonObject(response).encode());
+        });
+
 
         startPromise.complete();
     }
