@@ -89,8 +89,8 @@ public class ListEventsResponseUtil {
                         strSpokenEvent = strSpokenEvent.replace("presents", "<phoneme alphabet='ipa' ph='pɹizɛnts'>presents</phoneme> <break time=\"0.25s\"/>");
                         if (addLocationToEvent) {
                             String titleLocation = CommonUtils.toTitleCase(KeysLocations.getLocation(thisItem.getEventLocation()));
-                            eventShortDescription += " in " + titleLocation;
-                            strSpokenEvent += " in " + titleLocation;
+                            eventShortDescription += ", in " + CommonUtils.toTitleCase(titleLocation).replace("-", " ");
+                            strSpokenEvent += ", in " + CommonUtils.toTitleCase(titleLocation).replace("-", " ");
                         }
 
                         speechOutputBuilder.append(strSpokenEvent + "<break time=\"1s\"/>");

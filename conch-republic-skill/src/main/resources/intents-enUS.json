@@ -47,20 +47,6 @@
           ]
         },
         {
-          "name": "AMAZON.YesIntent",
-          "samples": [
-            "yes please",
-            "yes"
-          ]
-        },
-        {
-          "name": "AMAZON.NoIntent",
-          "samples": [
-            "no thank you",
-            "no"
-          ]
-        },
-        {
           "name": "FullyBakedAskIntent",
           "slots": [
             {
@@ -84,6 +70,8 @@
             "what events are happening in {month} around {location}",
             "what events are in {month} in {location}",
             "what events are happening in {month} in {location}",
+            "what's happening in Key West in October",
+            "what's happening around Key Largo in May",
             "what's happening in {month}",
             "what's happening in {location}",
             "what's happening in {location} in {month}",
@@ -147,12 +135,6 @@
           ]
         },
         {
-          "name": "AMAZON.NavigateHomeIntent",
-          "samples": [
-            "home"
-          ]
-        },
-        {
           "name": "AMAZON.NextIntent",
           "samples": [
             "next events",
@@ -160,6 +142,10 @@
             "more",
             "next"
           ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
         }
       ],
       "types": [

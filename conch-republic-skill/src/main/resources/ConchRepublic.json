@@ -462,18 +462,6 @@
                 ]
               },
               {
-                "type": "Container",
-                "direction": "row",
-                "paddingRight": 150,
-                "grow": 1,
-                "items": [
-                  {
-                    "type": "AlexaFooter",
-                    "footerHint": "${payload.ConchRepublicTemplateData.properties.HintString}"
-                  }
-                ]
-              },
-              {
                 "type": "Text",
                 "text": "Photo by: Bruce Warrington</b>",
                 "style": "textStyleSecondaryHint",

@@ -60,6 +60,8 @@
             }
           ],
           "samples": [
+            "Qué está pasando en Key West en octubre",
+            "Qué está pasando alrededor de Key Largo en mayo",
             "Qué está pasando en {location} en {month}",
             "que eventos están ocurriendo en {month}",
             "que eventos están ocurriendo en {location}",
