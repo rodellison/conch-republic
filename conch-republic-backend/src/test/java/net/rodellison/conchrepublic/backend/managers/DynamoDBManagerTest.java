@@ -12,6 +12,9 @@ import com.amazonaws.services.dynamodbv2.model.ScanResult;
 import net.rodellison.conchrepublic.backend.utils.DynamoDBClient;
 import net.rodellison.conchrepublic.common.model.EventItem;
 import net.rodellison.conchrepublic.common.model.KeysLocations;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configuration;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +30,7 @@ class DynamoDBManagerTest {
     @Test
     @DisplayName(" get an EventItem from the Dynamo DB")
     void getEventsDataForLocation() {
+
 
         AmazonDynamoDB mockADDB = mock(AmazonDynamoDB.class);
         DynamoDB mockDynamoDB = mock(DynamoDB.class);
