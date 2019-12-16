@@ -14,6 +14,7 @@
   "HELP_DISPLAY_TEXT1": "Alexa, Ask The Conch Republic:",
   "HELP_DISPLAY_TEXT2": "What is happening in {Key Largo, Islamorada, Marathon, the Lower Keys, Key West}<br/>",
   "CANCEL_SPEECH1": "<p>Thanks for visiting the Conch Republic. Ready for a Margarita?</p>",
+  "CANCEL_SPEECH2": "<p>Thanks for visiting the Conch Republic. Ready for a slice of Key Lime Pie?</p>",
   "NEXT_ERROR_SPEECH1": "Sorry!, I ran into a problem, so starting over. Try asking a question like these: What's happening in Key West in October, or What's happening around Key Largo in May?",
   "STARTOVER_SPEECH1": "Ok, <p>starting over. Try asking a question like these:</p> What's happening in Key West in October, or What's happening around Key Largo in May?",
   "FALLBACK_SPEECH1": "I couldn't understand the question you asked. <p>Please try asking a question similar to one of these:</p> What's happening in Key West in October, or What's happening around Key Largo in May?",

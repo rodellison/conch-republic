@@ -17,6 +17,7 @@ public class LanguageLocalization {
     private String HELP_DISPLAY_TEXT1;
     private String HELP_DISPLAY_TEXT2;
     private String CANCEL_SPEECH1;
+    private String CANCEL_SPEECH2;
     private String FALLBACK_SPEECH1;
     private String EVENTDETAIL_ERROR_SPEECH1;
     private String EVENTDETAIL_ERROR_RESPONSE1;
@@ -34,6 +35,14 @@ public class LanguageLocalization {
     private String HOME_DISPLAY_TEXT1;
     private String HOME_DISPLAY_TEXT2;
     private String HOME_DISPLAY_TEXT3;
+
+    public String getCANCEL_SPEECH2() {
+        return CANCEL_SPEECH2;
+    }
+
+    public void setCANCEL_SPEECH2(String CANCEL_SPEECH2) {
+        this.CANCEL_SPEECH2 = CANCEL_SPEECH2;
+    }
 
     public String getHOME_DISPLAY_TEXT1() {
         return HOME_DISPLAY_TEXT1;

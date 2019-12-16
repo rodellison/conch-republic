@@ -16,6 +16,7 @@ import java.util.Map;
 public class CommonUtils {
 
     private static final Logger log = LogManager.getLogger(CommonUtils.class);
+    public static String savedLocale;
 
     public static String prepForSSMLSpeech(String text) {
         String returnText = text.replace("& ", "and ");
@@ -79,6 +80,7 @@ public class CommonUtils {
 
             theLanguageLocalization = gson.fromJson(reader, LanguageLocalization.class);
             reader.close();
+            savedLocale = locale;
             return theLanguageLocalization;
 
         } catch (IOException e) {

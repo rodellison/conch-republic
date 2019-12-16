@@ -57,7 +57,16 @@ public class EventItemResponseUtil {
         log.debug(eventTextToDisplay);
         speechOutputBuilder.append(eventTextToDisplay);
 
-        thisIterationList.add(CommonUtils.prepForSSMLSpeech(theItem.getEventDescription()));
+        String dateText = "";
+        String startDate = DateUtils.convertNumericDateToFormatted(theItem.getEventStartDate());
+        String endDate = DateUtils.convertNumericDateToFormatted(theItem.getEventEndDate());
+        if (startDate.equals(endDate)) {
+            dateText += startDate;
+        } else {
+            dateText += startDate + " - " + endDate ;
+        }
+
+        thisIterationList.add(dateText);
         thisIterationList.add("");
         thisIterationList.add("");
 
@@ -96,6 +105,7 @@ public class EventItemResponseUtil {
                 ConchRepublicTemplateProperties.put("HeadingText", primaryTextDisplay);
                 ConchRepublicTemplateProperties.put("EventImageUrl", eventImgURL);
                 ConchRepublicTemplateProperties.put("HintString", hintString);
+                ConchRepublicTemplateProperties.put("Locale", CommonUtils.savedLocale);
 
                 log.info("LaunchRequestHandler called, building Render Document");
                 RenderDocumentDirective documentDirective = RenderDocumentDirective.builder()

@@ -50,6 +50,7 @@ public class StandardResponseUtil {
                 ConchRepublicTemplateProperties.put("HeadingText", primaryTextDisplay);
                 ConchRepublicTemplateProperties.put("EventImageUrl", eventImgURL);
                 ConchRepublicTemplateProperties.put("HintString", hintString);
+                ConchRepublicTemplateProperties.put("Locale", CommonUtils.savedLocale);
 
                 List<String> textEvents = new ArrayList<String>();
                 textEvents.add(text1Display);

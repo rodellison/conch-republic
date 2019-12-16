@@ -50,13 +50,18 @@ public class ListEventsResponseUtil {
             addLocationToEvent = true;
         }
         if (!strTheMonth.equals("") && !strTheLocation.equals("")) {
-            primaryTextDisplay = "Events for " + CommonUtils.toTitleCase(strTheLocation) + " in " + CommonUtils.toTitleCase(strTheMonth);
+
+            primaryTextDisplay = CommonUtils.savedLocale == "es-US" ? "Eventos en " + CommonUtils.toTitleCase(strTheLocation) + " en " + CommonUtils.toTitleCase(strTheMonth)
+                    : "Events for " + CommonUtils.toTitleCase(strTheLocation) + " in " + CommonUtils.toTitleCase(strTheMonth);
         }
         if (strTheMonth.equals("") && !strTheLocation.equals("")) {
-            primaryTextDisplay = "Events for " + CommonUtils.toTitleCase(strTheLocation);
+            primaryTextDisplay = CommonUtils.savedLocale == "es-US" ? "Eventos en " + CommonUtils.toTitleCase(strTheLocation)
+                    : "Events in " + CommonUtils.toTitleCase(strTheLocation);
         }
         if (!strTheMonth.equals("") && strTheLocation.equals("")) {
-            primaryTextDisplay = "Events in " + CommonUtils.toTitleCase(strTheMonth);
+            primaryTextDisplay = CommonUtils.savedLocale == "es-US" ? "Eventos en " + CommonUtils.toTitleCase(strTheMonth)
+                    : "Events in " + CommonUtils.toTitleCase(strTheMonth);
+
             addLocationToEvent = true;
         }
 
@@ -202,6 +207,7 @@ public class ListEventsResponseUtil {
                 ConchRepublicTemplateProperties.put("HeadingText", primaryTextDisplay);
                 ConchRepublicTemplateProperties.put("EventImageUrl", eventImgURL);
                 ConchRepublicTemplateProperties.put("HintString", hintString);
+                ConchRepublicTemplateProperties.put("Locale", CommonUtils.savedLocale);
 
                 log.info("LaunchRequestHandler called, building Render Document");
                 RenderDocumentDirective documentDirective = RenderDocumentDirective.builder()

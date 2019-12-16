@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
+import java.util.Random;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
@@ -34,12 +35,23 @@ public class CancelandStopIntentHandler implements RequestHandler {
             return null;
         }
 
-        String speechText = locData.getCANCEL_SPEECH1();
+        int whichClose = getRandomNumberInRange(0,2);
+        String speechText = whichClose == 0 ? locData.getCANCEL_SPEECH1() : locData.getCANCEL_SPEECH2();
         speechText += "<audio src='" + System.getenv("INTRO_AUDIO") + "'/>";
 
         return input.getResponseBuilder()
                 .withSpeech(speechText)
                 .withShouldEndSession(true)
                 .build();
+    }
+
+    private static int getRandomNumberInRange(int min, int max) {
+
+        if (min >= max) {
+            throw new IllegalArgumentException("max must be greater than min");
+        }
+
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
     }
 }
