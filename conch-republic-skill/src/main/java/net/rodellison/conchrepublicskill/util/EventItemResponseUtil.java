@@ -67,7 +67,7 @@ public class EventItemResponseUtil {
         }
 
         thisIterationList.add(dateText);
-        thisIterationList.add("");
+        thisIterationList.add(theItem.getEventDescription().replace("&nbsp;", " "));
         thisIterationList.add("");
 
         if (!theItem.getEventImgURL().trim().equals(""))

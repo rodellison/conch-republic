@@ -609,7 +609,6 @@
                 "paddingLeft": 40,
                 "paddingRight": 72,
                 "paddingTop": 60,
-                "grow": 1,
                 "items": [
                   {
                     "type": "Container",
@@ -639,16 +638,22 @@
                     "direction": "column",
                     "paddingLeft": 20,
                     "paddingRight": 20,
-                    "width": "63vw",
+                    "width": "60vw",
                     "items": [
                       {
                         "type": "Text",
                         "text": "<b>${payload.ConchRepublicTemplateData.properties.HeadingText}</b>",
-                        "style": "textStyleBody"
+                        "style": "textStylePrimary"
                       },
                       {
                         "type": "Text",
                         "text": "${payload.ConchRepublicTemplateData.properties.EventText[0]}",
+                        "paddingTop": 20,
+                        "style": "textStyleBodyMid"
+                      },
+                      {
+                        "type": "Text",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[1]}",
                         "paddingTop": 20,
                         "style": "textStyleBodyMid"
                       }
