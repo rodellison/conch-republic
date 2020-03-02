@@ -35,6 +35,15 @@ public class LanguageLocalization {
     private String HOME_DISPLAY_TEXT1;
     private String HOME_DISPLAY_TEXT2;
     private String HOME_DISPLAY_TEXT3;
+    private String APP_TITLE;
+
+    public String getAPP_TITLE() {
+        return APP_TITLE;
+    }
+
+    public void setAPP_TITLE(String APP_TITLE) {
+        this.APP_TITLE = APP_TITLE;
+    }
 
     public String getCANCEL_SPEECH2() {
         return CANCEL_SPEECH2;
@@ -322,7 +331,6 @@ public class LanguageLocalization {
     }
 
     private String STARTOVER_SPEECH1;
-  
 
 
 }

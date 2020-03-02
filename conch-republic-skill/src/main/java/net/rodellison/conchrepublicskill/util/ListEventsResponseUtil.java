@@ -37,6 +37,7 @@ public class ListEventsResponseUtil {
         StringBuilder speechOutputBuilder = new StringBuilder();
 
         String speechText = "";
+        String cardText = "";
         String repromptSpeechText1 = "";
         String repromptSpeechText2 = "";
         Boolean addLocationToEvent = false;
@@ -51,19 +52,21 @@ public class ListEventsResponseUtil {
         }
         if (!strTheMonth.equals("") && !strTheLocation.equals("")) {
 
-            primaryTextDisplay = CommonUtils.savedLocale == "es-US" ? "Eventos en " + CommonUtils.toTitleCase(strTheLocation) + " en " + CommonUtils.toTitleCase(strTheMonth)
+            primaryTextDisplay = CommonUtils.savedLocale.equals("es-US") ? "Eventos en " + CommonUtils.toTitleCase(strTheLocation) + " en " + CommonUtils.toTitleCase(strTheMonth)
                     : "Events for " + CommonUtils.toTitleCase(strTheLocation) + " in " + CommonUtils.toTitleCase(strTheMonth);
         }
         if (strTheMonth.equals("") && !strTheLocation.equals("")) {
-            primaryTextDisplay = CommonUtils.savedLocale == "es-US" ? "Eventos en " + CommonUtils.toTitleCase(strTheLocation)
+            primaryTextDisplay = CommonUtils.savedLocale.equals("es-US") ? "Eventos en " + CommonUtils.toTitleCase(strTheLocation)
                     : "Events in " + CommonUtils.toTitleCase(strTheLocation);
         }
         if (!strTheMonth.equals("") && strTheLocation.equals("")) {
-            primaryTextDisplay = CommonUtils.savedLocale == "es-US" ? "Eventos en " + CommonUtils.toTitleCase(strTheMonth)
+            primaryTextDisplay = CommonUtils.savedLocale.equals("es-US") ? "Eventos en " + CommonUtils.toTitleCase(strTheMonth)
                     : "Events in " + CommonUtils.toTitleCase(strTheMonth);
 
             addLocationToEvent = true;
         }
+
+        cardText += primaryTextDisplay + "<br/>";
 
         int startItem = eventListStartItem;
         log.debug("This loop starting item will be: " + startItem);
@@ -98,6 +101,7 @@ public class ListEventsResponseUtil {
                             strSpokenEvent += ", in " + CommonUtils.toTitleCase(titleLocation).replace("-", " ");
                         }
 
+                        cardText += eventShortDescription + "<br/>";
                         speechOutputBuilder.append(strSpokenEvent + "<break time=\"1s\"/>");
                         thisIterationList.add(eventShortDescription);
 
@@ -239,7 +243,7 @@ public class ListEventsResponseUtil {
             return input.getResponseBuilder()
                     .withSpeech(speechText)
                     .withReprompt(repromptSpeechText1 + repromptSpeechText2)
-                    .withStandardCard(System.getenv("APP_TITLE"), CommonUtils.prepForSimpleStandardCardText(repromptSpeechText1 + repromptSpeechText2), myStandardCardImage)
+                    .withStandardCard(locData.getAPP_TITLE(), CommonUtils.prepForSimpleStandardCardText(cardText), myStandardCardImage)
                     .build();
 
         }

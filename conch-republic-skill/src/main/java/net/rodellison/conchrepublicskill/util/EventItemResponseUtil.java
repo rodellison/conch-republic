@@ -38,8 +38,9 @@ public class EventItemResponseUtil {
         StringBuilder speechOutputBuilder = new StringBuilder();
 
         String speechText = "";
+        String cardText = "";
         String repromptSpeechText1 = "";
-        String repromptSpeechText2 = locData.getEVENTITEM_HINT();
+        String repromptSpeechText2 = hintString;
 
         String eventImgURL = "NA";
         String eventTextToDisplay;
@@ -47,14 +48,24 @@ public class EventItemResponseUtil {
         List<String> thisIterationList = new ArrayList<>();
 
         primaryTextDisplay = theItem.getEventName().replace("&nbsp;", " ");
+        cardText = primaryTextDisplay + "<br/>";
 
         speechOutputBuilder.append("The ");
         String tempEventName = theItem.getEventName().replace("presents", "<phoneme alphabet='ipa' ph='pɹizɛnts'>presents</phoneme>");
         tempEventName = tempEventName.replace("&nbsp;", " ");
         speechOutputBuilder.append(tempEventName +  "<break time=\"0.5s\"/>");
-        eventTextToDisplay = theItem.getEventDescription().replace("&nbsp;", " ") + "<break time=\"1s\"/>";
+        eventTextToDisplay = theItem.getEventDescription().replace("&nbsp;", " ");
 
         log.debug(eventTextToDisplay);
+
+        //Convert the Event Item text into language appropriate output..
+        if (CommonUtils.savedLocale.equals("es-US"))
+        {
+            TranslateManager myTranslateManager;
+            myTranslateManager = new TranslateManager(TranslateClient.getTranslateClient());
+            eventTextToDisplay = myTranslateManager.TranslateOutput(eventTextToDisplay, "es");
+        }
+
         speechOutputBuilder.append(eventTextToDisplay);
 
         String dateText = "";
@@ -65,9 +76,11 @@ public class EventItemResponseUtil {
         } else {
             dateText += startDate + " - " + endDate ;
         }
+        cardText += dateText + "<br/>";
+        cardText += eventTextToDisplay + "<br/>";
 
         thisIterationList.add(dateText);
-        thisIterationList.add(theItem.getEventDescription().replace("&nbsp;", " "));
+        thisIterationList.add(eventTextToDisplay);
         thisIterationList.add("");
 
         if (!theItem.getEventImgURL().trim().equals(""))
@@ -78,6 +91,10 @@ public class EventItemResponseUtil {
 
         speechText = speechOutputBuilder.toString();
         speechText = CommonUtils.prepForSSMLSpeech(speechText);
+        if (CommonUtils.savedLocale.equals("es-US"))  //a few extra things to clean up if english to spanish text conversion happened..
+        {
+            speechText = CommonUtils.prepForSSMLSpeechForSpanish(speechText);
+        }
         log.debug("Heres whats being said: " + speechText);
 
         if (CommonUtils.supportsApl(input)) {
@@ -137,8 +154,10 @@ public class EventItemResponseUtil {
             return input.getResponseBuilder()
                     .withSpeech(speechText)
                     .withReprompt(repromptSpeechText1 + repromptSpeechText2)
-                    .withStandardCard(System.getenv("APP_TITLE"), CommonUtils.prepForSimpleStandardCardText(repromptSpeechText1 + repromptSpeechText2), myStandardCardImage)
+                    .withStandardCard(locData.getAPP_TITLE(), CommonUtils.prepForSimpleStandardCardText(cardText), myStandardCardImage)
                     .build();
+
+    //                 .withStandardCard(System.getenv("APP_TITLE"), CommonUtils.prepForSimpleStandardCardText(cardText + repromptSpeechText1 + repromptSpeechText2), myStandardCardImage)
 
         }
     }

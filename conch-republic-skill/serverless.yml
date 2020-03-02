@@ -21,6 +21,7 @@ functions:
       INTRO_AUDIO: https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/audio/ConchRepublic.mp3
       DYNAMO_DB_TABLENAME: ${env:DYNAMO_DB_TABLENAME}
       APP_TITLE: "The Conch Republic"
+      APP_TITLE_ES: "La República de la Concha"
       SKILL_ID: ${env:CONCH_REPUBLIC_SKILLID}
     events:
       - alexaSkill: ${env:CONCH_REPUBLIC_SKILLID}

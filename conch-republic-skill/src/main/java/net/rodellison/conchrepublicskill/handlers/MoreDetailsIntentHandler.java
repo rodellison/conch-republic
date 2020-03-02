@@ -122,6 +122,7 @@ public class MoreDetailsIntentHandler implements IntentRequestHandler {
                 primaryTextDisplay,
                 Text1Display,
                 Text2Display,
-                Text3Display);
+                Text3Display,
+                locData.getAPP_TITLE());
     }
 }

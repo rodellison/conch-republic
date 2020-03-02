@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "la republica de la concha",
+      "invocationName": "la república de la concha",
       "intents": [
         {
           "name": "AMAZON.FallbackIntent",
@@ -14,17 +14,20 @@
         {
           "name": "AMAZON.CancelIntent",
           "samples": [
+            "cancela",
+            "terminé",
+            "Estoy terminado",
+            "Estoy terminada",
+            "ya terminé",
             "cancelar",
-            "he terminado",
-            "he terminado",
             "acabé"
           ]
         },
         {
           "name": "AMAZON.HelpIntent",
           "samples": [
-            "ayúdame por favor",
-            "ayúdame",
+            "ayudame por favor",
+            "ayudame",
             "ayuda",
             "necesito ayuda"
           ]
@@ -60,53 +63,52 @@
             }
           ],
           "samples": [
-            "Que esta pasando en {location} en {month}",
-            "Que eventos estan ocurriendo en {month}",
-            "Que eventos estan ocurriendo en {location}",
-            "Que eventos estan en {location} en {month}",
-            "Que eventos son alrededor de {location}",
-            "Que eventos son alrededor de {location} en {month}",
-            "Que eventos estan cerca de {location}",
-            "Que eventos estan cerca de {location} en {month}",
-            "Que eventos estan ocurriendo en {month} alrededor de {location}",
-            "Que eventos estan en {month} en {location}",
-            "Que eventos estan ocurriendo en {month} en {location}",
-            "Que esta pasando en {month}",
-            "Que esta pasando en {location}",
-            "Que esta pasando en {location} en {month}",
-            "Que pasa alrededor {location}",
-            "Que pasa alrededor {location} en {month}",
-            "Que pasa cerca {location}",
-            "Que pasa cerca {location} en {month}",
-            "lo que sucede en {month} alrededor de  {location}",
-            "Que pasa en {month} en {location}",
-            "Que esta pasando en {month}",
-            "Que esta pasando en {location}",
-            "Que esta pasando en {location} en {month}",
-            "Que esta pasando alrededor {location}",
-            "Que esta pasando alrededor {location} en {month}",
-            "lo que sucede cerca de {location}",
-            "lo que sucede cerca de {location} en {month}",
-            "lo que sucede en {month} alrededor de {location}",
+            "qué esta pasando en {location} en {month}",
+            "qué eventos estan ocurriendo en {month}",
+            "qué eventos estan ocurriendo en {location}",
+            "qué eventos estan en {location} en {month}",
+            "qué eventos son alrededor de {location}",
+            "qué eventos son alrededor de {location} en {month}",
+            "qué eventos estan cerca de {location}",
+            "qué eventos estan cerca de {location} en {month}",
+            "qué eventos estan ocurriendo en {month} alrededor de {location}",
+            "qué eventos estan en {month} en {location}",
+            "qué eventos estan ocurriendo en {month} en {location}",
+            "qué esta pasando en {month}",
+            "qué esta pasando en {location}",
+            "qué esta pasando en {location} en {month}",
+            "qué pasa alrededor {location}",
+            "qué pasa alrededor {location} en {month}",
+            "qué pasa cerca {location}",
+            "qué pasa cerca {location} en {month}",
+            "qué pasa en {month} en {location}",
+            "qué esta pasando en {month}",
+            "qué esta pasando en {location}",
+            "qué esta pasando en {location} en {month}",
+            "qué esta pasando alrededor {location}",
+            "qué esta pasando alrededor {location} en {month}",
+            "qué sucede cerca de {location}",
+            "qué sucede cerca de {location} en {month}",
+            "qué sucede en {month} alrededor de {location}",
             "que esta pasando en {month} en {location}",
-            "Que hay en el calendario en {month}",
-            "Que hay en el calendario en {location}",
-            "Que hay en el calendario en {location} en {month}",
-            "Que hay en el calendario alrededor de {location}",
-            "Que hay en el calendario alrededor de {location} en {month}",
-            "Que hay en el calendario cerca de {location}",
-            "Que hay en el calendario cerca de {location} en {month}",
-            "Que hay en el calendario en {month} alrededor de {location}",
-            "Que hay en el calendario en {month} en {location}",
-            "Que hay en el calendario en {month}",
-            "Que hay en el calendario en {location}",
-            "Que hay en el calendario en {location} en {month}",
-            "Que hay en el calendario alrededor de {location}",
-            "Que hay en el calendario alrededor de {location} en {month}",
-            "Que hay en el calendario cerca de {location}",
-            "Que hay en el calendario cerca de {location} en {month}",
-            "lo que esta en el calendario en {month} alrededor de {location}",
-            "lo que esta en el calendario en {month} en {location}",
+            "qué hay en el calendario en {month}",
+            "qué hay en el calendario en {location}",
+            "qué hay en el calendario en {location} en {month}",
+            "qué hay en el calendario alrededor de {location}",
+            "qué hay en el calendario alrededor de {location} en {month}",
+            "qué hay en el calendario cerca de {location}",
+            "qué hay en el calendario cerca de {location} en {month}",
+            "qué hay en el calendario en {month} alrededor de {location}",
+            "qué hay en el calendario en {month} en {location}",
+            "qué hay en el calendario en {month}",
+            "qué hay en el calendario en {location}",
+            "qué hay en el calendario en {location} en {month}",
+            "qué hay en el calendario alrededor de {location}",
+            "qué hay en el calendario alrededor de {location} en {month}",
+            "qué hay en el calendario cerca de {location}",
+            "qué hay en el calendario cerca de {location} en {month}",
+            "qué esta en el calendario en {month} alrededor de {location}",
+            "qué esta en el calendario en {month} en {location}",
             "para eventos en {month}",
             "para eventos en {location}",
             "para eventos en {location} en {month}",
@@ -153,7 +155,7 @@
           "values": [
             {
               "name": {
-                "value": "florida keys"
+                "value": "Florida Keys"
               }
             },
             {
@@ -163,7 +165,7 @@
             },
             {
               "name": {
-                "value": "The lower keys"
+                "value": "The Lower Keys"
               }
             },
             {
@@ -179,71 +181,6 @@
             {
               "name": {
                 "value": "Key Largo"
-              }
-            }
-          ]
-        },
-        {
-          "name": "AMAZON.Month",
-          "values": [
-            {
-              "name": {
-                "value": "diciembre"
-              }
-            },
-            {
-              "name": {
-                "value": "noviembre"
-              }
-            },
-            {
-              "name": {
-                "value": "octubre"
-              }
-            },
-            {
-              "name": {
-                "value": "septiembre"
-              }
-            },
-            {
-              "name": {
-                "value": "agosto"
-              }
-            },
-            {
-              "name": {
-                "value": "julio"
-              }
-            },
-            {
-              "name": {
-                "value": "junio"
-              }
-            },
-            {
-              "name": {
-                "value": "mayo"
-              }
-            },
-            {
-              "name": {
-                "value": "abril"
-              }
-            },
-            {
-              "name": {
-                "value": "marzo"
-              }
-            },
-            {
-              "name": {
-                "value": "febrero"
-              }
-            },
-            {
-              "name": {
-                "value": "enero"
               }
             }
           ]

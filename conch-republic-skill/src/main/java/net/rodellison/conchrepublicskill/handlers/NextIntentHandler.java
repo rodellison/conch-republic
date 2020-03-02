@@ -77,7 +77,8 @@ public class NextIntentHandler implements RequestHandler {
             String Text2Display = "";
             String Text3Display = "";
 
-            return StandardResponseUtil.getResponse(input, layoutToUse, hintString, eventImgURL, speechText, repromptSpeechText1, repromptSpeechText2, primaryTextDisplay, Text1Display, Text2Display, Text3Display);
+            return StandardResponseUtil.getResponse(input, layoutToUse, hintString, eventImgURL, speechText, repromptSpeechText1, repromptSpeechText2,
+                    primaryTextDisplay, Text1Display, Text2Display, Text3Display, locData.getAPP_TITLE());
         }
 
     }

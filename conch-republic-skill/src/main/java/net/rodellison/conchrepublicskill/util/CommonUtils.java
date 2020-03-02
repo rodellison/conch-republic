@@ -29,6 +29,15 @@ public class CommonUtils {
         return returnText;
     }
 
+    public static String prepForSSMLSpeechForSpanish(String text) {
+        String returnText = text.replace("& ", "y ");
+        returnText = text.replace("and ", "y ");
+        returnText = returnText.replace("«", "");  //AWS Amazon Translate may come back with these for quotes in spanish
+        returnText = returnText.replace("»", "");
+
+        return returnText;
+    }
+
 
     public static String prepForSimpleStandardCardText(String text) {
         String returnText = text.replace("<br/>", "\n\n");

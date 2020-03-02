@@ -51,6 +51,7 @@ public class StartOverIntentHandler implements RequestHandler {
                 locData.getLAUNCH_TITLE(),
                 locData.getHOME_DISPLAY_TEXT1(),
                 locData.getHOME_DISPLAY_TEXT2(),
-                locData.getHOME_DISPLAY_TEXT3());
+                locData.getHOME_DISPLAY_TEXT3(),
+                locData.getAPP_TITLE());
     }
 }

@@ -48,6 +48,7 @@ public class FallBackIntentHandler implements IntentRequestHandler {
                 locData.getHELP_PRIMARY_TEXT(),
                 locData.getHELP_DISPLAY_TEXT1(),
                 locData.getHELP_DISPLAY_TEXT2(),
-                "");
+                "",
+                locData.getAPP_TITLE());
     }
 }

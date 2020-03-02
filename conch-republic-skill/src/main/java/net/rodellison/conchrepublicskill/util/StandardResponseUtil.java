@@ -22,7 +22,7 @@ public class StandardResponseUtil {
     private static Image myStandardCardImage;
     private static final Logger log = LogManager.getLogger(StandardResponseUtil.class);
 
-    public static Optional<Response> getResponse(HandlerInput input, String layoutToUse, String hintString, String eventImgURL, String speechText, String repromptSpeechText1, String repromptSpeechText2, String primaryTextDisplay, String text1Display, String text2Display, String text3Display) {
+    public static Optional<Response> getResponse(HandlerInput input, String layoutToUse, String hintString, String eventImgURL, String speechText, String repromptSpeechText1, String repromptSpeechText2, String primaryTextDisplay, String text1Display, String text2Display, String text3Display, String appTitle) {
         if (CommonUtils.supportsApl(input)) {
             //  ViewportProfile viewportProfile = ViewportUtils.getViewportProfile(input.getRequestEnvelope());
 
@@ -90,7 +90,7 @@ public class StandardResponseUtil {
             return input.getResponseBuilder()
                     .withSpeech(speechText)
                     .withReprompt(repromptSpeechText1 + repromptSpeechText2)
-                    .withStandardCard(System.getenv("APP_TITLE"), CommonUtils.prepForSimpleStandardCardText(repromptSpeechText1 + repromptSpeechText2), myStandardCardImage)
+                    .withStandardCard(appTitle, CommonUtils.prepForSimpleStandardCardText(repromptSpeechText1 + repromptSpeechText2), myStandardCardImage)
                     .build();
 
         }

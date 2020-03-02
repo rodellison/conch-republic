@@ -12,6 +12,11 @@
 
     <artifactId>conch-republic-skill</artifactId>
 
+    <properties>
+        <aws-sdk-translate-version>1.11.728</aws-sdk-translate-version>
+    </properties>
+
+
     <dependencies>
         <dependency>
             <groupId>com.amazon.alexa</groupId>
@@ -34,6 +39,12 @@
             <artifactId>aws-java-sdk-dynamodb</artifactId>
             <version>${aws-sdk-dynamodb-version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-translate</artifactId>
+            <version>${aws-sdk-translate-version}</version>
+        </dependency>
+
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
