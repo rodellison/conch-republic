@@ -69,8 +69,8 @@ public class EventItemResponseUtil {
         speechOutputBuilder.append(eventTextToDisplay);
 
         String dateText = "";
-        String startDate = DateUtils.convertNumericDateToFormatted(theItem.getEventStartDate());
-        String endDate = DateUtils.convertNumericDateToFormatted(theItem.getEventEndDate());
+        String startDate = DateUtils.convertNumericDateToFormatted(theItem.getEventStartDate(), CommonUtils.savedLocale);
+        String endDate = DateUtils.convertNumericDateToFormatted(theItem.getEventEndDate(), CommonUtils.savedLocale);
         if (startDate.equals(endDate)) {
             dateText += startDate;
         } else {
@@ -86,6 +86,7 @@ public class EventItemResponseUtil {
         if (!theItem.getEventImgURL().trim().equals(""))
             eventImgURL = domainURL + theItem.getEventImgURL();
 
+        speechOutputBuilder.append("<break time=\"0.5s\"/>");
         speechOutputBuilder.append(repromptSpeechText1);
         speechOutputBuilder.append(repromptSpeechText2);
 
@@ -112,9 +113,9 @@ public class EventItemResponseUtil {
                 log.info("EventsResponseUtil called, reading documentNode and dataSources values");
                 Map<String, Object> document = mapper.readValue(documentNode.toString(), ConchRepublicMapType);
                 JsonNode dataSources = mapper.readTree(dataSourcesNode.toString());
-                ObjectNode ConchRepublicTemplateProperties = (ObjectNode) dataSources.get("ConchRepublicTemplateData").get("properties");
+                ObjectNode ConchRepublicTemplateProperties = (ObjectNode) dataSources.get("TemplateData").get("properties");
 
-                log.info("EventsResponseUtil called, setting properties");
+                log.info("EventsResponseUtil called, setting props");
                 ArrayNode theArray = mapper.valueToTree(thisIterationList);
                 ConchRepublicTemplateProperties.putArray("EventText").addAll(theArray);
 

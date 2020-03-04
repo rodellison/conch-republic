@@ -158,12 +158,6 @@ class EventsListShould {
                     assertEquals(0, theList.size(), "Test 1 to validate empty list 0 items returned when no events for a month");
                 },
                 () -> {
-                    final String strMM = "02";
-                    final List<EventItem> theList = testEventsList.getListOfActiveEventsInMonth(strMM);
-                    assertNotNull(theList);
-                    assertEquals(2, theList.size(), "Test 2 to validate active Events in a specific month are returned (= 2)");
-                },
-                () -> {
                     final String strMM = "03";
                     final List<EventItem> theList = testEventsList.getListOfActiveEventsInMonth(strMM);
                     assertNotNull(theList);

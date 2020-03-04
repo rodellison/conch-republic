@@ -122,23 +122,4 @@ public class EventsList implements Iterable<EventItem> {
 
     }
 
-//    private Boolean activeInMonthAndLocationRequested(String StartDate, String EndDate, String monthRequested, KeysLocations thisEventLocation, KeysLocations locationBeingSearched)
-//    {
-//        //strYYYYMMDD contains today..
-//        int todaysMM = Integer.parseInt(strYYYYMMDD.substring(4,6));
-//        int searchYYYY = Integer.parseInt(strYYYYMMDD.substring(0,4));
-//
-//        if (Integer.parseInt(monthRequested) < todaysMM)
-//            searchYYYY +=1;
-//
-//        String searchStart = searchYYYY + monthRequested + "01";
-//        String searchEnd = searchYYYY + monthRequested + "31";
-//        if (Integer.valueOf(EndDate) >= Integer.valueOf(searchStart) && Integer.valueOf(StartDate) <= Integer.valueOf(searchEnd))
-//            if (thisEventLocation.equals(locationBeingSearched) || thisEventLocation.equals(KeysLocations.ALL_FLORIDA_KEYS))
-//                return true;
-//            else
-//                return false;
-//        else
-//            return false;
-//    }
 }

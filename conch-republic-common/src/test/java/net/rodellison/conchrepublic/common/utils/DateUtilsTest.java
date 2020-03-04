@@ -46,24 +46,24 @@ class DateUtilsTest {
     void convertNumericDateToFormatted() {
 
         String testDate = "20201231";
-        String convertedDate = DateUtils.convertNumericDateToFormatted(testDate);
+        String convertedDate = DateUtils.convertNumericDateToFormatted(testDate, "en-US");
         assertEquals("12/31/2020", convertedDate);
 
         testDate = "20200131";
-        convertedDate = DateUtils.convertNumericDateToFormatted(testDate);
+        convertedDate = DateUtils.convertNumericDateToFormatted(testDate, "en-US");
         assertEquals("01/31/2020", convertedDate);
 
         testDate = "20200229";
-        convertedDate = DateUtils.convertNumericDateToFormatted(testDate);
+        convertedDate = DateUtils.convertNumericDateToFormatted(testDate, "en-US");
         assertEquals("02/29/2020", convertedDate);
 
         testDate = "20200329";
-        convertedDate = DateUtils.convertNumericDateToFormatted(testDate);
-        assertEquals("03/29/2020", convertedDate);
+        convertedDate = DateUtils.convertNumericDateToFormatted(testDate, "es-US");  //test spanish
+        assertEquals("29/03/2020", convertedDate);
 
         testDate = "20201031";
-        convertedDate = DateUtils.convertNumericDateToFormatted(testDate);
-        assertEquals("10/31/2020", convertedDate);
+        convertedDate = DateUtils.convertNumericDateToFormatted(testDate, "es-US"); //test spanish
+        assertEquals("31/10/2020", convertedDate);
 
     }
 

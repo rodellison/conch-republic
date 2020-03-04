@@ -41,10 +41,10 @@ public class StandardResponseUtil {
                 log.info("LaunchRequestHandler called, reading dataSources node");
                 JsonNode dataSources = mapper.readTree(dataSourcesNode.toString());
 
-                log.info("LaunchRequestHandler called, getting properties node");
-                ObjectNode ConchRepublicTemplateProperties = (ObjectNode) dataSources.get("ConchRepublicTemplateData").get("properties");
+                log.info("LaunchRequestHandler called, getting props node");
+                ObjectNode ConchRepublicTemplateProperties = (ObjectNode) dataSources.get("TemplateData").get("properties");
 
-                log.info("LaunchRequestHandler called, setting properties");
+                log.info("LaunchRequestHandler called, setting props");
 
                 ConchRepublicTemplateProperties.put("LayoutToUse", layoutToUse);
                 ConchRepublicTemplateProperties.put("HeadingText", primaryTextDisplay);

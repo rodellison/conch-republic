@@ -94,7 +94,7 @@ public class FullyBakedAskIntentHandler implements IntentRequestHandler {
             });
 
             //need to cap the max size of EventItems we're going to hang on to, so as to not blow out the session attributes limit
-            int maxEventsToKeep = 30;
+            int maxEventsToKeep = 27;
             if (myFilteredEventList.size() > maxEventsToKeep)
                 myFilteredEventList = myFilteredEventList.subList(0, maxEventsToKeep);
 

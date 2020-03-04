@@ -82,14 +82,14 @@ public class ListEventsResponseUtil {
                 try {
                     EventItem thisItem = eventItemsList.get(startItem++);
                     if (thisItem != null) {
-                        String startDate = DateUtils.convertNumericDateToFormatted(thisItem.getEventStartDate());
-                        String endDate = DateUtils.convertNumericDateToFormatted(thisItem.getEventEndDate());
+                        String startDate = DateUtils.convertNumericDateToFormatted(thisItem.getEventStartDate(), CommonUtils.savedLocale);
+                        String endDate = DateUtils.convertNumericDateToFormatted(thisItem.getEventEndDate(), CommonUtils.savedLocale);
                         if (startDate.equals(endDate)) {
                             eventShortDescription += startDate + ": ";
-                            speechOutputBuilder.append("On " + startDate + ", the ");
+                            speechOutputBuilder.append(CommonUtils.savedLocale.equals("es-US") ? "El " + startDate + ", la " : "On " + startDate + ", the ");
                         } else {
                             eventShortDescription += startDate + " - " + endDate + ": ";
-                            speechOutputBuilder.append("From " + startDate + " til " + endDate + ", the ");
+                            speechOutputBuilder.append(CommonUtils.savedLocale.equals("es-US") ? "Desde el " + startDate + " hasta el " + endDate + ", la " : "From " + startDate + " til " + endDate + ", the ");
                         }
 
                         eventShortDescription += thisItem.getEventName().replace("&nbsp;", " ");
@@ -177,6 +177,8 @@ public class ListEventsResponseUtil {
         //Check if we're at the end of the events for this search
         if (startItem >= eventItemsList.size())
             speechOutputBuilder.append(locData.getEVENTLIST_DISPLAY_TEXT1_NOMORE() + "<break time=\"1s\"/>");
+        else
+            speechOutputBuilder.append("<break time=\"0.5s\"/>");
 
         speechOutputBuilder.append(repromptSpeechText1);
         speechOutputBuilder.append(repromptSpeechText2);
@@ -199,9 +201,9 @@ public class ListEventsResponseUtil {
                 log.info("EventsResponseUtil called, reading documentNode and dataSources values");
                 Map<String, Object> document = mapper.readValue(documentNode.toString(), ConchRepublicMapType);
                 JsonNode dataSources = mapper.readTree(dataSourcesNode.toString());
-                ObjectNode ConchRepublicTemplateProperties = (ObjectNode) dataSources.get("ConchRepublicTemplateData").get("properties");
+                ObjectNode ConchRepublicTemplateProperties = (ObjectNode) dataSources.get("TemplateData").get("properties");
 
-                log.info("EventsResponseUtil called, setting properties");
+                log.info("EventsResponseUtil called, setting props");
                 if (thisIterationList.size() > 0) {
                     ArrayNode theArray = mapper.valueToTree(thisIterationList);
                     ConchRepublicTemplateProperties.putArray("EventText").addAll(theArray);

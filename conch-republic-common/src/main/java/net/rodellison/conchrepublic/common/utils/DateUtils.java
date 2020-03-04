@@ -150,7 +150,6 @@ public class DateUtils {
         inDate = inDate.replace("Feb ", "February ");
         inDate = inDate.replace("Mar ", "March ");
         inDate = inDate.replace("Apr ", "April ");
-        //      inDate = inDate.replace("May ", "May ");
         inDate = inDate.replace("Jun ", "June ");
         inDate = inDate.replace("Jul ", "July ");
         inDate = inDate.replace("Aug ", "August ");
@@ -161,12 +160,17 @@ public class DateUtils {
         return inDate;
     }
 
-    public static String convertNumericDateToFormatted(String numericDate)
+    public static String convertNumericDateToFormatted(String numericDate, String languageLocale)
     {
         LocalDate localDate = LocalDate.of(Integer.valueOf(numericDate.substring(0,4)),
                 Integer.valueOf(numericDate.substring(4,6)),
                 Integer.valueOf(numericDate.substring(6)));
-         return String.format("%02d", localDate.getMonthValue()) + "/" + String.format("%02d", localDate.getDayOfMonth()) + "/" + localDate.getYear();
+
+        if (languageLocale.contains("es"))  //if Spanish, reverse month and year
+            return String.format("%02d", localDate.getDayOfMonth()) + "/" + String.format("%02d", localDate.getMonthValue()) + "/" + localDate.getYear();
+        else
+            return String.format("%02d", localDate.getMonthValue()) + "/" + String.format("%02d", localDate.getDayOfMonth()) + "/" + localDate.getYear();
+
     }
 
 }

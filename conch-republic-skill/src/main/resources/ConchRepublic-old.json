@@ -182,7 +182,7 @@
             "items": [
               {
                 "type": "Image",
-                "source": "${payload.TemplateData.properties.HomeImageUrlXSMALL}",
+                "source": "${payload.ConchRepublicTemplateData.properties.HomeImageUrlXSMALL}",
                 "scale": "best-fill",
                 "width": "100vw",
                 "height": "100vh",
@@ -196,7 +196,7 @@
                 "paddingLeft": "10vw",
                 "paddingTop": "20vw",
                 "textAlign": "center",
-                "text": "${payload.TemplateData.properties.HeadingText}",
+                "text": "${payload.ConchRepublicTemplateData.properties.HeadingText}",
                 "fontWeight": "normal"
               },
               {
@@ -214,7 +214,7 @@
                     "items": [
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[0]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[0]}",
                         "paddingTop": 40,
                         "style": "textStyleSecondary2",
                         "width": "90vw",
@@ -222,7 +222,7 @@
                       },
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[1]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[1]}",
                         "paddingTop": 20,
                         "style": "textStyleSecondary2",
                         "width": "90vw",
@@ -230,7 +230,7 @@
                       },
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[2]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[2]}",
                         "paddingTop": 20,
                         "style": "textStyleSecondary2",
                         "width": "90vw",
@@ -241,7 +241,7 @@
                 ]
               },
               {
-                "when": "${payload.TemplateData.properties.Locale == 'es-US'}",
+                "when": "${payload.ConchRepublicTemplateData.properties.Locale == 'es-US'}",
                 "type": "Text",
                 "text": "Foto de Alfred Schrock",
                 "paddingTop": 25,
@@ -250,7 +250,7 @@
                 "textAlign": "center"
               },
               {
-                "when": "${payload.TemplateData.properties.Locale != 'es-US'}",
+                "when": "${payload.ConchRepublicTemplateData.properties.Locale != 'es-US'}",
                 "type": "Text",
                 "text": "Photo by Alfred Schrock",
                 "paddingTop": 25,
@@ -268,7 +268,7 @@
             "items": [
               {
                 "type": "Image",
-                "source": "${payload.TemplateData.properties.HomeImageUrlXLARGE}",
+                "source": "${payload.ConchRepublicTemplateData.properties.HomeImageUrlXLARGE}",
                 "scale": "best-fill",
                 "width": "100vw",
                 "height": "100vh",
@@ -277,11 +277,11 @@
               },
               {
                 "type": "AlexaHeader",
-                "headerAttributionImage": "${payload.TemplateData.properties.LogoUrl}"
+                "headerAttributionImage": "${payload.ConchRepublicTemplateData.properties.LogoUrl}"
               },
               {
                 "type": "Text",
-                "text": "<b>${payload.TemplateData.properties.HeadingText}</b>",
+                "text": "<b>${payload.ConchRepublicTemplateData.properties.HeadingText}</b>",
                 "style": "textStyleBody",
                 "width": "100vw",
                 "textAlign": "center"
@@ -302,7 +302,7 @@
                     "items": [
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[0]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[0]}",
                         "paddingTop": 40,
                         "style": "textStylePrimary2",
                         "width": "90vw",
@@ -310,7 +310,7 @@
                       },
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[1]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[1]}",
                         "paddingTop": 40,
                         "style": "textStylePrimary2",
                         "width": "90vw",
@@ -318,7 +318,7 @@
                       },
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[2]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[2]}",
                         "paddingTop": 40,
                         "style": "textStylePrimary2",
                         "width": "90vw",
@@ -329,7 +329,7 @@
                 ]
               },
               {
-                "when": "${payload.TemplateData.properties.Locale == 'es-US'}",
+                "when": "${payload.ConchRepublicTemplateData.properties.Locale == 'es-US'}",
                 "type": "Text",
                 "text": "Foto de Alfred Schrock",
                 "style": "textStyleSecondaryHint",
@@ -338,7 +338,7 @@
                 "textAlign": "center"
               },
               {
-                "when": "${payload.TemplateData.properties.Locale != 'es-US'}",
+                "when": "${payload.ConchRepublicTemplateData.properties.Locale != 'es-US'}",
                 "type": "Text",
                 "text": "Photo by Alfred Schrock",
                 "style": "textStyleSecondaryHint",
@@ -363,7 +363,7 @@
                 "type": "Image",
                 "width": "100vw",
                 "height": "100vh",
-                "source": "${payload.TemplateData.properties.EventsImageUrlXSMALL}",
+                "source": "${payload.ConchRepublicTemplateData.properties.EventsImageUrlXSMALL}",
                 "scale": "best-fill",
                 "align": "center",
                 "overlayColor": "rgba(0, 0, 0, 0.3)",
@@ -385,14 +385,14 @@
                     "items": [
                       {
                         "type": "Text",
-                        "text": "<b>${payload.TemplateData.properties.HeadingText}</b>",
+                        "text": "<b>${payload.ConchRepublicTemplateData.properties.HeadingText}</b>",
                         "style": "textStylePrimary",
                         "width": "80vw",
                         "textAlign": "center"
                       },
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[0]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[0]}",
                         "paddingTop": 40,
                         "style": "textStyleSecondary2",
                         "width": "80vw",
@@ -400,7 +400,7 @@
                       },
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[1]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[1]}",
                         "paddingTop": 20,
                         "style": "textStyleSecondary2",
                         "width": "80vw",
@@ -408,14 +408,14 @@
                       },
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[2]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[2]}",
                         "paddingTop": 20,
                         "style": "textStyleSecondary2",
                         "width": "80vw",
                         "textAlign": "center"
                       },
                       {
-                        "when": "${payload.TemplateData.properties.Locale == 'es-US'}",
+                        "when": "${payload.ConchRepublicTemplateData.properties.Locale == 'es-US'}",
                         "type": "Text",
                         "text": "Foto de Bruce Warrington",
                         "style": "textStyleSecondaryHint",
@@ -424,7 +424,7 @@
                         "textAlign": "center"
                       },
                       {
-                        "when": "${payload.TemplateData.properties.Locale != 'es-US'}",
+                        "when": "${payload.ConchRepublicTemplateData.properties.Locale != 'es-US'}",
                         "type": "Text",
                         "text": "Photo by Bruce Warrington",
                         "style": "textStyleSecondaryHint",
@@ -445,7 +445,7 @@
             "items": [
               {
                 "type": "Image",
-                "source": "${payload.TemplateData.properties.EventsImageUrlXLARGE}",
+                "source": "${payload.ConchRepublicTemplateData.properties.EventsImageUrlXLARGE}",
                 "scale": "best-fill",
                 "width": "100vw",
                 "height": "100vh",
@@ -454,7 +454,7 @@
               },
               {
                 "type": "AlexaHeader",
-                "headerAttributionImage": "${payload.TemplateData.properties.LogoUrl}"
+                "headerAttributionImage": "${payload.ConchRepublicTemplateData.properties.LogoUrl}"
               },
               {
                 "type": "Container",
@@ -471,24 +471,24 @@
                     "items": [
                       {
                         "type": "Text",
-                        "text": "<b>${payload.TemplateData.properties.HeadingText}</b>",
+                        "text": "<b>${payload.ConchRepublicTemplateData.properties.HeadingText}</b>",
                         "style": "textStyleBody"
                       },
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[0]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[0]}",
                         "paddingTop": 20,
                         "style": "textStylePrimary2"
                       },
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[1]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[1]}",
                         "paddingTop": 20,
                         "style": "textStylePrimary2"
                       },
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[2]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[2]}",
                         "paddingTop": 20,
                         "style": "textStylePrimary2"
                       }
@@ -497,7 +497,7 @@
                 ]
               },
               {
-                "when": "${payload.TemplateData.properties.Locale == 'es-US'}",
+                "when": "${payload.ConchRepublicTemplateData.properties.Locale == 'es-US'}",
                 "type": "Text",
                 "text": "Foto de Bruce Warrington",
                 "style": "textStyleSecondaryHint",
@@ -506,7 +506,7 @@
                 "textAlign": "left"
               },
               {
-                "when": "${payload.TemplateData.properties.Locale != 'es-US'}",
+                "when": "${payload.ConchRepublicTemplateData.properties.Locale != 'es-US'}",
                 "type": "Text",
                 "text": "Photo by Bruce Warrington",
                 "style": "textStyleSecondaryHint",
@@ -529,7 +529,7 @@
             "items": [
               {
                 "type": "Image",
-                "source": "${payload.TemplateData.properties.EventItemImageUrlXSMALL}",
+                "source": "${payload.ConchRepublicTemplateData.properties.EventItemImageUrlXSMALL}",
                 "scale": "best-fill",
                 "width": "100vw",
                 "height": "100vh",
@@ -552,7 +552,7 @@
                     "items": [
                       {
                         "type": "Text",
-                        "text": "<b>${payload.TemplateData.properties.HeadingText}</b>",
+                        "text": "<b>${payload.ConchRepublicTemplateData.properties.HeadingText}</b>",
                         "style": "textStyleBodyMid",
                         "paddingTop": 100,
                         "width": "70vw",
@@ -560,14 +560,13 @@
                       },
                       {
                         "type": "Text",
-                        "text": "<b>${payload.TemplateData.properties.EventText[0]}</b>",
+                        "text": "<b>${payload.ConchRepublicTemplateData.properties.EventText[0]}</b>",
                         "style": "textStyleBodyMid",
                         "paddingTop": 100,
                         "width": "100vw",
                         "textAlign": "center"
-                      },
-                      {
-                        "when": "${payload.TemplateData.properties.Locale == 'es-US'}",
+                      },                     {
+                        "when": "${payload.ConchRepublicTemplateData.properties.Locale == 'es-US'}",
                         "type": "Text",
                         "text": "Foto de Keith Luke",
                         "style": "textStyleSecondaryHint",
@@ -576,7 +575,7 @@
                         "textAlign": "center"
                       },
                       {
-                        "when": "${payload.TemplateData.properties.Locale != 'es-US'}",
+                        "when": "${payload.ConchRepublicTemplateData.properties.Locale != 'es-US'}",
                         "type": "Text",
                         "text": "Photo by Keith Luke",
                         "style": "textStyleSecondaryHint",
@@ -597,7 +596,7 @@
             "items": [
               {
                 "type": "Image",
-                "source": "${payload.TemplateData.properties.EventItemImageUrlXLARGE}",
+                "source": "${payload.ConchRepublicTemplateData.properties.EventItemImageUrlXLARGE}",
                 "scale": "best-fill",
                 "width": "100vw",
                 "height": "100vh",
@@ -615,18 +614,18 @@
                     "type": "Container",
                     "items": [
                       {
-                        "when": "${payload.TemplateData.properties.EventImageUrl != 'NA'}",
+                        "when": "${payload.ConchRepublicTemplateData.properties.EventImageUrl != 'NA'}",
                         "type": "Image",
-                        "source": "${payload.TemplateData.properties.EventImageUrl}",
+                        "source": "${payload.ConchRepublicTemplateData.properties.EventImageUrl}",
                         "width": 340,
                         "height": 360,
                         "scale": "best-fit",
                         "align": "top"
                       },
                       {
-                        "when": "${payload.TemplateData.properties.EventImageUrl == 'NA'}",
+                        "when": "${payload.ConchRepublicTemplateData.properties.EventImageUrl == 'NA'}",
                         "type": "Image",
-                        "source": "${payload.TemplateData.properties.GeneralSquareImageUrl}",
+                        "source": "${payload.ConchRepublicTemplateData.properties.GeneralSquareImageUrl}",
                         "width": 340,
                         "height": 360,
                         "scale": "best-fit",
@@ -643,18 +642,18 @@
                     "items": [
                       {
                         "type": "Text",
-                        "text": "<b>${payload.TemplateData.properties.HeadingText}</b>",
+                        "text": "<b>${payload.ConchRepublicTemplateData.properties.HeadingText}</b>",
                         "style": "textStylePrimary"
                       },
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[0]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[0]}",
                         "paddingTop": 20,
                         "style": "textStyleBodyMid"
                       },
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[1]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[1]}",
                         "paddingTop": 20,
                         "style": "textStyleBodyMid"
                       }
@@ -663,7 +662,7 @@
                 ]
               },
               {
-                "when": "${payload.TemplateData.properties.Locale == 'es-US'}",
+                "when": "${payload.ConchRepublicTemplateData.properties.Locale == 'es-US'}",
                 "type": "Text",
                 "text": "Foto de Keith Luke",
                 "style": "textStyleSecondaryHint",
@@ -671,7 +670,7 @@
                 "textAlign": "left"
               },
               {
-                "when": "${payload.TemplateData.properties.Locale != 'es-US'}",
+                "when": "${payload.ConchRepublicTemplateData.properties.Locale != 'es-US'}",
                 "type": "Text",
                 "text": "Photo by Keith Luke",
                 "style": "textStyleSecondaryHint",
@@ -693,7 +692,7 @@
             "items": [
               {
                 "type": "Image",
-                "source": "${payload.TemplateData.properties.HelpImageUrlXSMALL}",
+                "source": "${payload.ConchRepublicTemplateData.properties.HelpImageUrlXSMALL}",
                 "scale": "best-fill",
                 "width": "100vw",
                 "height": "100vh",
@@ -714,7 +713,7 @@
                     "items": [
                       {
                         "type": "Text",
-                        "text": "<b>${payload.TemplateData.properties.HeadingText}</b>",
+                        "text": "<b>${payload.ConchRepublicTemplateData.properties.HeadingText}</b>",
                         "style": "textStylePrimary",
                         "paddingTop": 100,
                         "width": "80vw",
@@ -722,7 +721,7 @@
                       },
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[0]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[0]}",
                         "paddingTop": 40,
                         "style": "textStyleSecondary2",
                         "width": "80vw",
@@ -730,7 +729,7 @@
                       },
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[1]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[1]}",
                         "paddingTop": 20,
                         "style": "textStyleSecondary2",
                         "width": "80vw",
@@ -738,14 +737,14 @@
                       },
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[2]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[2]}",
                         "paddingTop": 20,
                         "style": "textStyleSecondary2",
                         "width": "80vw",
                         "textAlign": "center"
                       },
                       {
-                        "when": "${payload.TemplateData.properties.Locale == 'es-US'}",
+                        "when": "${payload.ConchRepublicTemplateData.properties.Locale == 'es-US'}",
                         "type": "Text",
                         "text": "Foto de Charles Jackson",
                         "style": "textStyleSecondaryHint",
@@ -754,7 +753,7 @@
                         "textAlign": "center"
                       },
                       {
-                        "when": "${payload.TemplateData.properties.Locale != 'es-US'}",
+                        "when": "${payload.ConchRepublicTemplateData.properties.Locale != 'es-US'}",
                         "type": "Text",
                         "text": "Photo by Charles Jackson",
                         "style": "textStyleSecondaryHint",
@@ -775,7 +774,7 @@
             "items": [
               {
                 "type": "Image",
-                "source": "${payload.TemplateData.properties.HelpImageUrlXLARGE}",
+                "source": "${payload.ConchRepublicTemplateData.properties.HelpImageUrlXLARGE}",
                 "scale": "best-fill",
                 "width": "100vw",
                 "height": "100vh",
@@ -784,7 +783,7 @@
               },
               {
                 "type": "AlexaHeader",
-                "headerAttributionImage": "${payload.TemplateData.properties.LogoUrl}"
+                "headerAttributionImage": "${payload.ConchRepublicTemplateData.properties.LogoUrl}"
               },
               {
                 "type": "Container",
@@ -801,24 +800,24 @@
                     "items": [
                       {
                         "type": "Text",
-                        "text": "<b>${payload.TemplateData.properties.HeadingText}</b>",
+                        "text": "<b>${payload.ConchRepublicTemplateData.properties.HeadingText}</b>",
                         "style": "textStyleBody"
                       },
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[0]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[0]}",
                         "paddingTop": 20,
                         "style": "textStylePrimary2"
                       },
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[1]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[1]}",
                         "paddingTop": 20,
                         "style": "textStylePrimary2"
                       },
                       {
                         "type": "Text",
-                        "text": "${payload.TemplateData.properties.EventText[2]}",
+                        "text": "${payload.ConchRepublicTemplateData.properties.EventText[2]}",
                         "paddingTop": 20,
                         "style": "textStylePrimary2"
                       }
@@ -834,12 +833,12 @@
                 "items": [
                   {
                     "type": "AlexaFooter",
-                    "footerHint": "${payload.TemplateData.properties.HintString}"
+                    "footerHint": "${payload.ConchRepublicTemplateData.properties.HintString}"
                   }
                 ]
               },
               {
-                "when": "${payload.TemplateData.properties.Locale == 'es-US'}",
+                "when": "${payload.ConchRepublicTemplateData.properties.Locale == 'es-US'}",
                 "type": "Text",
                 "text": "Foto de Charles Jackson",
                 "style": "textStyleSecondaryHint",
@@ -848,7 +847,7 @@
                 "textAlign": "left"
               },
               {
-                "when": "${payload.TemplateData.properties.Locale != 'es-US'}",
+                "when": "${payload.ConchRepublicTemplateData.properties.Locale != 'es-US'}",
                 "type": "Text",
                 "text": "Photo by Charles Jackson",
                 "style": "textStyleSecondaryHint",
@@ -867,19 +866,19 @@
       ],
       "items": [
         {
-          "when": "${payload.TemplateData.properties.LayoutToUse == 'Home'}",
+          "when": "${payload.ConchRepublicTemplateData.properties.LayoutToUse == 'Home'}",
           "type": "Home"
         },
         {
-          "when": "${payload.TemplateData.properties.LayoutToUse == 'Events'}",
+          "when": "${payload.ConchRepublicTemplateData.properties.LayoutToUse == 'Events'}",
           "type": "Events"
         },
         {
-          "when": "${payload.TemplateData.properties.LayoutToUse == 'EventItem'}",
+          "when": "${payload.ConchRepublicTemplateData.properties.LayoutToUse == 'EventItem'}",
           "type": "EventItem"
         },
         {
-          "when": "${payload.TemplateData.properties.LayoutToUse == 'Help'}",
+          "when": "${payload.ConchRepublicTemplateData.properties.LayoutToUse == 'Help'}",
           "type": "Help"
         }
       ]
@@ -889,22 +888,22 @@
     "TemplateData": {
       "type": "object",
       "objectId": "ConchRepublicSample",
-      "properties": {
+      "props": {
         "Title": "The Conch Republic",
         "LayoutToUse": "Home",
         "Locale": "en-US",
         "HeadingText": "Welcome to the Conch Republic",
         "HintString": "What is happening in Key West in May?",
-        "HomeImageUrlXSMALL": "http://bit.ly/3cCMFbA",
-        "HomeImageUrlXLARGE": "http://bit.ly/39leByz",
-        "EventItemImageUrlXSMALL": "http://bit.ly/2vDM5cG",
-        "EventItemImageUrlXLARGE": "http://bit.ly/2TnpcDH",
-        "HelpImageUrlXSMALL": "http://bit.ly/2PIXnDg",
-        "HelpImageUrlXLARGE": "http://bit.ly/39jkf48",
-        "EventsImageUrlXSMALL": "http://bit.ly/3amPI5E",
-        "EventsImageUrlXLARGE": "http://bit.ly/3apRnaw",
-        "LogoUrl": "http://bit.ly/39iYTEc",
-        "GeneralSquareImageUrl": "http://bit.ly/2uPxAlM",
+        "HomeImageUrlXSMALL": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/Keys4-X_SMALL.jpg",
+        "HomeImageUrlXLARGE": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/Keys4-X_LARGE.jpg",
+        "EventItemImageUrlXSMALL": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/Keys3-X_SMALL.jpg",
+        "EventItemImageUrlXLARGE": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/Keys3-X_LARGE.jpg",
+        "HelpImageUrlXSMALL": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/Keys2-X_SMALL.jpg",
+        "HelpImageUrlXLARGE": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/Keys2-X_LARGE.jpg",
+        "EventsImageUrlXSMALL": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/Keys1-X_SMALL.jpg",
+        "EventsImageUrlXLARGE": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/Keys1-X_LARGE.jpg",
+        "LogoUrl": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/ConchRepublicSquare108.jpg",
+        "GeneralSquareImageUrl": "https://d3d9reei5h7cvh.cloudfront.net/ConchRepublic/images/ConchRepublicSquare512.jpg",
         "EventText": [
           " ",
           " ",

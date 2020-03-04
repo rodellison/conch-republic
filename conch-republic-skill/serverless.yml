@@ -3,7 +3,7 @@ service: conch-republic-skill # NOTE: update this with your service name
 
 provider:
   name: aws
-  runtime: java8
+  runtime: java11
 
 # you can add packaging information here
 package:
