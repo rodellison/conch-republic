@@ -27,7 +27,7 @@
         <org.mockito-version>2.28.2</org.mockito-version>
         <google.gson.version>2.8.5</google.gson.version>
         <io.vertx.version>3.8.2</io.vertx.version>
-        <httpcomponents-version>4.5.10</httpcomponents-version>
+<!--        <httpcomponents-version>4.5.10</httpcomponents-version>-->
         <jsoup-version>1.12.1</jsoup-version>
         <ask-sdk-version>2.26.0</ask-sdk-version>
         <aws-lambda.version>1.2.0</aws-lambda.version>
@@ -47,13 +47,13 @@
                     <artifactId>log4j-core</artifactId>
                     <version>[2.15.0,)</version>
                 </dependency>
-                -->
+
                 <dependency>
                     <groupId>org.apache.httpcomponents</groupId>
                     <artifactId>httpclient</artifactId>
                     <version>${httpcomponents-version}</version>
                 </dependency>
-
+        -->
 
                 <!--        Using JUnit5-->
         <dependency>
