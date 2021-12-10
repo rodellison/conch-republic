@@ -4,6 +4,14 @@ service: conch-republic-skill # NOTE: update this with your service name
 provider:
   name: aws
   runtime: java11
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:GetRecords
+      Resource: arn:aws:dynamodb:us-east-1:${env:AWS_ACCOUNT}:table/FloridaKeys*
 
 # you can add packaging information here
 package:

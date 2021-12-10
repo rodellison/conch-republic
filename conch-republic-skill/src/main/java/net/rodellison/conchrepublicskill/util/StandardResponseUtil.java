@@ -20,7 +20,7 @@ import org.apache.logging.log4j.Logger;
 public class StandardResponseUtil {
 
     private static Image myStandardCardImage;
-    private static final Logger log = LogManager.getLogger(StandardResponseUtil.class);
+    //private static final Logger log = LogManager.getLogger(StandardResponseUtil.class);
 
     public static Optional<Response> getResponse(HandlerInput input, String layoutToUse, String hintString, String eventImgURL, String speechText, String repromptSpeechText1, String repromptSpeechText2, String primaryTextDisplay, String text1Display, String text2Display, String text3Display, String appTitle) {
         if (CommonUtils.supportsApl(input)) {
@@ -35,16 +35,16 @@ public class StandardResponseUtil {
                 TypeReference<HashMap<String, Object>> ConchRepublicMapType = new TypeReference<HashMap<String, Object>>() {
                 };
 
-                log.info("LaunchRequestHandler called, reading documentNode value");
+                System.out.println("INFO: LaunchRequestHandler called, reading documentNode value");
                 Map<String, Object> document = mapper.readValue(documentNode.toString(), ConchRepublicMapType);
 
-                log.info("LaunchRequestHandler called, reading dataSources node");
+                System.out.println("INFO: LaunchRequestHandler called, reading dataSources node");
                 JsonNode dataSources = mapper.readTree(dataSourcesNode.toString());
 
-                log.info("LaunchRequestHandler called, getting props node");
+                System.out.println("INFO: LaunchRequestHandler called, getting props node");
                 ObjectNode ConchRepublicTemplateProperties = (ObjectNode) dataSources.get("TemplateData").get("properties");
 
-                log.info("LaunchRequestHandler called, setting props");
+                System.out.println("INFO: LaunchRequestHandler called, setting props");
 
                 ConchRepublicTemplateProperties.put("LayoutToUse", layoutToUse);
                 ConchRepublicTemplateProperties.put("HeadingText", primaryTextDisplay);
@@ -59,7 +59,7 @@ public class StandardResponseUtil {
                 ArrayNode theArray = mapper.valueToTree(textEvents);
                 ConchRepublicTemplateProperties.putArray("EventText").addAll(theArray);
 
-                log.info("LaunchRequestHandler called, building Render Document");
+                System.out.println("INFO: LaunchRequestHandler called, building Render Document");
 
                 RenderDocumentDirective documentDirective = RenderDocumentDirective.builder()
                         .withDocument(document)
@@ -67,9 +67,9 @@ public class StandardResponseUtil {
                         }))
                         .build();
 
-                log.debug(documentDirective);
+                System.out.println("DEBUG: " + documentDirective);
 
-                log.info("LaunchRequestHandler called, calling responseBuilder");
+                System.out.println("INFO: LaunchRequestHandler called, calling responseBuilder");
 
                 return input.getResponseBuilder()
                         .withSpeech(speechText)

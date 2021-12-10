@@ -19,7 +19,7 @@ import static com.amazon.ask.request.Predicates.intentName;
 
 public class HelpIntentHandler implements IntentRequestHandler {
 
-    private static final Logger log = LogManager.getLogger(HelpIntentHandler.class);
+    //private static final Logger log = LogManager.getLogger(HelpIntentHandler.class);
 
     @Override
     public boolean canHandle(HandlerInput handlerInput, IntentRequest intentRequest) {
@@ -29,14 +29,14 @@ public class HelpIntentHandler implements IntentRequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput handlerInput, IntentRequest intentRequest) {
-        log.warn("HelpIntentHandler called");
+        System.out.println("WARN: HelpIntentHandler called");
 
         LanguageLocalization locData;
         String incomingLocale = intentRequest.getLocale();
-        log.info("Incoming intent locale: " + incomingLocale);
+        System.out.println("INFO: Incoming intent locale: " + incomingLocale);
         locData = CommonUtils.getLocalizationStrings(incomingLocale);
         if (locData == null) {
-            log.error("Failed in getting language location data");
+            System.out.println("ERROR: Failed in getting language location data");
             return null;
         }
 

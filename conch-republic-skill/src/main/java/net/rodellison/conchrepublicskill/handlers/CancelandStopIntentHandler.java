@@ -16,7 +16,7 @@ import static com.amazon.ask.request.Predicates.intentName;
 
 public class CancelandStopIntentHandler implements RequestHandler {
 
-    private static final Logger log = LogManager.getLogger(CancelandStopIntentHandler.class);
+    //private static final Logger log = LogManager.getLogger(CancelandStopIntentHandler.class);
 
     @Override
     public boolean canHandle(HandlerInput input) {
@@ -26,12 +26,13 @@ public class CancelandStopIntentHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput input) {
 
-        log.warn("CancelandStopIntentHandler called");
+        System.out.println();
+        System.out.println("WARN: CancelandStopIntentHandler called");
         LanguageLocalization locData;
         String incomingLocale = input.getRequestEnvelope().getRequest().getLocale();
         locData = CommonUtils.getLocalizationStrings(incomingLocale);
         if (locData == null) {
-            log.error("Failed in getting language location data");
+            System.out.println("ERROR: Failed in getting language location data");
             return null;
         }
 

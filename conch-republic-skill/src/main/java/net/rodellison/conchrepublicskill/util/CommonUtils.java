@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class CommonUtils {
 
-    private static final Logger log = LogManager.getLogger(CommonUtils.class);
+    //private static final Logger log = LogManager.getLogger(CommonUtils.class);
     public static String savedLocale;
 
     public static String prepForSSMLSpeech(String text) {
@@ -93,7 +93,7 @@ public class CommonUtils {
             return theLanguageLocalization;
 
         } catch (IOException e) {
-            log.error("Failed in loading localization.json file");
+            System.out.println("ERROR: Failed in loading localization.json file");
             e.printStackTrace();
         }
         return null;

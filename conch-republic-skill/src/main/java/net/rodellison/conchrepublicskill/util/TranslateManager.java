@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class TranslateManager {
 
-    private static final Logger log = LogManager.getLogger(TranslateManager.class);
+    //private static final Logger log = LogManager.getLogger(TranslateManager.class);
     private static AmazonTranslate client;
 
     public TranslateManager(AmazonTranslate theClient) {
@@ -34,7 +34,7 @@ public class TranslateManager {
             return result.getTranslatedText();
 
         } catch (Exception e) {
-            log.error(e.getMessage());
+            System.out.println("ERROR: " + e.getMessage());
             return null;
 
         }

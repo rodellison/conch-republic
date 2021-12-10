@@ -18,7 +18,7 @@ import static com.amazon.ask.request.Predicates.intentName;
 
 public class StartOverIntentHandler implements RequestHandler {
 
-    private static final Logger log = LogManager.getLogger(StartOverIntentHandler.class);
+    //private static final Logger log = LogManager.getLogger(StartOverIntentHandler.class);
 
     @Override
     public boolean canHandle(HandlerInput input) {
@@ -28,13 +28,13 @@ public class StartOverIntentHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput input) {
 
-        log.warn("StartOverIntentHandler called");
+        System.out.println("WARN: StartOverIntentHandler called");
 
         LanguageLocalization locData;
         String incomingLocale = input.getRequestEnvelope().getRequest().getLocale();
         locData = CommonUtils.getLocalizationStrings(incomingLocale);
         if (locData == null) {
-            log.error("Failed in getting language location data");
+            System.out.println("ERROR: Failed in getting language location data");
             return null;
         }
         String layoutToUse = "Home";

@@ -9,11 +9,11 @@ import org.apache.logging.log4j.Logger;
 
 public class DynamoDBClient {
 
-    private static final Logger log = LogManager.getLogger(DynamoDBClient.class);
+    //private static final Logger log = LogManager.getLogger(DynamoDBClient.class);
 
     public static AmazonDynamoDB getDynamoDBClient() {
 
-        log.info("Getting DynamoDBClient");
+        System.out.println("INFO: Getting DynamoDBClient");
          AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
                 .withCredentials(new EnvironmentVariableCredentialsProvider())
                 .withRegion(Regions.US_EAST_1)

@@ -25,7 +25,7 @@ import static com.amazon.ask.request.Predicates.intentName;
 
 public class FullyBakedAskIntentHandler implements IntentRequestHandler {
 
-    private static final Logger log = LogManager.getLogger(FullyBakedAskIntentHandler.class);
+    //private static final Logger log = LogManager.getLogger(FullyBakedAskIntentHandler.class);
     private static final String INTENT_NAME = "FullyBakedAskIntent";
     private static final String LOCATION_SLOT = "location";
     private static final String MONTH_SLOT = "month";
@@ -53,7 +53,7 @@ public class FullyBakedAskIntentHandler implements IntentRequestHandler {
         String incomingLocale = intentRequest.getLocale();
         locData = CommonUtils.getLocalizationStrings(incomingLocale);
         if (locData == null) {
-            log.error("Failed in getting language location data");
+            System.out.println("ERROR: Failed in getting language location data");
             return null;
         }
 
@@ -66,7 +66,7 @@ public class FullyBakedAskIntentHandler implements IntentRequestHandler {
         if (slotMonth.isPresent())
             strTheMonth = slotMonth.get();
 
-        log.info("FullyBakedAskIntent values received.. Location Slot value: " + strTheLocation + ", Month Slot value: " + strTheMonth);
+        System.out.println("INFO: FullyBakedAskIntent values received.. Location Slot value: " + strTheLocation + ", Month Slot value: " + strTheMonth);
 
         if (!strTheLocation.equals(""))
         {
@@ -88,9 +88,9 @@ public class FullyBakedAskIntentHandler implements IntentRequestHandler {
 
         List<EventItem> myFilteredEventList = myDynamoDBManager.getCoreEventInfo(strTheLocation, strTheMonth);
         if (myFilteredEventList != null) {
-            log.info("Filtered event count = " + myFilteredEventList.size());
+            System.out.println("INFO: Filtered event count = " + myFilteredEventList.size());
             myFilteredEventList.forEach(eventItem -> {
-                log.debug(eventItem.toString());
+                System.out.println("DEBUG: " + eventItem.toString());
             });
 
             //need to cap the max size of EventItems we're going to hang on to, so as to not blow out the session attributes limit

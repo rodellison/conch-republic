@@ -24,7 +24,7 @@ import java.util.*;
 public class ListEventsResponseUtil {
 
     private static Image myStandardCardImage;
-    private static final Logger log = LogManager.getLogger(ListEventsResponseUtil.class);
+    //private static final Logger log = LogManager.getLogger(ListEventsResponseUtil.class);
 
     public static Optional<Response> getResponse(HandlerInput input, int eventListStartItem, String strTheMonth, String strTheLocation, List<EventItem> eventItemsList, LanguageLocalization locData) {
 
@@ -69,10 +69,10 @@ public class ListEventsResponseUtil {
         cardText += primaryTextDisplay + "<br/>";
 
         int startItem = eventListStartItem;
-        log.debug("This loop starting item will be: " + startItem);
+        System.out.println("DEBUG: This loop starting item will be: " + startItem);
         List<String> thisIterationList = new ArrayList<>();
         if (eventItemsList.size() > 0) {
-            log.debug("This loop recognizes: " + eventItemsList.size() + " items");
+            System.out.println("DEBUG: This loop recognizes: " + eventItemsList.size() + " items");
             if (eventListStartItem == 0)
                 speechOutputBuilder.append(locData.getEVENTLIST_SPEECH_INTRO() + "<break time=\"1s\"/>");
 
@@ -106,7 +106,7 @@ public class ListEventsResponseUtil {
                         thisIterationList.add(eventShortDescription);
 
                     } else {
-                        log.debug("eventItemsList.get(startItem++) was null");
+                        System.out.println("DEBUG: eventItemsList.get(startItem++) was null");
                     }
 
                     //load up the first, second and third variables that will be stored in session vars for later use
@@ -125,7 +125,7 @@ public class ListEventsResponseUtil {
 
                 } catch (Exception ex) {
                     atEnd = true;
-                    log.debug("atEnd = true");
+                    System.out.println("DEBUG: atEnd = true");
                     break;
                 }
             }
@@ -185,7 +185,7 @@ public class ListEventsResponseUtil {
 
         speechText = speechOutputBuilder.toString();
         speechText = CommonUtils.prepForSSMLSpeech(speechText);
-        log.debug("Heres whats being said: " + speechText);
+        System.out.println("DEBUG: Heres whats being said: " + speechText);
 
         if (CommonUtils.supportsApl(input)) {
             //  ViewportProfile viewportProfile = ViewportUtils.getViewportProfile(input.getRequestEnvelope());
@@ -198,12 +198,12 @@ public class ListEventsResponseUtil {
                 TypeReference<HashMap<String, Object>> ConchRepublicMapType = new TypeReference<HashMap<String, Object>>() {
                 };
 
-                log.info("EventsResponseUtil called, reading documentNode and dataSources values");
+                System.out.println("INFO: EventsResponseUtil called, reading documentNode and dataSources values");
                 Map<String, Object> document = mapper.readValue(documentNode.toString(), ConchRepublicMapType);
                 JsonNode dataSources = mapper.readTree(dataSourcesNode.toString());
                 ObjectNode ConchRepublicTemplateProperties = (ObjectNode) dataSources.get("TemplateData").get("properties");
 
-                log.info("EventsResponseUtil called, setting props");
+                System.out.println("INFO: EventsResponseUtil called, setting props");
                 if (thisIterationList.size() > 0) {
                     ArrayNode theArray = mapper.valueToTree(thisIterationList);
                     ConchRepublicTemplateProperties.putArray("EventText").addAll(theArray);
@@ -215,16 +215,16 @@ public class ListEventsResponseUtil {
                 ConchRepublicTemplateProperties.put("HintString", hintString);
                 ConchRepublicTemplateProperties.put("Locale", CommonUtils.savedLocale);
 
-                log.info("LaunchRequestHandler called, building Render Document");
+                System.out.println("INFO: LaunchRequestHandler called, building Render Document");
                 RenderDocumentDirective documentDirective = RenderDocumentDirective.builder()
                         .withDocument(document)
                         .withDatasources(mapper.convertValue(dataSources, new TypeReference<Map<String, Object>>() {
                         }))
                         .build();
 
-                log.debug(documentDirective);
+                System.out.println("DEBUG: " + documentDirective);
 
-                log.info("LaunchRequestHandler called, calling responseBuilder");
+                System.out.println("INFO: LaunchRequestHandler called, calling responseBuilder");
 
                 return input.getResponseBuilder()
                         .withSpeech(speechText)

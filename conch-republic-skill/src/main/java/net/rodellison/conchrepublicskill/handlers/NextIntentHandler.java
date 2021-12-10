@@ -24,7 +24,7 @@ import static com.amazon.ask.request.Predicates.intentName;
 public class NextIntentHandler implements RequestHandler {
 
     private static final String INTENT_NAME = "NextIntent";
-    private static final Logger log = LogManager.getLogger(NextIntentHandler.class);
+    //private static final Logger log = LogManager.getLogger(NextIntentHandler.class);
 
     @Override
     public boolean canHandle(HandlerInput input) {
@@ -34,14 +34,14 @@ public class NextIntentHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput input) {
 
-        log.warn("NextIntentHandler called");
+        System.out.println("WARN: NextIntentHandler called");
         Map<String, Object> attributes = input.getAttributesManager().getSessionAttributes();
 
         LanguageLocalization locData;
         String incomingLocale = input.getRequestEnvelope().getRequest().getLocale();
         locData = CommonUtils.getLocalizationStrings(incomingLocale);
         if (locData == null) {
-            log.error("Failed in getting language location data");
+            System.out.println("ERROR: Failed in getting language location data");
             return null;
         }
 
@@ -59,7 +59,7 @@ public class NextIntentHandler implements RequestHandler {
             Type listEventItemsType = new TypeToken<List<EventItem>>() {
             }.getType();
             eventItemsList = gson.fromJson(attributes.get("EVENT_ITEMS").toString(), listEventItemsType);
-            log.debug("In NextIntent handler, eventItemsList= " + eventItemsList);
+            System.out.println("DEBUG: In NextIntent handler, eventItemsList= " + eventItemsList);
             return ListEventsResponseUtil.getResponse(input, startItem, strTheMonth, strTheLocation, eventItemsList, locData);
 
         } catch (Exception e) {

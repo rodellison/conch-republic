@@ -25,7 +25,7 @@ import static com.amazon.ask.request.Predicates.intentName;
 
 public class MoreDetailsIntentHandler implements IntentRequestHandler {
 
-    private static final Logger log = LogManager.getLogger(MoreDetailsIntentHandler.class);
+    //private static final Logger log = LogManager.getLogger(MoreDetailsIntentHandler.class);
     private static final String ITEM_ORDINAL_SLOT = "ItemOrdinal";
 
     @Override
@@ -50,11 +50,11 @@ public class MoreDetailsIntentHandler implements IntentRequestHandler {
         String incomingLocale = intentRequest.getLocale();
         locData = CommonUtils.getLocalizationStrings(incomingLocale);
         if (locData == null) {
-            log.error("Failed in getting language location data");
+            System.out.println("ERROR: Failed in getting language location data");
             return null;
         }
 
-        log.info("MoreDetailsIntent values received.. Ordinal Slot value: " + slotOrdinal.get());
+        System.out.println("INFO: MoreDetailsIntent values received.. Ordinal Slot value: " + slotOrdinal.get());
         String strEventID = "";
         Boolean ordinalInvalid = false;
 
@@ -73,7 +73,7 @@ public class MoreDetailsIntentHandler implements IntentRequestHandler {
                 ordinalInvalid = true;
         }
 
-        log.info("Ordinal voiced: " + strOrdinal + ", value for matching attribute: " + strEventID);
+        System.out.println("INFO: Ordinal voiced: " + strOrdinal + ", value for matching attribute: " + strEventID);
 
          if (ordinalInvalid)
         {
@@ -89,7 +89,7 @@ public class MoreDetailsIntentHandler implements IntentRequestHandler {
             EventItem theEventItem = myDynamoDBManager.getEventItemInfo(strEventID);
             if (theEventItem != null)
             {
-                log.debug(theEventItem);
+                System.out.println("DEBUG: " + theEventItem);
                 return EventItemResponseUtil.getResponse(handlerInput, theEventItem, locData);
             }
             else

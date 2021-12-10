@@ -16,7 +16,7 @@ import java.util.*;
 
 public class DynamoDBManager {
 
-    private static final Logger log = LogManager.getLogger(DynamoDBManager.class);
+    //private static final Logger log = LogManager.getLogger(DynamoDBManager.class);
     private static AmazonDynamoDB client;
 
     public DynamoDBManager(AmazonDynamoDB theClient) {
@@ -34,19 +34,19 @@ public class DynamoDBManager {
 
             EventsList eventListResults = new EventsList();
 
-            log.info("Attempting to get Event Data items from DynamoDB for location: " + strLocation + " and month: " + strMonth);
+            System.out.println("INFO: Attempting to get Event Data items from DynamoDB for location: " + strLocation + " and month: " + strMonth);
 
             Map<String, AttributeValue> expressionAttributeValues = new HashMap<>();
 
             String filterToUse = ALL_LOCATIONS;
             String todaysDate = DateUtils.getFormattedTodayDate();
-            log.info("Getting today's formatted date for EndDate comparison: " + todaysDate);
+            System.out.println("INFO: Getting today's formatted date for EndDate comparison: " + todaysDate);
             expressionAttributeValues.put(":ed", new AttributeValue().withS(todaysDate));
 
             //Normalize the location input
             KeysLocations myKeysLocation = KeysLocations.convertToEnumLocation(strLocation);
             String theLocationToGet = KeysLocations.getLocation(myKeysLocation);
-            log.info("theLocationToGet value: " + theLocationToGet);
+            System.out.println("INFO: theLocationToGet value: " + theLocationToGet);
 
             if (!strLocation.equals("")) {
                 filterToUse = LOCATION_AND_MONTH;
@@ -84,9 +84,9 @@ public class DynamoDBManager {
                     }
 
                     result = client.scan(scanRequest);
-                    log.info("Scan result scanned count: " + result.getScannedCount());
-                    log.info("Scan result completed, total items found: " + result.getCount());
-                    log.info("Scan result token info: " + result.getLastEvaluatedKey());
+                    System.out.println("INFO: Scan result scanned count: " + result.getScannedCount());
+                    System.out.println("INFO: Scan result completed, total items found: " + result.getCount());
+                    System.out.println("INFO: Scan result token info: " + result.getLastEvaluatedKey());
 
                     for (Map<String, AttributeValue> item : result.getItems()) {
 
@@ -113,36 +113,36 @@ public class DynamoDBManager {
 
             } catch (AmazonClientException ace)
             {
-                log.error("DynamoDB Scan Exception: " + ace.getMessage());
+                System.out.println("ERROR: DynamoDB Scan Exception: " + ace.getMessage());
             }
 
 
             if (totalCountOfItems > 0) {
 
-               log.debug(eventListResults.toString());
+               System.out.println("DEBUG: " + eventListResults.toString());
 
                 if (strMonth.equals("") && strLocation.equals(""))
                 {
-                    log.info("Returning EventList data for all months and locations (open ended scan) ");
+                    System.out.println("INFO: Returning EventList data for all months and locations (open ended scan) ");
                     return eventListResults.getListOfEventsSortedByStartDate();
                 }
                if (!strMonth.equals("") && !strLocation.equals(""))
                 {
-                    log.info("Returning EventList data for specific month and location: " + DateUtils.convertMonth(strMonth) + ", " + strLocation);
+                    System.out.println("INFO: Returning EventList data for specific month and location: " + DateUtils.convertMonth(strMonth) + ", " + strLocation);
                     return eventListResults.getListOfActiveEventsInMonthInLocation(DateUtils.convertMonth(strMonth), KeysLocations.convertToEnumLocation(strLocation));
                 }
                 if (strMonth.equals("") && !strLocation.equals(""))
                 {
-                    log.info("Returning EventList data for all dates at a specific location");
+                    System.out.println("INFO: Returning EventList data for all dates at a specific location");
                     return eventListResults.getListOfActiveEventsInLocation(KeysLocations.convertToEnumLocation(strLocation));
                 }
                 if (!strMonth.equals("") && strLocation.equals(""))
                 {
-                    log.info("Returning EventList data for specific month for all locations");
+                    System.out.println("INFO: Returning EventList data for specific month for all locations");
                     return eventListResults.getListOfActiveEventsInMonth(DateUtils.convertMonth(strMonth));
                 }
 
-                log.info("Returning EventList data for all future events for all locations");
+                System.out.println("INFO: Returning EventList data for all future events for all locations");
                 return eventListResults.getListOfEventsSortedByStartDate();
             }
             else {
@@ -151,7 +151,7 @@ public class DynamoDBManager {
 
 
         } catch (Exception e) {
-            log.error(strDataBaseTableName + " DynamoDB creation failed: " + e.getMessage());
+            System.out.println("ERROR: " + strDataBaseTableName + " DynamoDB creation failed: " + e.getMessage());
             return null;
 
         }
@@ -163,7 +163,7 @@ public class DynamoDBManager {
 
         String strDataBaseTableName = System.getenv("DYNAMO_DB_TABLENAME");
 
-        log.info("Attempting to get Event Data item from DynamoDB for EventID: " + strEventID);
+        System.out.println("INFO: Attempting to get Event Data item from DynamoDB for EventID: " + strEventID);
 
         Map<String, AttributeValue> expressionAttributeValues = new HashMap<>();
         expressionAttributeValues.put(":eID", new AttributeValue().withS(strEventID));
@@ -180,7 +180,7 @@ public class DynamoDBManager {
         try {
             queryResult = client.query(queryRequest);
             if (queryResult != null) {
-                log.info("Query item result count: " + queryResult.getCount());
+                System.out.println("INFO: Query item result count: " + queryResult.getCount());
                 List<Map<String, AttributeValue>> items = queryResult.getItems();
                 //There SHOULD only be one resulting item fetched.. if more, then just use first..
 
@@ -198,7 +198,7 @@ public class DynamoDBManager {
             }
 
         } catch (AmazonClientException ace) {
-            log.error("DynamoDB Query Exception: " + ace.getMessage());
+            System.out.println("ERROR: DynamoDB Query Exception: " + ace.getMessage());
 
         }
         return null;

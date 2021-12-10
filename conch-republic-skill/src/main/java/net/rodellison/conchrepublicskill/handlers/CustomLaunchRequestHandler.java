@@ -17,7 +17,7 @@ import static com.amazon.ask.request.Predicates.requestType;
 
 public class CustomLaunchRequestHandler implements LaunchRequestHandler {
 
-    private static final Logger log = LogManager.getLogger(CustomLaunchRequestHandler.class);
+    //private static final Logger log = LogManager.getLogger(CustomLaunchRequestHandler.class);
 
     @Override
     public boolean canHandle(HandlerInput handlerInput, LaunchRequest launchRequest) {
@@ -26,14 +26,14 @@ public class CustomLaunchRequestHandler implements LaunchRequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput handlerInput, LaunchRequest launchRequest) {
-        log.warn("LaunchRequestHandler called");
+        System.out.println("WARN: LaunchRequestHandler called");
 
 
         LanguageLocalization locData;
         String incomingLocale = launchRequest.getLocale();
         locData = CommonUtils.getLocalizationStrings(incomingLocale);
         if (locData == null) {
-            log.error("Failed in getting language location data");
+            System.out.println("ERROR: Failed in getting language location data");
             return null;
         }
 

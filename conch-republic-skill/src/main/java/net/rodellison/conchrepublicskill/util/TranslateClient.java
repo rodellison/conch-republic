@@ -9,11 +9,11 @@ import org.apache.logging.log4j.Logger;
 
 public class TranslateClient {
 
-    private static final Logger log = LogManager.getLogger(TranslateClient.class);
+    //private static final Logger log = LogManager.getLogger(TranslateClient.class);
 
     public static AmazonTranslate getTranslateClient() {
 
-        log.info("Getting DynamoDBClient");
+        System.out.println("INFO: Getting DynamoDBClient");
         AmazonTranslate client = AmazonTranslateClientBuilder.standard()
                 .withCredentials(new EnvironmentVariableCredentialsProvider())
                 .withRegion(Regions.US_EAST_1)

@@ -25,7 +25,7 @@ import java.util.*;
 public class EventItemResponseUtil {
 
     private static Image myStandardCardImage;
-    private static final Logger log = LogManager.getLogger(EventItemResponseUtil.class);
+    //private static final Logger log = LogManager.getLogger(EventItemResponseUtil.class);
 
     public static Optional<Response> getResponse(HandlerInput input, EventItem theItem, LanguageLocalization locData) {
 
@@ -56,7 +56,7 @@ public class EventItemResponseUtil {
         speechOutputBuilder.append(tempEventName +  "<break time=\"0.5s\"/>");
         eventTextToDisplay = theItem.getEventDescription().replace("&nbsp;", " ");
 
-        log.debug(eventTextToDisplay);
+        System.out.println("DEBUG: " + eventTextToDisplay);
 
         //Convert the Event Item text into language appropriate output..
         if (CommonUtils.savedLocale.equals("es-US"))
@@ -96,7 +96,7 @@ public class EventItemResponseUtil {
         {
             speechText = CommonUtils.prepForSSMLSpeechForSpanish(speechText);
         }
-        log.debug("Heres whats being said: " + speechText);
+        System.out.println("DEBUG: Heres whats being said: " + speechText);
 
         if (CommonUtils.supportsApl(input)) {
             //  ViewportProfile viewportProfile = ViewportUtils.getViewportProfile(input.getRequestEnvelope());
@@ -110,12 +110,12 @@ public class EventItemResponseUtil {
                 TypeReference<HashMap<String, Object>> ConchRepublicMapType = new TypeReference<HashMap<String, Object>>() {
                 };
 
-                log.info("EventsResponseUtil called, reading documentNode and dataSources values");
+                System.out.println("INFO: EventsResponseUtil called, reading documentNode and dataSources values");
                 Map<String, Object> document = mapper.readValue(documentNode.toString(), ConchRepublicMapType);
                 JsonNode dataSources = mapper.readTree(dataSourcesNode.toString());
                 ObjectNode ConchRepublicTemplateProperties = (ObjectNode) dataSources.get("TemplateData").get("properties");
 
-                log.info("EventsResponseUtil called, setting props");
+                System.out.println("INFO: EventsResponseUtil called, setting props");
                 ArrayNode theArray = mapper.valueToTree(thisIterationList);
                 ConchRepublicTemplateProperties.putArray("EventText").addAll(theArray);
 
@@ -125,16 +125,16 @@ public class EventItemResponseUtil {
                 ConchRepublicTemplateProperties.put("HintString", hintString);
                 ConchRepublicTemplateProperties.put("Locale", CommonUtils.savedLocale);
 
-                log.info("LaunchRequestHandler called, building Render Document");
+                System.out.println("INFO: LaunchRequestHandler called, building Render Document");
                 RenderDocumentDirective documentDirective = RenderDocumentDirective.builder()
                         .withDocument(document)
                         .withDatasources(mapper.convertValue(dataSources, new TypeReference<Map<String, Object>>() {
                         }))
                         .build();
 
-                log.debug(documentDirective);
+                System.out.println("DEBUG: " + documentDirective);
 
-                log.info("LaunchRequestHandler called, calling responseBuilder");
+                System.out.println("INFO: LaunchRequestHandler called, calling responseBuilder");
 
                 return input.getResponseBuilder()
                         .withSpeech(speechText)

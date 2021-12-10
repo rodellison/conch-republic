@@ -17,7 +17,7 @@ import static com.amazon.ask.request.Predicates.intentName;
 
 public class FallBackIntentHandler implements IntentRequestHandler {
 
-    private static final Logger log = LogManager.getLogger(FallBackIntentHandler.class);
+    //private static final Logger log = LogManager.getLogger(FallBackIntentHandler.class);
 
     @Override
     public boolean canHandle(HandlerInput handlerInput, IntentRequest intentRequest) {
@@ -26,13 +26,13 @@ public class FallBackIntentHandler implements IntentRequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput handlerInput, IntentRequest intentRequest) {
-        log.warn("FallBackIntentHandler called");
+        System.out.println("WARN: FallBackIntentHandler called");
 
         LanguageLocalization locData;
         String incomingLocale = intentRequest.getLocale();
         locData = CommonUtils.getLocalizationStrings(incomingLocale);
         if (locData == null) {
-            log.error("Failed in getting language location data");
+            System.out.println("ERROR: Failed in getting language location data");
             return null;
         }
 
